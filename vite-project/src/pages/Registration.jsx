@@ -1,12 +1,13 @@
 import { useState } from 'react';
+import { useRegisterUserMutation } from '../store/apiSlice';
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../store/authSlice';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [registerUserApi, { isLoading, error }] = useRegisterUserMutation();
   const [formData, setFormData] = useState({
     first_name: '',
     last_name: '',
@@ -14,33 +15,30 @@ const Registration = () => {
     password: '',
   });
 
-  const [error, setError] = useState(null);
-
   const handleChange = async (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null);
-
     try {
-      const response = await axios.post(
-        'http://localhost:3000/register',
-        formData
-      );
-      console.log("response:" , response);
-      dispatch(registerUser({ token: response.data.token }));
+
+      const response = await registerUserApi(formData).unwrap();
+      dispatch(registerUser({ token: response.token, user: response.user }));
       navigate('/');
     } catch (error) {
-      setError(error.response.data.message || 'Registration failed.');
+      console.error('Registration failed', error);
     }
   };
 
   return (
     <>
       <h2>Registration</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && (
+        <p style={{ color: 'red' }}>
+          {error.data?.message || 'Registration failed. Please try again.'}
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -74,7 +72,9 @@ const Registration = () => {
           onChange={handleChange}
           required
         />
-        <button type="submit">Register</button>
+        <button type="submit" disabled={isLoading}>
+          Register
+        </button>
       </form>
     </>
   );

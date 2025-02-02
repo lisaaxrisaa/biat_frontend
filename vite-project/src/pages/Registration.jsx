@@ -22,6 +22,7 @@ const Registration = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+
       const response = await registerUserApi(formData).unwrap();
       dispatch(registerUser({ token: response.token, user: response.user }));
       navigate('/');

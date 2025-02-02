@@ -26,9 +26,10 @@ const Registration = () => {
 
     try {
       const response = await axios.post(
-        'http://localhost:3003/register',
+        'http://localhost:3000/register',
         formData
       );
+      console.log("response:" , response);
       dispatch(registerUser({ token: response.data.token }));
       navigate('/');
     } catch (error) {

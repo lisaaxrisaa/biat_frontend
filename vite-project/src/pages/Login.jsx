@@ -15,7 +15,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
-  const [loginUserApi, { isLoading }] = useLoginUserMutation;
+  const [loginUserApi, { isLoading }] = useLoginUserMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

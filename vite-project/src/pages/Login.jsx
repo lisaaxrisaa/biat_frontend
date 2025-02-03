@@ -1,33 +1,33 @@
-// login.jsx: user enters their email and password in form
-// save token and use redux tool kit and redirect to home page
-import React, { useState } from "react";
+// changes made:
+// - replaced mock token with api token
+// - add isLoading for button, keeps users from double submitting and lets them know it is processing
+// - improved error handling
+
+import { useState } from "react";
+import { useLoginUserMutation } from "../store/apiSlice";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../store/authSlice";
-// import { setToken }
+
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const registeredUser = JSON.parse(localStorage.getItem("userData"));
   const [error, setError] = useState(null);
+  const [loginUserApi, { isLoading }] = useLoginUserMutation;
 
-  //  mock token as there is no api in use
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (
-      registeredUser?.email === email &&
-      registeredUser?.password === password
-    ) {
-      const token = "mock-auth-token";
-      dispatch(registerUser({ token }));
-      sessionStorage.setItem("authToken", token);
+    try {
+      const credentials = { email, password };
+      const response = await loginUserApi(credentials).unwrap();
+      dispatch(registerUser({ token: response.token, user: response.user }));
       navigate("/");
-    } else {
-      setError("Unauthorized login, try again later!");
+    } catch (error) {
+      setError("Invalid login, please try again!");
+      console.error("Invalid login, please try again!", error);
     }
-    // if time allows: error handling
   };
 
   return (
@@ -49,7 +49,9 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Loading..." : "Login"}
+        </button>
       </form>
     </>
   );

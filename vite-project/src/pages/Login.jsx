@@ -3,15 +3,15 @@
 // - add isLoading for button, keeps users from double submitting and lets them know it is processing
 // - improved error handling
 
-import { useState } from "react";
-import { useLoginUserMutation } from "../store/apiSlice";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { registerUser } from "../store/authSlice";
+import { useState } from 'react';
+import { useLoginUserMutation } from '../store/loginSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { registerUser } from '../store/authSlice';
 
 const Login = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -23,17 +23,17 @@ const Login = () => {
       const credentials = { email, password };
       const response = await loginUserApi(credentials).unwrap();
       dispatch(registerUser({ token: response.token, user: response.user }));
-      navigate("/");
+      navigate('/');
     } catch (error) {
-      setError("Invalid login, please try again!");
-      console.error("Invalid login, please try again!", error);
+      setError('Invalid login, please try again!');
+      console.error('Invalid login, please try again!', error);
     }
   };
 
   return (
     <>
       <h2>Login</h2>
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -49,8 +49,8 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Login"}
+        <button type="submit" disabled={isLoading} className="btn btn-primary">
+          {isLoading ? 'Loading...' : 'Login'}
         </button>
       </form>
     </>

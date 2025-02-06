@@ -4,7 +4,7 @@ const updateProfileSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     updateUser: builder.mutation({
       query: (updateUserData) => ({
-        url: '/user/update',
+        url: '/api/auth/user/update',
         method: 'PUT',
         body: updateUserData,
       }),

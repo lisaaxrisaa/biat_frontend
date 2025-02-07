@@ -20,7 +20,7 @@ const Registration = () => {
     e.preventDefault();
     try {
       await registerUserApi(formData).unwrap();
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       console.error('Registration failed', error);
     }

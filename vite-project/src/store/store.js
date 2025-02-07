@@ -3,7 +3,6 @@ import { api } from './api';
 import registrationSlice from './registrationSlice';
 import weatherSlice from './weatherSlice';
 import authReducer from './authSlice';
-import reducer from './authSlice';
 
 const store = configureStore({
   reducer: {

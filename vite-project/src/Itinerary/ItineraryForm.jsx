@@ -1,7 +1,6 @@
 // /components/Itinerary/ItineraryForm.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
-import { useCreateItineraryMutation } from '../store/itinerarySlice';
 
 const ItineraryForm = () => {
   const [tripName, setTripName] = useState('');

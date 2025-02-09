@@ -5,6 +5,8 @@ import Registration from './pages/Registration';
 import UpdateProfile from './pages/UpdateProfile';
 import Profile from './pages/Profile';
 import NavBar from '../../NavBar';
+import ItineraryPage from './Itinerary/ItineraryPage';
+import ItineraryForm from './Itinerary/ItineraryForm';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +20,8 @@ const App = () => {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/itineraries" element={<ItineraryPage />} />
+            <Route path="/itinerary-form" element={<ItineraryForm />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/update-profile" element={<UpdateProfile />} />

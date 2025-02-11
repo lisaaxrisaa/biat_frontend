@@ -11,7 +11,7 @@ const JournalList = () => {
   useEffect(() => {
     const getEntries = async () => {
       try {
-        const response = await fetch("api/user/journal");
+        const response = await fetch("/user/journal");
         if (!response.ok) {
           throw new Error("Unable to fetch entries");
         }

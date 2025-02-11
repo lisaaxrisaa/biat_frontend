@@ -7,6 +7,8 @@ import Profile from './pages/Profile';
 import NavBar from '../../NavBar';
 import ItineraryPage from './Itinerary/ItineraryPage';
 import ItineraryForm from './Itinerary/ItineraryForm';
+import ItineraryDetailPage from './Itinerary/ItineraryDetail';
+import EditItineraryPage from './Itinerary/EditItinerary';
 import { Provider } from 'react-redux';
 import store from './store/store';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +24,8 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/itineraries" element={<ItineraryPage />} />
             <Route path="/itinerary-form" element={<ItineraryForm />} />
+            <Route path="/itinerary/:id" element={<ItineraryDetailPage />} />
+            <Route path="/edit-itinerary/:id" element={<EditItineraryPage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/update-profile" element={<UpdateProfile />} />

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const NewEntry = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [imageUrl, setImageurl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
@@ -16,7 +16,7 @@ const NewEntry = () => {
 
     const newJournalEntry = { title, content, imageUrl };
     try {
-      const response = await fetch("api/profile/journal", {
+      const response = await fetch("api/user/journal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,7 @@ const NewEntry = () => {
         <input
           type="text"
           value={imageUrl}
-          onChange={(e) => setImageurl(e.target.value)}
+          onChange={(e) => setImageUrl(e.target.value)}
         />
         <button type="submit">Create Journal Entry</button>
       </form>

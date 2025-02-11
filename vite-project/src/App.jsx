@@ -8,6 +8,7 @@ import Profile from './pages/Profile';
 import NavBar from '../../NavBar';
 import { Provider } from 'react-redux';
 import store from './store/store';
+import Logout from './pages/Logout';
 // import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -20,6 +21,7 @@ const App = () => {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="/profile" element={<Profile />} />

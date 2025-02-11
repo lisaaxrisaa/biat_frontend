@@ -9,7 +9,7 @@ const JournalList = () => {
   useEffect(() => {
     const getEntries = async () => {
       try {
-        const response = await fetch("/profile/journal", {
+        const response = await fetch("api/profile/journal", {
           method: "GET",
           headers: {
             Authorization: `Bearer ${localStorage.getItem("authToken")}`,

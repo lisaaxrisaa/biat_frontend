@@ -13,7 +13,7 @@ const JournalEntry = () => {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
-        const response = await fetch(`/api/user/journal/${id}`);
+        const response = await fetch(`user/journal/${id}`);
         if (!response.ok) {
           throw new Error("Could not load entry.");
         }

@@ -43,7 +43,7 @@ const ItineraryPage = () => {
   }, [isAddingItinerary]);
 
   return (
-    <div>
+    <div className="itinerary-page">
       <h2>Your Itineraries</h2>
 
       {!isAddingItinerary && (

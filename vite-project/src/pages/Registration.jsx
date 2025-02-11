@@ -1,3 +1,5 @@
+// changes made:
+// add form component import and change form to match
 import { useState } from 'react';
 import { useRegisterUserMutation } from '../store/registrationSlice';
 import { useNavigate } from 'react-router-dom';
@@ -34,6 +36,7 @@ const Registration = () => {
           {error.data?.message || 'Registration failed. Please try again.'}
         </p>
       )}
+
       <form onSubmit={handleSubmit}>
         <input
           type="text"

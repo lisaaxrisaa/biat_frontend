@@ -23,6 +23,8 @@ const Login = () => {
       const credentials = { email, password };
       const response = await loginUserApi(credentials).unwrap();
       dispatch(registerUser({ token: response.token, user: response.user }));
+      sessionStorage.setItem('token', response.token);
+      sessionStorage.setItem('user', JSON.stringify(response.user));
       navigate('/');
     } catch (error) {
       setError('Invalid login, please try again!');
@@ -41,6 +43,7 @@ const Login = () => {
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
         />
         <input
           type="password"
@@ -48,8 +51,9 @@ const Login = () => {
           placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
         />
-        <button type="submit" disabled={isLoading} className="btn btn-primary">
+        <button type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Login'}
         </button>
       </form>

@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   useGetItineraryQuery,
-  useCreateItineraryMutation,
+  useUpdateItineraryMutation,
+  useDeleteActivityMutation,
 } from '../store/itinerarySlice';
 
 const EditItineraryPage = () => {
@@ -14,8 +15,8 @@ const EditItineraryPage = () => {
     isLoading,
     refetch,
   } = useGetItineraryQuery(id);
-
-  const [createItinerary] = useCreateItineraryMutation();
+  const [updateItinerary] = useUpdateItineraryMutation();
+  const [deleteActivity] = useDeleteActivityMutation();
 
   const [formData, setFormData] = useState({
     tripName: '',
@@ -28,36 +29,20 @@ const EditItineraryPage = () => {
     activities: [],
   });
 
-  const convertTo24HourFormat = (time) => {
-    const [hoursMinutes, ampm] = time.split(' ');
-    const [hours, minutes] = hoursMinutes.split(':');
-
-    let newHour = parseInt(hours, 10);
-    if (ampm === 'PM' && newHour < 12) {
-      newHour += 12;
-    }
-    if (ampm === 'AM' && newHour === 12) {
-      newHour = 0;
-    }
-    return `${newHour.toString().padStart(2, '0')}:${minutes}`;
-  };
-
   useEffect(() => {
     if (itinerary) {
       setFormData({
-        tripName: itinerary.tripName,
-        startDate: itinerary.startDate.split('T')[0],
-        endDate: itinerary.endDate.split('T')[0],
-        type: itinerary.type,
-        description: itinerary.description,
-        date: itinerary.date.split('T')[0],
-        time: convertTo24HourFormat(itinerary.time),
+        tripName: itinerary.tripName || '',
+        startDate: itinerary.startDate ? itinerary.startDate.split('T')[0] : '',
+        endDate: itinerary.endDate ? itinerary.endDate.split('T')[0] : '',
+        type: itinerary.type || '',
+        description: itinerary.description || '',
+        date: itinerary.date ? itinerary.date.split('T')[0] : '',
+        time: itinerary.time || '',
         activities: itinerary.activities || [],
       });
     }
   }, [itinerary]);
-
-  console.log('Activities:', formData.activities);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,10 +55,7 @@ const EditItineraryPage = () => {
   const handleActivityChange = (e, index) => {
     const { name, value } = e.target;
     const updatedActivities = [...formData.activities];
-    updatedActivities[index] = {
-      ...updatedActivities[index],
-      [name]: value,
-    };
+    updatedActivities[index] = { ...updatedActivities[index], [name]: value };
     setFormData({ ...formData, activities: updatedActivities });
   };
 
@@ -82,20 +64,39 @@ const EditItineraryPage = () => {
       ...formData,
       activities: [
         ...formData.activities,
-        { name: '', description: '', activityTime: '', location: '' },
+        { id: null, name: '', description: '', activityTime: '', location: '' },
       ],
     });
   };
 
-  const handleDeleteActivity = (index) => {
-    const updatedActivities = [...formData.activities];
-    if (updatedActivities[index].id) {
-      updatedActivities[index].toBeDeleted = true;
-    } else {
-      updatedActivities.splice(index, 1);
+  const handleDeleteActivity = async (activityId) => {
+    if (!activityId) {
+      console.error('No activity ID provided for deletion');
+      return;
     }
 
-    setFormData({ ...formData, activities: updatedActivities });
+    console.log('Deleting activity with ID:', activityId); // Debugging log
+
+    try {
+      const result = await deleteActivity(activityId).unwrap();
+      console.log('Delete response:', result);
+
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        activities: prevFormData.activities.filter(
+          (activity) => activity.id !== activityId
+        ),
+      }));
+
+      console.log('Activity deleted successfully');
+    } catch (error) {
+      console.error('Error deleting activity:', error);
+      if (error.originalStatus === 404) {
+        console.error('Activity not found. Please check the activity ID.');
+      } else {
+        console.error('Unexpected error:', error);
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -108,8 +109,13 @@ const EditItineraryPage = () => {
 
     const filteredActivities = formData.activities.filter(
       (activity) =>
-        activity.name.trim() !== '' || activity.description.trim() !== ''
+        (activity.name.trim() !== '' || activity.description.trim() !== '') &&
+        !activity.deleteFlag // Exclude activities marked for deletion
     );
+
+    const deletedActivityIds = formData.activities
+      .filter((activity) => activity.id && activity.deleteFlag)
+      .map((activity) => activity.id);
 
     const finalFormData = {
       ...formData,
@@ -120,17 +126,25 @@ const EditItineraryPage = () => {
         ? new Date(formData.endDate).toISOString()
         : null,
       date: formData.date ? new Date(formData.date).toISOString() : null,
-      activities: filteredActivities.length > 0 ? filteredActivities : [],
+      activities: filteredActivities,
+      deletedActivityIds,
     };
 
     console.log('Submitting:', finalFormData);
 
     try {
-      const response = await createItinerary(finalFormData).unwrap();
-      alert('Itinerary added successfully');
-      navigate(`/itinerary/${response.id}`);
-    } catch (error) {
-      console.error('Failed to add itinerary:', error);
+      await updateItinerary({
+        id,
+        updatedItinerary: finalFormData,
+      }).unwrap();
+
+      if (refetch) {
+        await refetch();
+      }
+
+      navigate(`/itinerary/${id}`);
+    } catch (err) {
+      console.error('Failed to update itinerary:', err);
     }
   };
 
@@ -206,7 +220,7 @@ const EditItineraryPage = () => {
 
         <h3>Activities</h3>
         {formData.activities.map((activity, index) => (
-          <div key={index}>
+          <div key={activity.id || index}>
             <input
               type="text"
               name="name"
@@ -234,10 +248,14 @@ const EditItineraryPage = () => {
               value={activity.location}
               onChange={(e) => handleActivityChange(e, index)}
             />
-
-            <button type="button" onClick={() => handleDeleteActivity(index)}>
-              Delete
-            </button>
+            {activity.id && (
+              <button
+                type="button"
+                onClick={() => handleDeleteActivity(activity.id)}
+              >
+                Delete
+              </button>
+            )}
           </div>
         ))}
         <button type="button" onClick={handleAddActivity}>

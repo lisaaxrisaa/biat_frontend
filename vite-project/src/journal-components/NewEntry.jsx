@@ -16,7 +16,7 @@ const NewEntry = () => {
 
     const newJournalEntry = { title, content, imageUrl };
     try {
-      const response = await fetch("/api/user/journal", {
+      const response = await fetch("/user/journal", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

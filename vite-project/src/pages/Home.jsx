@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useGetItinerariesQuery } from "../store/itinerarySlice";
-import WeatherForm from "../Weather/WeatherForm";
-import ItineraryList from "../Itinerary/ItineraryList";
+
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import WeatherForm from '../Weather/WeatherForm';
+
 
 const Home = () => {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState(null);
+
   const token = sessionStorage.getItem("token");
-  const [showItineraries, setShowItineraries] = useState(false);
-  // const userId = sessionStorage.getItem('userId');
+ 
 
   useEffect(() => {
     if (!token) {
@@ -18,14 +18,8 @@ const Home = () => {
     }
   }, [token, navigate]);
 
-  const { data: itineraries, error, isLoading } = useGetItinerariesQuery();
-
   const fetchWeather = (location) => {
     setWeatherData(location);
-  };
-
-  const handleBuildItineraryClick = () => {
-    setShowItineraries(true);
   };
 
   return (
@@ -43,7 +37,6 @@ const Home = () => {
         </div>
       </div>
 
-      {/* "Build Itinerary" card */}
       <div className="card-container">
         <div className="card">
           <Link to="/itineraries">

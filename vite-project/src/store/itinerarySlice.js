@@ -8,13 +8,11 @@ const itinerarySlice = api.injectEndpoints({
         return `/api/itinerary/user/itinerary`;
       },
       transformResponse: (response) => {
-        console.log('Fetched itineraries from API:', response);
         return response;
       },
     }),
     getItinerary: builder.query({
       query: (id) => {
-        console.log('Fetching itinerary with ID:', id);
         return `/api/itinerary/user/itinerary/${id}`;
       },
     }),
@@ -38,6 +36,12 @@ const itinerarySlice = api.injectEndpoints({
         method: 'DELETE',
       }),
     }),
+    deleteActivity: builder.mutation({
+      query: (activityId) => ({
+        url: `/api/itinerary/user/itinerary/activity/${activityId}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 
   overrideExisting: false,
@@ -49,6 +53,7 @@ export const {
   useCreateItineraryMutation,
   useUpdateItineraryMutation,
   useDeleteItineraryMutation,
+  useDeleteActivityMutation,
 } = itinerarySlice;
 
 export default itinerarySlice;

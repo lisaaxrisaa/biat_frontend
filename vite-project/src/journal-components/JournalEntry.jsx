@@ -1,4 +1,4 @@
-// This file will be responsible for rendering a specific journal entry 
+// This file will be responsible for rendering a specific journal entry
 // and also redirecting users to edit entry page
 
 // isEditing variable: shows view only and if it is being modified
@@ -13,7 +13,7 @@ const JournalEntry = () => {
   useEffect(() => {
     const fetchEntry = async () => {
       try {
-        const response = await fetch(`user/journal/${id}`);
+        const response = await fetch(`/api/user/journal/${id}`);
         if (!response.ok) {
           throw new Error("Could not load entry.");
         }

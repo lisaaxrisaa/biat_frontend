@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useGetItinerariesQuery } from '../store/itinerarySlice';
-import WeatherForm from '../Weather/WeatherForm';
-import ItineraryList from '../Itinerary/ItineraryList';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useGetItinerariesQuery } from "../store/itinerarySlice";
+import WeatherForm from "../Weather/WeatherForm";
+import ItineraryList from "../Itinerary/ItineraryList";
 
 const Home = () => {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState(null);
-  const token = sessionStorage.getItem('token');
+  const token = sessionStorage.getItem("token");
   const [showItineraries, setShowItineraries] = useState(false);
   // const userId = sessionStorage.getItem('userId');
 
@@ -49,6 +49,15 @@ const Home = () => {
           <Link to="/itineraries">
             <h3>Build Itinerary</h3>
             <p>Click here to view your itineraries</p>
+          </Link>
+        </div>
+      </div>
+      {/* Created Journal card */}
+      <div className="card-container">
+        <div className="card">
+          <h3>Journal</h3>
+          <Link to="/user/journals">
+            <h4>Click here to view your journal</h4>
           </Link>
         </div>
       </div>

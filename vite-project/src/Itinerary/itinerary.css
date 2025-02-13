@@ -1,88 +1,166 @@
-body,
-html {
-  height: 100%;
-  width: 100%;
-  margin: 0;
+/* 
+.itinerary-form-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://st4.depositphotos.com/21486874/23723/v/450/depositphotos_237230256-stock-illustration-urban-vector-city-map-sanjose.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  background-color: #f4f4f4;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.itinerary-page {
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  max-width: 100%;
-  box-sizing: border-box;
+  overflow: auto;
 }
 
-.itinerary-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
-  justify-items: center;
-  align-items: stretch;
+
+.itinerary-form-container {
   width: 100%;
-  max-width: 1800px;
-  padding: 1rem;
-  box-sizing: border-box;
-  margin-top: 2rem;
+  max-width: 1100px;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  overflow-y: auto;
+  margin-top: 100px;
 }
 
-.itinerary-card {
-  background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  padding: 1rem;
+h2,
+h3 {
   text-align: center;
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
-  width: 100%;
-  min-height: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.itinerary-card:hover {
-  transform: translateY(-5px);
-}
-
-.view-details-btn {
-  background-color: #007bff;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
-  text-decoration: none;
   font-weight: 600;
-  transition: background-color 0.3s ease;
+  color: #222;
 }
 
-.view-details-btn:hover {
-  background-color: #0056b3;
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  color: #444;
 }
 
-/* Responsive Design */
-@media (max-width: 1200px) {
-  .itinerary-container {
-    grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+
+input,
+textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  color: #333;
+  min-height: 44px; 
+}
+
+textarea {
+  resize: none; 
+}
+
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #007bff;
+}
+
+
+.date-inputs {
+  display: flex;
+  gap: 15px;
+}
+
+.date-inputs label {
+  flex: 1;
+}
+
+.date-inputs input {
+  flex: 2;
+}
+
+input[type='time'] {
+  position: relative;
+  padding-right: 40px;
+}
+
+input[type='time']::-webkit-calendar-picker-indicator {
+  filter: invert(1); 
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-right: 10px;
+}
+
+
+.activities-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.activities-table th,
+.activities-table td {
+  padding: 14px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  text-align: center;
+}
+
+.activities-table th {
+  background: #f8f9fa;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.add-activity,
+.save-button {
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  color: white;
+  background: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  width: 100%;
+}
+
+.add-activity:hover,
+.save-button:hover {
+  background: #0056b3;
+}
+
+
+.delete-btn {
+  background: #dc3545;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.delete-btn:hover {
+  background: #c82333;
+}
+
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.add-activity,
+.save-button {
+  flex: 1;
+  max-width: 300px;
+}
+
+
+@media (max-width: 768px) {
+  .date-inputs {
+    flex-direction: column;
   }
-}
-
-@media (max-width: 900px) {
-  .itinerary-container {
-    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
-  }
-}
-
-@media (max-width: 600px) {
-  .itinerary-container {
-    grid-template-columns: 1fr; /* 1 card per row */
-  }
-}
+}  */

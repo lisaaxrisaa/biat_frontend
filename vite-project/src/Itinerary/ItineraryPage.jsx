@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useGetItinerariesQuery } from '../store/itinerarySlice';
 import ItineraryList from '../Itinerary/ItineraryList';
 import ItineraryForm from './ItineraryForm';
+import './itinerary-page.css';
 
 const ItineraryPage = () => {
   const [isAddingItinerary, setIsAddingItinerary] = useState(false);
@@ -43,27 +44,33 @@ const ItineraryPage = () => {
   }, [isAddingItinerary]);
 
   return (
-    <div className="itinerary-page">
-      <h2>Your Itineraries</h2>
+    <>
+      <div className="itinerary-page-wrapper">
+        <div className="itinerary-page">
+          <h1>Your Itineraries</h1>
 
-      {!isAddingItinerary && (
-        <button onClick={handleAddItineraryClick}>Add Itinerary</button>
-      )}
-
-      {isAddingItinerary ? (
-        <ItineraryForm />
-      ) : (
-        <>
-          {isLoading ? (
-            <p>Loading itineraries...</p>
-          ) : error ? (
-            <p>Error loading itineraries.</p>
-          ) : (
-            <ItineraryList itineraries={apiItineraries} />
+          {!isAddingItinerary && (
+            <button className="add-itinerary" onClick={handleAddItineraryClick}>
+              Add Itinerary
+            </button>
           )}
-        </>
-      )}
-    </div>
+
+          {isAddingItinerary ? (
+            <ItineraryForm />
+          ) : (
+            <>
+              {isLoading ? (
+                <p>Loading itineraries...</p>
+              ) : error ? (
+                <p>Error loading itineraries.</p>
+              ) : (
+                <ItineraryList itineraries={apiItineraries} />
+              )}
+            </>
+          )}
+        </div>
+      </div>
+    </>
   );
 };
 

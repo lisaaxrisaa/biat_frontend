@@ -1,0 +1,105 @@
+.itinerary-page-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://wallpapers.com/images/featured/sky-mvehfqz6w2ges2dj.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: auto;
+}
+
+.itinerary-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 20px 20px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.itinerary-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 1400px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.itinerary-card {
+  background: rgba(255, 255, 255, 0.81);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.346);
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+  flex: 1 1 calc(25% - 20px);
+  max-width: 300px;
+  min-width: 260px;
+  height: 270px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.itinerary-card:hover {
+  transform: translateY(-5px);
+}
+
+.add-itinerary,
+.view-details-btn {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+  margin-top: auto;
+}
+
+.add-itinerary:hover,
+.view-details-btn:hover {
+  background: #0056b3;
+}
+
+.add-itinerary:focus,
+.view-details-btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .itinerary-card {
+    flex: 1 1 calc(33.333% - 20px);
+  }
+}
+
+@media (max-width: 900px) {
+  .itinerary-card {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+@media (max-width: 600px) {
+  .itinerary-card {
+    flex: 1 1 100%;
+  }
+}

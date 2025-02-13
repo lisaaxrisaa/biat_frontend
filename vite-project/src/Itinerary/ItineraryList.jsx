@@ -1,6 +1,6 @@
 import React from 'react';
 import ItineraryCard from './ItineraryCard';
-import './itinerary.css';
+import './itinerary-page.css';
 
 const ItineraryList = ({ itineraries }) => {
   return (

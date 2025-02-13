@@ -29,14 +29,13 @@ const ItineraryDetailPage = () => {
 
   return (
     <>
-      <div className="itinerary-detail-page">
-        <div className="itinerary-detail-content">
+      <div className="itinerary-details-wrapper">
+        <div className="itinerary-details-container">
           <h2>{itinerary.tripName}</h2>
-          <p>
-            <strong>Start Date:</strong> {formatDate(itinerary.startDate)}
-          </p>
-          <p>
-            <strong>End Date:</strong> {formatDate(itinerary.endDate)}
+          <p className="trip-dates">
+            <strong>Date:</strong>{' '}
+            {new Date(itinerary.startDate).toLocaleDateString()} -{' '}
+            {new Date(itinerary.endDate).toLocaleDateString()}
           </p>
           <p>
             <strong>Type:</strong> {itinerary.type}
@@ -44,46 +43,48 @@ const ItineraryDetailPage = () => {
           <p>
             <strong>Description:</strong> {itinerary.description}
           </p>
-          <p>
-            <strong>Date:</strong> {formatDate(itinerary.date)}
-          </p>
-          <p>
-            <strong>Time:</strong> {itinerary.time}
-          </p>
 
           <h3>Activities</h3>
           {itinerary.activities && itinerary.activities.length > 0 ? (
-            <ul>
-              {itinerary.activities.map((activity, index) => (
-                <li className="activity-list" key={index}>
-                  <p>
-                    <strong>{activity.name}</strong>
-                  </p>
-                  <p>
-                    <strong>Description:</strong> {activity.description}
-                  </p>
-                  <p>
-                    <strong>Time:</strong> {activity.activityTime}
-                  </p>
-                  <p>
-                    <strong>Location:</strong> {activity.location}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <table className="activities-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Activity Name</th>
+                  <th>Description</th>
+                  <th>Time</th>
+                  <th>Location</th>
+                </tr>
+              </thead>
+              <tbody>
+                {itinerary.activities.map((activity, index) => (
+                  <tr key={index}>
+                    <td>
+                      {activity.date
+                        ? new Date(activity.date).toLocaleDateString()
+                        : 'N/A'}
+                    </td>
+                    <td>{activity.name}</td>
+                    <td>{activity.description}</td>
+                    <td>{activity.activityTime || 'N/A'}</td>
+                    <td>{activity.location || 'N/A'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           ) : (
             <p>No activities available for this itinerary.</p>
           )}
 
-          <button className="edit-itinerary-btn" onClick={handleEditClick}>
-            Edit Itinerary
-          </button>
-          <button
-            onClick={() => deleteHandler(id)}
-            className="delete-itinerary-btn"
-          >
-            Delete Itinerary
-          </button>
+          <div className="button-group">
+            <button
+              className="edit-btn"
+              onClick={() => navigate(`/edit-itinerary/${id}`)}
+            >
+              Edit Itinerary
+            </button>
+            <button className="delete-btn">Delete Itinerary</button>
+          </div>
         </div>
       </div>
     </>

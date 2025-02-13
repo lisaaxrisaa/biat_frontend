@@ -1,50 +1,83 @@
-.itinerary-detail-page {
-  background-image: url('https://img.freepik.com/premium-photo/abstract-striped-notebook-with-pencil-white-paper-line-pattern-blank-notebook-picture-add-text-message-used-background-website_43429-2004.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 1705px;
-  height: 100vh;
+.itinerary-details-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 100vh;
+  width: 100vw;
   padding: 20px;
+  background: url('https://wallpapers.com/images/hd/planner-background-brd22ij7y2f2tjoz.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
-.itinerary-detail-content {
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 8px;
-  padding: 2rem;
+.itinerary-details-container {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
   width: 100%;
-  max-width: 700px;
   text-align: center;
 }
 
-.itinerary-detail-content h2 {
-  font-size: 2rem;
+.trip-dates {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.activities-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.activities-table th,
+.activities-table td {
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.activities-table th {
+  background: #f8f9fa;
+  color: #333;
   font-weight: bold;
 }
 
-.itinerary-detail-content p {
-  font-size: 1.2rem;
-  margin: 10px 0;
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
-.activity-list {
-  list-style: none;
-}
-
-.delete-itinerary-btn {
-  background-color: #ff4b5c;
+.edit-btn {
+  background: #007bff;
   color: white;
-  padding: 0.5rem 1rem;
+  padding: 12px 20px;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.3s ease-in-out;
 }
 
-.delete-itinerary-btn:hover {
-  background-color: #e93f4d;
+.edit-btn:hover {
+  background: #0056b3;
+}
+
+.delete-btn {
+  background: #dc3545;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.delete-btn:hover {
+  background: #b52a37;
 }

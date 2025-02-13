@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useGetWeatherQuery } from '../store/weatherSlice';
 import getWeatherIcon from './WeatherIcons';
-import Card from './WeatherCard';
+import WeatherCard from './WeatherCard';
 
 const WeatherForm = () => {
   const [location, setLocation] = useState('');
@@ -32,26 +32,27 @@ const WeatherForm = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Enter location"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-        />
-        <br />
-        <button type="submit">Get Weather</button>
-      </form>
+      <WeatherCard title="Weather">
+        <form onSubmit={handleSubmit} className="weather-form">
+          <input
+            type="text"
+            placeholder="Enter location"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+          />
 
-      {isLoading && <p>Loading...</p>}
+          <button type="submit">Get Weather</button>
+        </form>
 
-      {error && (
-        <p>Error: {error.message || 'Unable to fetch weather data.'}</p>
-      )}
+        {isLoading && <p>Loading...</p>}
 
-      {data && data.currentConditions ? (
-        <Card title={`Weather in ${data.address}`}>
-          <div>
+        {error && (
+          <p>Error: {error.message || 'Unable to fetch weather data.'}</p>
+        )}
+
+        {data && data.currentConditions ? (
+          <div className="weather-info">
+            <h4>Weather in {data.address}</h4>
             <div>{getWeatherIcon(data.currentConditions.conditions)}</div>
             <p>Temperature: {data.currentConditions?.temp ?? 'N/A'}°F</p>
             <p>Feels Like: {data.currentConditions?.feelslike ?? 'N/A'}°F</p>
@@ -65,10 +66,10 @@ const WeatherForm = () => {
             <p>Cloud Cover: {data.currentConditions?.cloudcover ?? 'N/A'}%</p>
             <p>Conditions: {data.currentConditions?.conditions ?? 'N/A'}</p>
           </div>
-        </Card>
-      ) : (
-        <p>No weather data available</p>
-      )}
+        ) : (
+          <p>No weather data available</p>
+        )}
+      </WeatherCard>
     </>
   );
 };

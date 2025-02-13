@@ -14,7 +14,9 @@ const ItineraryForm = () => {
     name: '',
     date: '',
     time: '',
-    activities: [{ name: '', description: '', activityTime: '', location: '' }],
+    activities: [
+      { name: '', description: '', activityTime: '', date: '', location: '' },
+    ],
   });
 
   const [createItinerary] = useCreateItineraryMutation();
@@ -42,7 +44,7 @@ const ItineraryForm = () => {
       ...prevFormData,
       activities: [
         ...prevFormData.activities,
-        { name: '', description: '', activityTime: '', location: '' },
+        { name: '', description: '', activityTime: '', date: '', location: '' },
       ],
     }));
   };
@@ -99,93 +101,171 @@ const ItineraryForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="form-container">
-      <div className="input-group">
-        <input
-          type="text"
-          name="tripName"
-          placeholder="Trip Name"
-          value={formData.tripName}
-          onChange={handleChange}
-          className="form-input"
-        />
-        <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          className="form-input"
-        />
-        <input
-          type="date"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          className="form-input"
-        />
-      </div>
-      <input
-        type="text"
-        name="type"
-        placeholder="Type"
-        value={formData.type}
-        onChange={handleChange}
-        className="form-input"
-      />
-      <textarea
-        name="description"
-        placeholder="Description"
-        value={formData.description}
-        onChange={handleChange}
-        className="form-input"
-      />
-      <div className="input-group">
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          className="form-input"
-        />
-        <input
-          type="time"
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          className="form-input"
-        />
-      </div>
+    <>
+      <div className="itinerary-form-wrapper">
+        <form onSubmit={handleSubmit} className="itinerary-form-container">
+          <h2>Create Itinerary</h2>
 
-      <h3>Activities</h3>
-
-      {formData.activities.map((activity, index) => (
-        <div key={index} className="activity-container">
-          <Activity
-            activity={activity}
-            index={index}
-            handleChange={handleChange}
+          <label>Trip Name</label>
+          <input
+            type="text"
+            name="tripName"
+            placeholder="Enter trip name"
+            value={formData.tripName}
+            onChange={handleChange}
+            className="form-input"
           />
-          <button
-            type="button"
-            onClick={() => handleDeleteActivity(index)}
-            className="delete-activity-btn"
-          >
-            Delete Activity
-          </button>
-        </div>
-      ))}
-      <button
-        type="button"
-        onClick={handleAddActivity}
-        className="add-activity-btn"
-      >
-        + Add Activity
-      </button>
 
-      <button type="submit" className="submit-btn">
-        Save and Submit Itinerary
-      </button>
-    </form>
+          <div className="date-inputs">
+            <label>
+              Start Date
+              <input
+                type="date"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+
+            <label>
+              End Date
+              <input
+                type="date"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+          </div>
+
+          <label>Type of Trip</label>
+          <input
+            type="text"
+            name="type"
+            placeholder="e.g., Vacation, Business, Adventure"
+            value={formData.type}
+            onChange={handleChange}
+            className="form-input"
+          />
+
+          <label>Description</label>
+          <textarea
+            name="description"
+            placeholder="Brief description of your trip"
+            value={formData.description}
+            onChange={handleChange}
+            className="form-input"
+          />
+          <div className="date-inputs">
+            <label>
+              Activity Date
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+
+            <label>
+              Activity Time
+              <input
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </label>
+          </div>
+          <h3>Activities</h3>
+          <table className="activities-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Activity Name</th>
+                <th>Description</th>
+                <th>Time</th>
+                <th>Location</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              {formData.activities.map((activity, index) => (
+                <tr key={index}>
+                  <td>
+                    <input
+                      type="date"
+                      name="date"
+                      value={activity.date || ''}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="name"
+                      value={activity.name}
+                      onChange={(e) => handleChange(e, index)}
+                      placeholder="Activity Name"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="description"
+                      value={activity.description}
+                      onChange={(e) => handleChange(e, index)}
+                      placeholder="Activity Description"
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="time"
+                      name="activityTime"
+                      value={activity.activityTime}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </td>
+                  <td>
+                    <input
+                      type="text"
+                      name="location"
+                      value={activity.location}
+                      onChange={(e) => handleChange(e, index)}
+                      placeholder="Activity Location"
+                    />
+                  </td>
+                  <td>
+                    <button
+                      className="form-delete-btn"
+                      onClick={() => handleDeleteActivity(index)}
+                    >
+                      ❌
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="button-container">
+            <button
+              type="button"
+              className="add-activity"
+              onClick={handleAddActivity}
+            >
+              + Add Activity
+            </button>
+            <button type="submit" className="save-button">
+              Save and Submit Itinerary
+            </button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 };
 

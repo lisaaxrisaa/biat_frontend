@@ -40,7 +40,16 @@ const EditItineraryPage = () => {
         description: itinerary.description || '',
         date: itinerary.date ? itinerary.date.split('T')[0] : '',
         time: itinerary.time || '',
-        activities: itinerary.activities || [],
+        activities: itinerary.activities
+          ? itinerary.activities.map((activity) => ({
+              id: activity.id || null,
+              name: activity.name || '',
+              description: activity.description || '',
+              activityTime: activity.activityTime || '',
+              date: activity.date ? activity.date.split('T')[0] : '',
+              location: activity.location || '',
+            }))
+          : [],
       });
     }
   }, [itinerary]);
@@ -65,40 +74,40 @@ const EditItineraryPage = () => {
       ...formData,
       activities: [
         ...formData.activities,
-        { id: null, name: '', description: '', activityTime: '', location: '' },
+        {
+          id: null,
+          name: '',
+          description: '',
+          activityTime: '',
+          date: '',
+          location: '',
+        },
       ],
     });
   };
 
-  const handleDeleteActivity = async (activityId) => {
-    if (!activityId) {
-      console.error('No activity ID provided for deletion');
-      return;
-    }
-
-    console.log('Deleting activity with ID:', activityId);
-
-    try {
-      const result = await deleteActivity(activityId).unwrap();
-      console.log('Delete response:', result);
-
-      setFormData((prevFormData) => ({
-        ...prevFormData,
-        activities: prevFormData.activities.filter(
-          (activity) => activity.id !== activityId
-        ),
-      }));
-
-      console.log('Activity deleted successfully');
-    } catch (error) {
-      console.error('Error deleting activity:', error);
-      if (error.originalStatus === 404) {
-        console.error('Activity not found. Please check the activity ID.');
-      } else {
-        console.error('Unexpected error:', error);
-      }
-    }
-  };
+  // const handleDeleteActivity = async (activityId) => {
+  //   if (!activityId) {
+  //     console.error('No activity ID provided for deletion');
+  //     return;
+  //   }
+  //   try {
+  //     await deleteActivity(activityId).unwrap();
+  //     setFormData((prevFormData) => ({
+  //       ...prevFormData,
+  //       activities: prevFormData.activities.filter(
+  //         (activity) => activity.id !== activityId
+  //       ),
+  //     }));
+  //   } catch (error) {
+  //     console.error('Error deleting activity:', error);
+  //     if (error.originalStatus === 404) {
+  //       console.error('Activity not found. Please check the activity ID.');
+  //     } else {
+  //       console.error('Unexpected error:', error);
+  //     }
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -218,6 +227,7 @@ const EditItineraryPage = () => {
               <table className="activities-table">
                 <thead>
                   <tr>
+                    <th>Date</th>
                     <th>Activity Name</th>
                     <th>Description</th>
                     <th>Time</th>
@@ -228,6 +238,15 @@ const EditItineraryPage = () => {
                 <tbody>
                   {formData.activities.map((activity, index) => (
                     <tr key={index}>
+                      <td>
+                        <input
+                          type="date"
+                          name="date"
+                          value={activity.date || ''}
+                          onChange={(e) => handleActivityChange(e, index)}
+                          placeholder="Activity Date"
+                        />
+                      </td>
                       <td>
                         <input
                           type="text"
@@ -265,6 +284,7 @@ const EditItineraryPage = () => {
                       </td>
                       <td>
                         <button
+                          className="edit-delete-btn"
                           type="button"
                           onClick={() => {
                             setFormData((prev) => ({

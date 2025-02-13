@@ -11,6 +11,7 @@ const NewEntry = () => {
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 

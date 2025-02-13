@@ -1,0 +1,62 @@
+.home-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://static.vecteezy.com/system/resources/previews/033/838/766/non_2x/beach-preparation-accessories-in-suitcase-on-sand-generative-ai-free-photo.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.797) !important;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.card a:hover {
+  color: #0056b3;
+}
+
+@media (max-width: 900px) {
+  .card-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+}

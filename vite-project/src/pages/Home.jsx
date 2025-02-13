@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import WeatherForm from '../Weather/WeatherForm';
+import './home.css';
 
 const Home = () => {
   const navigate = useNavigate();
@@ -21,34 +22,29 @@ const Home = () => {
 
   return (
     <>
-      <h2>Start Planning:</h2>
-      <div className="card-container">
-        <div className="card">
-          <h3>Weather</h3>
+      <div className="home-wrapper">
+        <h2 className="home-title">Start Planning:</h2>
+        <div className="card-grid">
           <WeatherForm fetchWeather={fetchWeather} />
           {weatherData && (
-            <div>
+            <div className="card">
               <h4>Weather in {weatherData}</h4>
             </div>
           )}
-        </div>
-      </div>
 
-      <div className="card-container">
-        <div className="card">
-          <Link to="/itineraries">
+          <div className="card">
             <h3>Build Itinerary</h3>
-            <p>Click here to view your itineraries</p>
-          </Link>
-        </div>
-      </div>
-      {/* Created Journal card */}
-      <div className="card-container">
-        <div className="card">
-          <h3>Journal</h3>
-          <Link to="/user/journals">
-            <h4>Click here to view your journal</h4>
-          </Link>
+            <Link to="/itineraries">
+              <h4>Click here to view your itineraries</h4>
+            </Link>
+          </div>
+
+          <div className="card">
+            <h3>Journal</h3>
+            <Link to="/user/journals">
+              <h4>Click here to view your journal</h4>
+            </Link>
+          </div>
         </div>
       </div>
     </>

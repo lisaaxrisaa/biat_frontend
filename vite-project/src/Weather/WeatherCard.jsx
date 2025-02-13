@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Card = ({ title, children }) => {
+const WeatherCard = ({ title, children }) => {
   return (
     <div className="card">
       <h3 className="card-title">{title}</h3>
@@ -10,9 +10,9 @@ const Card = ({ title, children }) => {
   );
 };
 
-Card.propTypes = {
+WeatherCard.propTypes = {
   title: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default Card;
+export default WeatherCard;

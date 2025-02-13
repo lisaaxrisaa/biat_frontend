@@ -5,6 +5,7 @@ import {
   useUpdateItineraryMutation,
   useDeleteActivityMutation,
 } from '../store/itinerarySlice';
+import './edit-itinerary.css';
 
 const EditItineraryPage = () => {
   const { id } = useParams();
@@ -75,7 +76,7 @@ const EditItineraryPage = () => {
       return;
     }
 
-    console.log('Deleting activity with ID:', activityId); // Debugging log
+    console.log('Deleting activity with ID:', activityId);
 
     try {
       const result = await deleteActivity(activityId).unwrap();
@@ -110,7 +111,7 @@ const EditItineraryPage = () => {
     const filteredActivities = formData.activities.filter(
       (activity) =>
         (activity.name.trim() !== '' || activity.description.trim() !== '') &&
-        !activity.deleteFlag // Exclude activities marked for deletion
+        !activity.deleteFlag
     );
 
     const deletedActivityIds = formData.activities
@@ -152,119 +153,152 @@ const EditItineraryPage = () => {
   if (error) return <p>Error fetching itinerary: {error.message}</p>;
 
   return (
-    <div className="edit-itinerary-page">
-      <h2>Edit Itinerary</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Trip Name:
-          <input
-            type="text"
-            name="tripName"
-            value={formData.tripName}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Start Date:
-          <input
-            type="date"
-            name="startDate"
-            value={formData.startDate}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          End Date:
-          <input
-            type="date"
-            name="endDate"
-            value={formData.endDate}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Type:
-          <input
-            type="text"
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Description:
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Date:
-          <input
-            type="date"
-            name="date"
-            value={formData.date}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Time:
-          <input
-            type="time"
-            name="time"
-            value={formData.time}
-            onChange={handleChange}
-          />
-        </label>
+    <>
+      <div className="edit-itinerary-wrapper">
+        <div className="edit-itinerary-page">
+          <div className="edit-itinerary-container">
+            <h2>Edit Itinerary</h2>
+            <form onSubmit={handleSubmit}>
+              <label>Trip Name</label>
+              <input
+                type="text"
+                name="tripName"
+                value={formData.tripName}
+                onChange={handleChange}
+              />
 
-        <h3>Activities</h3>
-        {formData.activities.map((activity, index) => (
-          <div key={activity.id || index}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Activity Name"
-              value={activity.name}
-              onChange={(e) => handleActivityChange(e, index)}
-            />
-            <textarea
-              name="description"
-              placeholder="Activity Description"
-              value={activity.description}
-              onChange={(e) => handleActivityChange(e, index)}
-            />
-            <input
-              type="time"
-              name="activityTime"
-              placeholder="Activity Time"
-              value={activity.activityTime}
-              onChange={(e) => handleActivityChange(e, index)}
-            />
-            <input
-              type="text"
-              name="location"
-              placeholder="Activity Location"
-              value={activity.location}
-              onChange={(e) => handleActivityChange(e, index)}
-            />
-            {activity.id && (
-              <button
-                type="button"
-                onClick={() => handleDeleteActivity(activity.id)}
-              >
-                Delete
-              </button>
-            )}
+              <label>Start Date</label>
+              <input
+                type="date"
+                name="startDate"
+                value={formData.startDate}
+                onChange={handleChange}
+              />
+
+              <label>End Date</label>
+              <input
+                type="date"
+                name="endDate"
+                value={formData.endDate}
+                onChange={handleChange}
+              />
+
+              <label>Type</label>
+              <input
+                type="text"
+                name="type"
+                value={formData.type}
+                onChange={handleChange}
+              />
+
+              <label>Description</label>
+              <textarea
+                name="description"
+                value={formData.description}
+                onChange={handleChange}
+              />
+
+              <label>Date</label>
+              <input
+                type="date"
+                name="date"
+                value={formData.date}
+                onChange={handleChange}
+              />
+
+              <label>Time</label>
+              <input
+                type="time"
+                name="time"
+                value={formData.time}
+                onChange={handleChange}
+              />
+
+              <h3>Activities</h3>
+              <table className="activities-table">
+                <thead>
+                  <tr>
+                    <th>Activity Name</th>
+                    <th>Description</th>
+                    <th>Time</th>
+                    <th>Location</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {formData.activities.map((activity, index) => (
+                    <tr key={index}>
+                      <td>
+                        <input
+                          type="text"
+                          name="name"
+                          value={activity.name}
+                          onChange={(e) => handleActivityChange(e, index)}
+                          placeholder="Activity Name"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="description"
+                          value={activity.description}
+                          onChange={(e) => handleActivityChange(e, index)}
+                          placeholder="Description"
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="time"
+                          name="activityTime"
+                          value={activity.activityTime}
+                          onChange={(e) => handleActivityChange(e, index)}
+                        />
+                      </td>
+                      <td>
+                        <input
+                          type="text"
+                          name="location"
+                          value={activity.location}
+                          onChange={(e) => handleActivityChange(e, index)}
+                          placeholder="Location"
+                        />
+                      </td>
+                      <td>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFormData((prev) => ({
+                              ...prev,
+                              activities: prev.activities.filter(
+                                (_, i) => i !== index
+                              ),
+                            }));
+                          }}
+                        >
+                          ❌
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <div className="button-container">
+                <button
+                  type="button"
+                  onClick={handleAddActivity}
+                  className="add-activity"
+                >
+                  + Add Activity
+                </button>
+                <button type="submit" className="save-button">
+                  Save Changes
+                </button>
+              </div>
+            </form>
           </div>
-        ))}
-        <button type="button" onClick={handleAddActivity}>
-          + Add Activity
-        </button>
-
-        <button type="submit">Save Changes</button>
-      </form>
-    </div>
+        </div>
+      </div>
+    </>
   );
 };
 

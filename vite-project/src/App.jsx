@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+=import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Registration from "./pages/Registration";
@@ -33,18 +33,17 @@ const App = () => {
             <Route path="/itinerary-form" element={<ItineraryForm />} />
             <Route path="/itinerary/:id" element={<ItineraryDetailPage />} />
             <Route path="/edit-itinerary/:id" element={<EditItineraryPage />} />
-
+            <Route path="/journals" element={<JournalList />} />
             <Route path="/user/journals" element={<JournalList />} />
-
             <Route path="/create-journal-entry" element={<NewEntry />} />
             <Route path="/journal/:id" element={<JournalEntry />} />
             <Route path="/edit-entry/:id" element={<EditEntry />} />
-
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
             <Route path="/register" element={<Registration />} />
             <Route path="/update-profile" element={<UpdateProfile />} />
             <Route path="/profile" element={<Profile />} />
+            {/* <Route path="/logout" element={<Logout />} /> */}
           </Routes>
         </BrowserRouter>
       </Provider>

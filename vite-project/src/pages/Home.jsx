@@ -1,16 +1,13 @@
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import WeatherForm from '../Weather/WeatherForm';
 
-
 const Home = () => {
   const navigate = useNavigate();
   const [weatherData, setWeatherData] = useState(null);
 
-  const token = sessionStorage.getItem("token");
- 
+  const token = sessionStorage.getItem('token');
 
   useEffect(() => {
     if (!token) {

@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('https://st4.depositphotos.com/21486874/23723/v/450/depositphotos_237230256-stock-illustration-urban-vector-city-map-sanjose.jpg')
+  background: url('https://images.pexels.com/photos/2104742/pexels-photo-2104742.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
     no-repeat center center fixed;
   background-size: cover;
   display: flex;
@@ -147,6 +147,21 @@ input[type='time']::-webkit-calendar-picker-indicator {
 .save-button {
   flex: 1;
   max-width: 300px;
+}
+
+.form-back-link {
+  position: absolute;
+  top: 20px;
+  left: 270px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.form-back-link:hover {
+  text-decoration: underline;
 }
 
 @media (max-width: 768px) {

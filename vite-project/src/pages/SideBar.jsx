@@ -1,15 +1,8 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './sidebar.css';
 
 const Sidebar = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = () => {
-    sessionStorage.removeItem('token');
-    navigate('/login');
-  };
-
   return (
     <div className="sidebar">
       <h1 className="sidebar-title">Pack Ahead</h1>
@@ -20,9 +13,9 @@ const Sidebar = () => {
         <Link to="/profile" className="sidebar-link">
           <h2>Profile</h2>
         </Link>
-        <button onClick={handleLogout} className="sidebar-logout">
+        <Link to="/logout" className="sidebar-logout">
           <h2>Logout</h2>
-        </button>
+        </Link>
       </nav>
     </div>
   );

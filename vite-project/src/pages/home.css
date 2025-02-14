@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: url('https://static.vecteezy.com/system/resources/previews/033/838/766/non_2x/beach-preparation-accessories-in-suitcase-on-sand-generative-ai-free-photo.jpg')
+  background: url('https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&w=1200')
     no-repeat center center fixed;
   background-size: cover;
   display: flex;
@@ -16,10 +16,10 @@
 }
 
 .home-title {
-  font-size: 2rem;
+  font-size: 5rem;
   font-weight: bold;
   color: white;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
 
 .card-grid {

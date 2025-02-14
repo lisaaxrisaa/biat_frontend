@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useUpdateUserMutation } from '../store/updateProfileSlice';
 import { updateUser } from '../store/authSlice';
 import { useNavigate } from 'react-router';
+import './update-profile.css';
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
@@ -33,46 +34,54 @@ const UpdateProfile = () => {
 
   return (
     <>
-      <h2>Update Profile</h2>
-      {error && (
-        <p style={{ color: 'red' }}>
-          {error.data?.message || 'Update failed.'}
-        </p>
-      )}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="first_name"
-          value={formData.first_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="last_name"
-          value={formData.last_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="New Password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-
-        <button type="submit" disabled={isLoading} className="btn btn-primary">
-          {isLoading ? 'Updating...' : 'Update Profile'}
-        </button>
-      </form>
+      <div className="update-profile-wrapper">
+        <div className="update-profile-container">
+          <div className="update-profile-header">
+            <h2>Update Profile</h2>
+          </div>
+          {error && (
+            <p className="error-message">
+              {error.data?.message || 'Update failed.'}
+            </p>
+          )}
+          <form className="update-profile-form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              value={formData.first_name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              value={formData.last_name}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <input
+              type="password"
+              name="password"
+              placeholder="New Password"
+              value={formData.password}
+              onChange={handleChange}
+            />
+            <button type="submit" disabled={isLoading}>
+              {isLoading ? 'Updating...' : 'Update Profile'}
+            </button>
+          </form>
+        </div>
+      </div>
     </>
   );
 };

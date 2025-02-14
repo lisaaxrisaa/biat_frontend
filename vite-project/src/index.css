@@ -28,6 +28,10 @@
   margin-left: 200px;
 }
 
-.itinerary-page-wrapper {
+.itinerary-page-wrapper,
+.edit-itinerary-wrapper,
+.home-wrapper,
+.itinerary-detail-container,
+.profile-container {
   margin-left: 120px;
 }

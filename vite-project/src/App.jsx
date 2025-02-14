@@ -19,6 +19,7 @@ import ItineraryDetailPage from './Itinerary/ItineraryDetail';
 import EditItineraryPage from './Itinerary/EditItinerary';
 import JournalList from './journal-components/JournalList';
 import Layout from './pages/Layout';
+import Logout from './pages/Logout';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -39,17 +40,13 @@ const AppContent = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     setIsLoggedIn(!!token);
-    console.log('Checking login status:', token);
-    console.log('Current route:', location.pathname);
   }, [location]);
 
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Registration />} />
       {isLoggedIn ? (
         <Route element={<Layout />}>
+          <Route path="/" element={<Home />} />
           <Route path="/itineraries" element={<ItineraryPage />} />
           <Route path="/itinerary-form" element={<ItineraryForm />} />
           <Route path="/itinerary/:id" element={<ItineraryDetailPage />} />
@@ -57,11 +54,16 @@ const AppContent = () => {
           <Route path="/journals" element={<JournalList />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       ) : (
-        <Route path="*" element={<Navigate to="/login" />} />
+        <>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Registration />} />
+          <Route path="*" element={<Navigate to="/login" />} />
+        </>
       )}
-      <Route path="*" element={<h1>404 - Page Not Found</h1>} />
     </Routes>
   );
 };

@@ -33,9 +33,9 @@ const Home = () => {
           )}
 
           <div className="card">
-            <h3>Build Itinerary</h3>
+            <h3>Itinerary</h3>
             <Link to="/itineraries">
-              <h4>Click here to view your itineraries</h4>
+              <h4>Start building your itineraries</h4>
             </Link>
           </div>
 

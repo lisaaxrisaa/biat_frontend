@@ -5,6 +5,7 @@ import {
   useUpdateItineraryMutation,
   useDeleteActivityMutation,
 } from '../store/itinerarySlice';
+import { Link } from 'react-router-dom';
 import './edit-itinerary.css';
 
 const EditItineraryPage = () => {
@@ -86,29 +87,6 @@ const EditItineraryPage = () => {
     });
   };
 
-  // const handleDeleteActivity = async (activityId) => {
-  //   if (!activityId) {
-  //     console.error('No activity ID provided for deletion');
-  //     return;
-  //   }
-  //   try {
-  //     await deleteActivity(activityId).unwrap();
-  //     setFormData((prevFormData) => ({
-  //       ...prevFormData,
-  //       activities: prevFormData.activities.filter(
-  //         (activity) => activity.id !== activityId
-  //       ),
-  //     }));
-  //   } catch (error) {
-  //     console.error('Error deleting activity:', error);
-  //     if (error.originalStatus === 404) {
-  //       console.error('Activity not found. Please check the activity ID.');
-  //     } else {
-  //       console.error('Unexpected error:', error);
-  //     }
-  //   }
-  // };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -166,6 +144,9 @@ const EditItineraryPage = () => {
       <div className="edit-itinerary-wrapper">
         <div className="edit-itinerary-page">
           <div className="edit-itinerary-container">
+            <Link to="/itineraries" className="edit-back-link">
+              &lt; Back to Itineraries
+            </Link>
             <h2>Edit Itinerary</h2>
             <form onSubmit={handleSubmit}>
               <label>Trip Name</label>
@@ -207,7 +188,7 @@ const EditItineraryPage = () => {
                 onChange={handleChange}
               />
 
-              <label>Date</label>
+              <label>Flight Date</label>
               <input
                 type="date"
                 name="date"
@@ -215,7 +196,7 @@ const EditItineraryPage = () => {
                 onChange={handleChange}
               />
 
-              <label>Time</label>
+              <label>Flight Time</label>
               <input
                 type="time"
                 name="time"

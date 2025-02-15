@@ -54,7 +54,10 @@ const Activity = ({ activity, index, handleChange, handleDeleteActivity }) => {
       <td>
         <button
           className="form-delete-btn"
-          onClick={() => handleDeleteActivity(index)}
+          onClick={(e) => {
+            e.preventDefault();
+            handleDeleteActivity(index);
+          }}
         >
           ❌
         </button>

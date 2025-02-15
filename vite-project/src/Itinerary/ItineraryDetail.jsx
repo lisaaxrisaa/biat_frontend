@@ -5,13 +5,16 @@ import {
   useGetItineraryQuery,
   useDeleteItineraryMutation,
 } from '../store/itinerarySlice';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import itinerarySlice from '../store/itinerarySlice';
 import './itinerary-detail.css';
 
 const ItineraryDetailPage = () => {
   const { id } = useParams();
   const { data: itinerary, error, isLoading } = useGetItineraryQuery(id);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [deleteItinerary] = useDeleteItineraryMutation();
 
   if (isLoading) return <p>Loading...</p>;
@@ -19,16 +22,26 @@ const ItineraryDetailPage = () => {
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm(
-      'Are you sure you want to delete this itinerary?'
+      `Are you sure you want to delete the itinerary: "${itinerary.tripName}"?`
     );
-    if (confirmDelete) {
-      try {
-        await deleteItinerary(id).unwrap();
-        navigate('/itineraries');
-      } catch (err) {
-        console.error('Failed to delete itinerary:', err);
-        alert('Error deleting itinerary. Please try again.');
-      }
+    if (!confirmDelete) return;
+
+    try {
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            return draft.filter((item) => item.id !== id);
+          }
+        )
+      );
+
+      await deleteItinerary(id).unwrap();
+      navigate('/itineraries');
+    } catch (err) {
+      console.error('Failed to delete itinerary:', err);
+      alert('Error deleting itinerary. Please try again.');
     }
   };
 

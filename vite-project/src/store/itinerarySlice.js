@@ -3,13 +3,10 @@ import { api } from './api';
 const itinerarySlice = api.injectEndpoints({
   endpoints: (builder) => ({
     getItineraries: builder.query({
-      query: (userId) => {
-        console.log('Fetching itineraries for user with ID:', userId);
-        return `/api/itinerary/user/itinerary`;
-      },
-      transformResponse: (response) => {
-        return response;
-      },
+      query: () => `/api/itinerary/user/itinerary`,
+      transformResponse: (response) =>
+        response.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)),
+      providesTags: ['Itineraries'],
     }),
     getItinerary: builder.query({
       query: (id) => {
@@ -22,6 +19,23 @@ const itinerarySlice = api.injectEndpoints({
         method: 'POST',
         body: newItinerary,
       }),
+      async onQueryStarted(newItinerary, { dispatch, queryFulfilled }) {
+        try {
+          const { data: createdItinerary } = await queryFulfilled;
+          dispatch(
+            itinerarySlice.util.updateQueryData(
+              'getItineraries',
+              undefined,
+              (draft) => {
+                draft.unshift(createdItinerary);
+              }
+            )
+          );
+          dispatch(itinerarySlice.util.invalidateTags(['Itineraries']));
+        } catch (error) {
+          console.error('Error creating itinerary:', error);
+        }
+      },
     }),
     updateItinerary: builder.mutation({
       query: ({ id, updatedItinerary }) => ({
@@ -29,6 +43,31 @@ const itinerarySlice = api.injectEndpoints({
         method: 'PUT',
         body: updatedItinerary,
       }),
+      async onQueryStarted(
+        { id, updatedItinerary },
+        { dispatch, queryFulfilled }
+      ) {
+        try {
+          dispatch(
+            itinerarySlice.util.updateQueryData(
+              'getItineraries',
+              undefined,
+              (draft) => {
+                const index = draft.findIndex(
+                  (itinerary) => itinerary.id === id
+                );
+                if (index !== -1) {
+                  draft[index] = { ...draft[index], ...updatedItinerary };
+                }
+              }
+            )
+          );
+          await queryFulfilled;
+          dispatch(itinerarySlice.util.invalidateTags(['Itineraries']));
+        } catch (error) {
+          console.error('Error updating itinerary:', error);
+        }
+      },
     }),
     deleteItinerary: builder.mutation({
       query: (id) => ({

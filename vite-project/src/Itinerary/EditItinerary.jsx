@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   useGetItineraryQuery,
   useUpdateItineraryMutation,
   useDeleteActivityMutation,
 } from '../store/itinerarySlice';
+import itinerarySlice from '../store/itinerarySlice';
 import { Link } from 'react-router-dom';
 import './edit-itinerary.css';
 
 const EditItineraryPage = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     data: itinerary,
     error,
@@ -118,9 +121,20 @@ const EditItineraryPage = () => {
       deletedActivityIds,
     };
 
-    console.log('Submitting:', finalFormData);
-
     try {
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            const index = draft.findIndex((itinerary) => itinerary.id === id);
+            if (index !== -1) {
+              draft[index] = { ...draft[index], ...finalFormData };
+            }
+          }
+        )
+      );
+
       await updateItinerary({
         id,
         updatedItinerary: finalFormData,

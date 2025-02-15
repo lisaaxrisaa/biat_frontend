@@ -20,6 +20,7 @@ import EditItineraryPage from './Itinerary/EditItinerary';
 import JournalList from './journal-components/JournalList';
 import Layout from './pages/Layout';
 import Logout from './pages/Logout';
+import LandingPage from './Landing Page/LandingPage';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -59,6 +60,7 @@ const AppContent = () => {
         </Route>
       ) : (
         <>
+          <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
           <Route path="*" element={<Navigate to="/login" />} />

@@ -1,62 +1,190 @@
-.home-wrapper {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: url('https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&w=1200')
-    no-repeat center center fixed;
-  background-size: cover;
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.home-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.home-card-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto auto auto;
+  gap: 20px;
+  justify-content: center;
+  align-items: start;
+  max-width: 1100px;
+  margin: auto;
+  grid-template-areas:
+    'weather journal journal'
+    'weather itinerary itinerary'
+    'budget packing packing';
+}
+
+.home-weather-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.home-title {
-  font-size: 5rem;
-  font-weight: bold;
+  text-align: center;
+  background: url('https://images.pexels.com/photos/1921336/pexels-photo-1921336.jpeg?auto=compress&cs=tinysrgb&w=1200')
+    no-repeat center center / cover;
   color: white;
-  margin-bottom: 30px;
-}
-
-.card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  max-width: 1200px;
-}
-
-.card {
-  background: rgba(255, 255, 255, 0.797) !important;
   padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border: 1px solid #ddd;
+  width: 100%;
+  max-width: 400px;
+  height: 100%;
+  position: relative;
+}
+
+.home-weather-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.home-weather-card * {
+  position: relative;
+  z-index: 2;
+  color: white;
+}
+
+.home-weather-card input {
+  color: black;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  width: 90%;
+  font-size: 16px;
+}
+
+.home-weather-card input::placeholder {
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.home-weather-card input:focus {
+  outline: none;
+  border: 2px solid #fff;
+}
+
+.home-weather-card-container {
+  grid-area: weather;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 350px;
+  height: 100%;
+}
+
+.weather-info {
+  text-align: center;
+  width: 100%;
+}
+
+.weather-info p {
+  margin: 8px 0;
+}
+
+.home-card {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  color: white;
   border-radius: 12px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   transition: transform 0.3s ease-in-out;
+  cursor: pointer;
+  overflow: hidden;
 }
 
-.card:hover {
-  transform: translateY(-5px);
+.home-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
 }
 
-.card a {
-  text-decoration: none;
-  color: #007bff;
+.home-card-content {
+  position: relative;
+  z-index: 2;
+  padding: 20px;
+}
+
+.home-card h3 {
+  font-size: 1.5rem;
   font-weight: bold;
+  margin-bottom: 8px;
 }
 
-.card a:hover {
-  color: #0056b3;
+.home-card p {
+  font-size: 1rem;
 }
 
-@media (max-width: 900px) {
-  .card-grid {
-    flex-direction: column;
-    align-items: center;
+.home-card-itinerary {
+  grid-area: itinerary;
+  background-image: url('https://images.pexels.com/photos/210243/pexels-photo-210243.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
+
+.home-card-journal {
+  grid-area: journal;
+  background-image: url('https://images.pexels.com/photos/414380/pexels-photo-414380.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
+
+.home-card-budget {
+  grid-area: budget;
+  background-image: url('https://images.pexels.com/photos/4386379/pexels-photo-4386379.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
+
+.home-card-packing {
+  grid-area: packing;
+  background-image: url('https://images.pexels.com/photos/1051077/pexels-photo-1051077.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
+
+@media (max-width: 768px) {
+  .home-card-grid {
+    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
+  }
+
+  .home-weather-card-container {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-card-grid {
+    grid-template-columns: repeat(1, 1fr); /* Single column for mobile */
+  }
+
+  .home-weather-card-container {
+    grid-column: span 1;
   }
 }

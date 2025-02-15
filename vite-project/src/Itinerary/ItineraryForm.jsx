@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCreateItineraryMutation } from '../store/itinerarySlice';
+import { useDispatch } from 'react-redux';
 import Activity from './Activity';
+import itinerarySlice from '../store/itinerarySlice';
 import { Link } from 'react-router-dom';
 import './itinerary-form.css';
 
@@ -22,6 +24,7 @@ const ItineraryForm = () => {
 
   const [createItinerary] = useCreateItineraryMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -90,14 +93,39 @@ const ItineraryForm = () => {
       activities: filteredActivities.length > 0 ? filteredActivities : [],
     };
 
-    console.log('Submitting:', finalFormData);
-
     try {
-      await createItinerary(finalFormData).unwrap();
+      const tempId = `temp-${Date.now()}`;
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            draft.unshift({ ...finalFormData, id: tempId });
+          }
+        )
+      );
+
+      const { data: createdItinerary } = await createItinerary(
+        finalFormData
+      ).unwrap();
+
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            return draft.map((itinerary) =>
+              itinerary.id === tempId ? createdItinerary : itinerary
+            );
+          }
+        )
+      );
+
       alert('Itinerary added successfully');
       navigate('/itineraries');
     } catch (error) {
       console.error('Failed to add itinerary:', error);
+      alert('Error adding itinerary. Please try again.');
     }
   };
 

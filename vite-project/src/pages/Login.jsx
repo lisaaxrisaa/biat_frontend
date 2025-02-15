@@ -3,6 +3,7 @@ import { useLoginUserMutation } from '../store/loginSlice';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../store/authSlice';
+import { Link } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
@@ -23,7 +24,6 @@ const Login = () => {
       dispatch(registerUser({ token: response.token, user: response.user }));
       sessionStorage.setItem('token', response.token);
       sessionStorage.setItem('user', JSON.stringify(response.user));
-      console.log('Redirecting to home...');
       navigate('/');
     } catch (error) {
       setError('Invalid login, please try again!');
@@ -60,6 +60,9 @@ const Login = () => {
               {isLoading ? 'Loading...' : 'Login'}
             </button>
           </form>
+          <p className="register-link">
+            Don't have an account? <Link to="/register">Register</Link>
+          </p>
         </div>
       </div>
     </>

@@ -33,7 +33,7 @@ const WeatherForm = () => {
 
   return (
     <>
-      <WeatherCard title="Weather">
+      <div className="home-weather-card">
         <form onSubmit={handleSubmit} className="weather-form">
           <input
             type="text"
@@ -41,6 +41,7 @@ const WeatherForm = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
+          <br />
           <br />
           <button className="weather-btn" type="submit">
             Get Weather
@@ -72,7 +73,7 @@ const WeatherForm = () => {
         ) : (
           <p>No weather data available</p>
         )}
-      </WeatherCard>
+      </div>
     </>
   );
 };

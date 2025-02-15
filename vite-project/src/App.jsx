@@ -21,6 +21,7 @@ import JournalList from './journal-components/JournalList';
 import Layout from './pages/Layout';
 import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';
+import FlightSearch from './Flight/FlightSearch';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -53,6 +54,7 @@ const AppContent = () => {
           <Route path="/itinerary/:id" element={<ItineraryDetailPage />} />
           <Route path="/edit-itinerary/:id" element={<EditItineraryPage />} />
           <Route path="/journals" element={<JournalList />} />
+          <Route path="/flights" element={<FlightSearch />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/logout" element={<Logout />} />

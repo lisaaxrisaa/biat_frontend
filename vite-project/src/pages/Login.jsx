@@ -1,7 +1,5 @@
-// changes made:
-// - replaced mock token with api token
-// - add isLoading for button, keeps users from double submitting and lets them know it is processing
-// - improved error handling
+// potential changes:
+// localStorage instead of sessionStorage (for different token storage)
 
 import { useState } from "react";
 import { useLoginUserMutation } from "../store/loginSlice";

@@ -11,19 +11,23 @@ const NewEntry = () => {
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const token = localStorage.getItem("token");
 
     const newJournalEntry = { title, content, imageUrl };
     try {
-      const response = await fetch("/user/journal", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newJournalEntry),
-      });
+      const response = await fetch(
+        "http://localhost:3000/api/journal/user/journal",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(newJournalEntry),
+        }
+      );
       if (response.ok) {
         navigate("/journals");
       } else {

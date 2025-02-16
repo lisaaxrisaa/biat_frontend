@@ -1,37 +1,14 @@
 // this file fetches entries from backend
-import React, { useState, useEffect } from "react";
+import React from "react";
 // removed unnecessary journalentry import
 import { Link } from "react-router-dom";
+import { useGetJournalsQuery } from "../store/journalSlice";
 
 const JournalList = () => {
-  const [journalEntries, setJournalEntries] = useState([]);
-  const [error, setError] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  //   gets and renders a list of the users journal entries
-  useEffect(() => {
-    const getEntries = async () => {
-      try {
-        const response = await fetch("/user/journal", {
-          headers: {
-            Authorization: `Bearer ${sessionStorage.getItem("token")}`,
-          },
-        });
-        if (!response.ok) {
-          throw new Error("Unable to fetch entries");
-        }
-        const data = await response.json();
-        setJournalEntries(data);
-        setIsLoading(false);
-      } catch (error) {
-        setError(error);
-        setIsLoading(false);
-      }
-    };
-    getEntries();
-  }, []);
+  const { data: journalEntries, error, isLoading } = useGetJournalsQuery();
 
   const renderEntries = () => {
-    if (journalEntries.length === 0) {
+    if (journalEntries && journalEntries.length === 0) {
       return (
         <div>
           <p>No entries.</p>

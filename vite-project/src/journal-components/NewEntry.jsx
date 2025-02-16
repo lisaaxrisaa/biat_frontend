@@ -11,7 +11,7 @@ const NewEntry = () => {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
-  const [createEntry, { isLoading, error }] = useCreateEntryMutation;
+  const [createEntry, { isLoading, error }] = useCreateEntryMutation();
 
   const handleSubmit = async (event) => {
     event.preventDefault();

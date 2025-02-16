@@ -43,21 +43,13 @@ const Home = () => {
             </div>
           </Link>
 
-          <Link to="/user/journals" className="home-card home-card-journal">
+          <Link to="/user/journal" className="home-card home-card-journal">
             <div className="home-card-content">
               <h3>Journal</h3>
               <p>Keep track of your travel memories and notes.</p>
             </div>
           </Link>
 
-<<<<<<< HEAD
-          <div className="card">
-            <h3>Journal</h3>
-            <Link to="/user/journal">
-              <h4>Click here to view your journal</h4>
-            </Link>
-          </div>
-=======
           <Link to="/budget" className="home-card home-card-budget">
             <div className="home-card-content">
               <h3>Budget Planner</h3>
@@ -71,7 +63,6 @@ const Home = () => {
               <p>Ensure you have everything you need for your trip.</p>
             </div>
           </Link>
->>>>>>> 119202d2f1ddc99eeb38f71c13307acedb5f706b
         </div>
       </div>
     </>

@@ -4,35 +4,22 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCreateEntryMutation } from "../store/journalSlice";
 
 const NewEntry = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
+  const [createEntry, { isLoading, error }] = useCreateEntryMutation;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const token = localStorage.getItem("token");
 
     const newJournalEntry = { title, content, imageUrl };
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/journal/user/journal",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(newJournalEntry),
-        }
-      );
-      if (response.ok) {
-        navigate("/journals");
-      } else {
-        console.error("Unable to create journal entry", response);
-      }
+      await createEntry(newJournalEntry).unwrap();
+      navigate("/journals");
     } catch (error) {
       console.error(error);
     }
@@ -60,8 +47,11 @@ const NewEntry = () => {
           value={imageUrl}
           onChange={(e) => setImageUrl(e.target.value)}
         />
-        <button type="submit">Create Journal Entry</button>
+        <button type="submit" disabled={isLoading}>
+          {isLoading ? "Creating Entry..." : "Create Journal Entry"}
+        </button>
       </form>
+      {error && <p>{error.message}</p>}
     </>
   );
 };

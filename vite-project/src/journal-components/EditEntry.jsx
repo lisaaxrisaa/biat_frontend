@@ -3,57 +3,40 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import DeleteEntry from "./DeleteEntry";
+import {
+  useGetJournalQuery,
+  useUpdateEntryMutation,
+} from "../store/journalSlice";
 
 const EditEntry = () => {
   const { id } = useParams();
-  const [entry, setEntry] = useState();
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
+  const { data: entry, error: fetchError, isLoading } = useGetJournalQuery(id);
+  const [updateEntry, { isLoading: isUpdating, error: updateError }] =
+    useUpdateEntryMutation();
+  if (fetchError) return <p>{fetchError.message}</p>;
 
   useEffect(() => {
-    const fetchEntry = async () => {
-      try {
-        const response = await fetch(`/api/user/journal/${id}`);
-        if (!response.ok) {
-          throw new Error("Unable to fetch entry");
-        }
-        const data = await response.json();
-        setEntry(data);
-        setTitle(data.title);
-        setContent(data.content);
-        setImageUrl(data.imageUrl || "");
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchEntry();
-  }, [id]);
+    if (entry) {
+      setTitle(entry.title);
+      setContent(entry.content);
+      setImageUrl(entry.imageUrl || "");
+    }
+  }, [entry]);
   const handleSave = async (event) => {
     event.preventDefault();
     const modifiedEntry = { title, content, imageUrl };
     try {
-      const response = await fetch(`/api/user/journal/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(modifiedEntry),
-      });
-      if (response.ok) {
-        alert("Journal entry updated");
-        navigate("/journals");
-      } else {
-        alert("Could not update entry, please try again later");
-      }
+      await updateEntry({ id, updatedEntry: modifiedEntry }).unwrap();
+      alert("Journal entry has been updated!");
+      navigate("/journals");
     } catch (error) {
       console.error(error);
     }
   };
-  if (!entry) {
-    return <p>No such entry found.</p>;
-  }
   return (
     <div>
       <h2>Edit</h2>
@@ -83,7 +66,9 @@ const EditEntry = () => {
           />
         </div>
         {/* Removed div between image url and button, as it was giving errors */}
-        <button type="submit">Save</button>
+        <button type="submit" disabled={isUpdating}>
+          {isUpdating ? "Saving..." : "Save"}
+        </button>
       </form>
 
       <DeleteEntry id={id} navigate={navigate} />

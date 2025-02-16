@@ -1,0 +1,79 @@
+.registration-page {
+  position: relative; /* Required for the overlay */
+  font-family: 'Quicksand', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background: url('https://images.pexels.com/photos/68704/pexels-photo-68704.jpeg?auto=compress&cs=tinysrgb&w=1200')
+    no-repeat center center fixed;
+  background-size: cover;
+}
+
+.registration-container {
+  position: relative;
+  z-index: 2;
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.registration-title {
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.registration-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.registration-form-group {
+  text-align: left;
+}
+
+.registration-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.registration-input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.registration-error-message {
+  color: #ff0000;
+  margin-bottom: 1rem;
+}
+
+.registration-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.registration-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.registration-button:hover:not(:disabled) {
+  background-color: #0056b3;
+}

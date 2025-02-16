@@ -1,35 +1,56 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { useGetItineraryQuery } from '../store/itinerarySlice';
-import useDeleteItinerary from './DeleteItinerary';
+import {
+  useGetItineraryQuery,
+  useDeleteItineraryMutation,
+} from '../store/itinerarySlice';
+import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import itinerarySlice from '../store/itinerarySlice';
 import './itinerary-detail.css';
 
 const ItineraryDetailPage = () => {
   const { id } = useParams();
   const { data: itinerary, error, isLoading } = useGetItineraryQuery(id);
-  const deleteHandler = useDeleteItinerary();
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log('Fetched itinerary:', itinerary);
-  }, [itinerary]);
-
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleDateString();
-  };
-
-  const handleEditClick = () => {
-    navigate(`/edit-itinerary/${id}`);
-  };
+  const dispatch = useDispatch();
+  const [deleteItinerary] = useDeleteItineraryMutation();
 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error loading itinerary details.</p>;
 
+  const handleDelete = async () => {
+    const confirmDelete = window.confirm(
+      `Are you sure you want to delete the itinerary: "${itinerary.tripName}"?`
+    );
+    if (!confirmDelete) return;
+
+    try {
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            return draft.filter((item) => item.id !== id);
+          }
+        )
+      );
+
+      await deleteItinerary(id).unwrap();
+      navigate('/itineraries');
+    } catch (err) {
+      console.error('Failed to delete itinerary:', err);
+      alert('Error deleting itinerary. Please try again.');
+    }
+  };
+
   return (
     <>
       <div className="itinerary-details-wrapper">
+        <Link to="/itineraries" className="edit-back-link">
+          &lt; Back to Itineraries
+        </Link>
         <div className="itinerary-details-container">
           <h2>{itinerary.tripName}</h2>
           <p className="trip-dates">
@@ -83,7 +104,9 @@ const ItineraryDetailPage = () => {
             >
               Edit Itinerary
             </button>
-            <button className="delete-btn">Delete Itinerary</button>
+            <button className="delete-btn" onClick={handleDelete}>
+              Delete Itinerary
+            </button>
           </div>
         </div>
       </div>

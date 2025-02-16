@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { useGetWeatherQuery } from '../store/weatherSlice';
 import getWeatherIcon from './WeatherIcons';
 import WeatherCard from './WeatherCard';
+import './weather.css';
 
 const WeatherForm = () => {
   const [location, setLocation] = useState('');
@@ -32,7 +33,7 @@ const WeatherForm = () => {
 
   return (
     <>
-      <WeatherCard title="Weather">
+      <div className="home-weather-card">
         <form onSubmit={handleSubmit} className="weather-form">
           <input
             type="text"
@@ -40,10 +41,13 @@ const WeatherForm = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-
-          <button type="submit">Get Weather</button>
+          <br />
+          <br />
+          <button className="weather-btn" type="submit">
+            Get Weather
+          </button>
         </form>
-
+        <br />
         {isLoading && <p>Loading...</p>}
 
         {error && (
@@ -52,7 +56,7 @@ const WeatherForm = () => {
 
         {data && data.currentConditions ? (
           <div className="weather-info">
-            <h4>Weather in {data.address}</h4>
+            <h4>{data.address}</h4>
             <div>{getWeatherIcon(data.currentConditions.conditions)}</div>
             <p>Temperature: {data.currentConditions?.temp ?? 'N/A'}°F</p>
             <p>Feels Like: {data.currentConditions?.feelslike ?? 'N/A'}°F</p>
@@ -69,7 +73,7 @@ const WeatherForm = () => {
         ) : (
           <p>No weather data available</p>
         )}
-      </WeatherCard>
+      </div>
     </>
   );
 };

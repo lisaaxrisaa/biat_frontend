@@ -1,0 +1,10 @@
+.weather-btn {
+  padding: 8px;
+  background-color: #ffffff00;
+  color: white;
+  border: none;
+  border: solid;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+}

@@ -5,7 +5,7 @@
   min-height: 100vh;
   width: 100vw;
   padding: 20px;
-  background: url('https://wallpapers.com/images/hd/planner-background-brd22ij7y2f2tjoz.jpg')
+  background: url('https://images.pexels.com/photos/21014/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1200')
     no-repeat center center fixed;
   background-size: cover;
   position: fixed;
@@ -80,4 +80,19 @@
 
 .delete-btn:hover {
   background: #b52a37;
+}
+
+.edit-back-link {
+  position: absolute;
+  top: 20px;
+  left: 270px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.edit-back-link:hover {
+  text-decoration: underline;
 }

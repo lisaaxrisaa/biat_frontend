@@ -1,3 +1,27 @@
+body {
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+h4,
+h5,
+h6 {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.special-text {
+  font-family: 'Quicksand', sans-serif;
+}
+
+.quote-text {
+  font-family: 'Quicksand', sans-serif;
+}
+
 .layout {
   display: flex;
 }
@@ -28,6 +52,10 @@
   margin-left: 200px;
 }
 
-.itinerary-page-wrapper {
+.itinerary-page-wrapper,
+.edit-itinerary-wrapper,
+.home-wrapper,
+.itinerary-detail-container,
+.profile-container {
   margin-left: 120px;
 }

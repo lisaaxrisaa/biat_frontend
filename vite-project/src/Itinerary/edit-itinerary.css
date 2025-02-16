@@ -7,15 +7,16 @@ body {
 
 .edit-itinerary-wrapper {
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100vw;
-  min-height: 100vh;
-  background: url('https://i.pinimg.com/originals/81/30/2c/81302c3aa7ee5ac744b24e2facc2a7e0.jpg')
+  height: 100vh;
+  background: url('https://images.pexels.com/photos/460672/pexels-photo-460672.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2')
     no-repeat center center fixed;
   background-size: cover;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* padding-top: 80px; */
   overflow: auto;
 }
 
@@ -28,6 +29,8 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   max-height: 80vh;
   overflow-y: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 h2,
@@ -132,6 +135,21 @@ textarea:focus {
 .save-button {
   flex: 1;
   max-width: 300px;
+}
+
+.edit-back-link {
+  position: absolute;
+  top: 20px;
+  left: 270px;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+
+.edit-back-link:hover {
+  text-decoration: underline;
 }
 
 input[type='time'] {

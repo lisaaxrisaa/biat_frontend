@@ -8,9 +8,15 @@ const weatherSlice = api.injectEndpoints({
         params: { location },
       }),
     }),
+    lazyGetWeather: builder.query({
+      query: (location) => ({
+        url: '/api/weather',
+        params: { location },
+      }),
+    }),
   }),
   overrideExisting: false,
 });
 
-export const { useGetWeatherQuery } = weatherSlice;
+export const { useGetWeatherQuery, useLazyGetWeatherQuery } = weatherSlice;
 export default weatherSlice;

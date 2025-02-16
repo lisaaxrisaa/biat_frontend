@@ -1,26 +1,23 @@
+<<<<<<< HEAD
 // import { useState } from 'react';
+=======
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// function App() {
-//   const [name, setName] = useState('');
-//   const [email, setEmail] = useState('');
-//   const [password, setPassword] = useState('');
-//   const [isLoggedin, setIsLoggedin] = useState(false);
+const Logout = () => {
+  const navigate = useNavigate();
+>>>>>>> 119202d2f1ddc99eeb38f71c13307acedb5f706b
 
-//   const login = (e) => {
-//     e.preventDefault();
-//     console.log(name, email, password);
-//     const userData = {
-//       name,
-//       email,
-//       password,
-//     };
-//     localStorage.setItem('token-info', JSON.stringify(userData));
-//     setIsLoggedin(true);
-//     setName('');
-//     setEmail('');
-//     setPassword('');
-//   };
+  useEffect(() => {
+    sessionStorage.removeItem('token');
+    sessionStorage.removeItem('user');
+    navigate('/login');
+  }, [navigate]);
 
+  return <p>Logging out...</p>;
+};
+
+<<<<<<< HEAD
 //   const logout = () => {
 //     localStorage.removeItem('token-info');
 //     setIsLoggedin(false);
@@ -68,3 +65,6 @@
 // }
 
 // export default Logout;
+=======
+export default Logout;
+>>>>>>> 119202d2f1ddc99eeb38f71c13307acedb5f706b

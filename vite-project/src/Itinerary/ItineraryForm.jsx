@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCreateItineraryMutation } from '../store/itinerarySlice';
+import { useDispatch } from 'react-redux';
 import Activity from './Activity';
+import itinerarySlice from '../store/itinerarySlice';
+import { Link } from 'react-router-dom';
 import './itinerary-form.css';
 
 const ItineraryForm = () => {
@@ -21,6 +24,7 @@ const ItineraryForm = () => {
 
   const [createItinerary] = useCreateItineraryMutation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;
@@ -89,20 +93,48 @@ const ItineraryForm = () => {
       activities: filteredActivities.length > 0 ? filteredActivities : [],
     };
 
-    console.log('Submitting:', finalFormData);
-
     try {
-      await createItinerary(finalFormData).unwrap();
+      const tempId = `temp-${Date.now()}`;
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            draft.unshift({ ...finalFormData, id: tempId });
+          }
+        )
+      );
+
+      const { data: createdItinerary } = await createItinerary(
+        finalFormData
+      ).unwrap();
+
+      dispatch(
+        itinerarySlice.util.updateQueryData(
+          'getItineraries',
+          undefined,
+          (draft) => {
+            return draft.map((itinerary) =>
+              itinerary.id === tempId ? createdItinerary : itinerary
+            );
+          }
+        )
+      );
+
       alert('Itinerary added successfully');
       navigate('/itineraries');
     } catch (error) {
       console.error('Failed to add itinerary:', error);
+      alert('Error adding itinerary. Please try again.');
     }
   };
 
   return (
     <>
       <div className="itinerary-form-wrapper">
+        <Link to="/itineraries" className="form-back-link">
+          &lt; Back to Itineraries
+        </Link>
         <form onSubmit={handleSubmit} className="itinerary-form-container">
           <h2>Create Itinerary</h2>
 
@@ -160,7 +192,7 @@ const ItineraryForm = () => {
           />
           <div className="date-inputs">
             <label>
-              Activity Date
+              Flight Date
               <input
                 type="date"
                 name="date"
@@ -171,7 +203,7 @@ const ItineraryForm = () => {
             </label>
 
             <label>
-              Activity Time
+              Flight Time
               <input
                 type="time"
                 name="time"
@@ -195,59 +227,13 @@ const ItineraryForm = () => {
             </thead>
             <tbody>
               {formData.activities.map((activity, index) => (
-                <tr key={index}>
-                  <td>
-                    <input
-                      type="date"
-                      name="date"
-                      value={activity.date || ''}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="name"
-                      value={activity.name}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="Activity Name"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="description"
-                      value={activity.description}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="Activity Description"
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="time"
-                      name="activityTime"
-                      value={activity.activityTime}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      type="text"
-                      name="location"
-                      value={activity.location}
-                      onChange={(e) => handleChange(e, index)}
-                      placeholder="Activity Location"
-                    />
-                  </td>
-                  <td>
-                    <button
-                      className="form-delete-btn"
-                      onClick={() => handleDeleteActivity(index)}
-                    >
-                      ❌
-                    </button>
-                  </td>
-                </tr>
+                <Activity
+                  key={index}
+                  activity={activity}
+                  index={index}
+                  handleChange={handleChange}
+                  handleDeleteActivity={handleDeleteActivity}
+                />
               ))}
             </tbody>
           </table>

@@ -1,8 +1,8 @@
-// changes made:
-// add form component import and change form to match
 import { useState } from 'react';
 import { useRegisterUserMutation } from '../store/registrationSlice';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import './registration.css';
 
 const Registration = () => {
   const navigate = useNavigate();
@@ -30,50 +30,73 @@ const Registration = () => {
 
   return (
     <>
-      <h2>Registration</h2>
-      {error && (
-        <p style={{ color: 'red' }}>
-          {error.data?.message || 'Registration failed. Please try again.'}
-        </p>
-      )}
+      <div className="registration-page">
+        <div className="registration-container">
+          <h2 className="registration-title">Registration</h2>
+          {error && (
+            <p className="registration-error-message">
+              {error.data?.message || 'Registration failed. Please try again.'}
+            </p>
+          )}
 
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="first_name"
-          placeholder="First Name"
-          value={formData.first_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="text"
-          name="last_name"
-          placeholder="Last Name"
-          value={formData.last_name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit" disabled={isLoading} className="btn btn-primary">
-          Register
-        </button>
-      </form>
+          <form onSubmit={handleSubmit} className="registration-form">
+            <div className="registration-form-group">
+              <input
+                type="text"
+                name="first_name"
+                placeholder="First Name"
+                value={formData.first_name}
+                onChange={handleChange}
+                required
+                className="registration-input"
+              />
+            </div>
+            <div className="registration-form-group">
+              <input
+                type="text"
+                name="last_name"
+                placeholder="Last Name"
+                value={formData.last_name}
+                onChange={handleChange}
+                required
+                className="registration-input"
+              />
+            </div>
+            <div className="registration-form-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                className="registration-input"
+              />
+            </div>
+            <div className="registration-form-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="registration-input"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isLoading}
+              className="registration-button"
+            >
+              {isLoading ? 'Registering...' : 'Register'}
+            </button>
+          </form>
+          <p className="login-link">
+            Already have an account? <Link to="/login">Login</Link>
+          </p>
+        </div>
+      </div>
     </>
   );
 };

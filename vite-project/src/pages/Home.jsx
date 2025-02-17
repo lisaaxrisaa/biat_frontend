@@ -63,6 +63,13 @@ const Home = () => {
               <p>Ensure you have everything you need for your trip.</p>
             </div>
           </Link>
+
+          <Link to="/flights" className="home-card home-card-flight">
+            <div className="home-card-content">
+              <h3>Flights</h3>
+              <p>Look up your upcoming flights.</p>
+            </div>
+          </Link>
         </div>
       </div>
     </>

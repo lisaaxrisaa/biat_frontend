@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router';
 import { useCreateItineraryMutation } from '../store/itinerarySlice';
 import { useDispatch } from 'react-redux';
 import Activity from './Activity';
-import itinerarySlice from '../store/itinerarySlice';
 import { Link } from 'react-router-dom';
 import './itinerary-form.css';
 
@@ -76,11 +75,6 @@ const ItineraryForm = () => {
       return;
     }
 
-    const filteredActivities = formData.activities.filter(
-      (activity) =>
-        activity.name.trim() !== '' || activity.description.trim() !== ''
-    );
-
     const finalFormData = {
       ...formData,
       startDate: formData.startDate
@@ -90,37 +84,14 @@ const ItineraryForm = () => {
         ? new Date(formData.endDate).toISOString()
         : null,
       date: formData.date ? new Date(formData.date).toISOString() : null,
-      activities: filteredActivities.length > 0 ? filteredActivities : [],
+      activities: formData.activities.filter(
+        (activity) =>
+          activity.name.trim() !== '' || activity.description.trim() !== ''
+      ),
     };
 
     try {
-      const tempId = `temp-${Date.now()}`;
-      dispatch(
-        itinerarySlice.util.updateQueryData(
-          'getItineraries',
-          undefined,
-          (draft) => {
-            draft.unshift({ ...finalFormData, id: tempId });
-          }
-        )
-      );
-
-      const { data: createdItinerary } = await createItinerary(
-        finalFormData
-      ).unwrap();
-
-      dispatch(
-        itinerarySlice.util.updateQueryData(
-          'getItineraries',
-          undefined,
-          (draft) => {
-            return draft.map((itinerary) =>
-              itinerary.id === tempId ? createdItinerary : itinerary
-            );
-          }
-        )
-      );
-
+      await createItinerary(finalFormData).unwrap();
       alert('Itinerary added successfully');
       navigate('/itineraries');
     } catch (error) {

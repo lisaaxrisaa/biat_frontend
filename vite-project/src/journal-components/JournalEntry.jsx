@@ -2,31 +2,19 @@
 // and also redirecting users to edit entry page
 
 // isEditing variable: shows view only and if it is being modified
-import React, { useState, useEffect } from "react";
-import JournalList from "./JournalList";
+import React from "react";
 import { useParams, Link } from "react-router-dom";
+import { useGetJournalQuery } from "../store/journalSlice";
 
 const JournalEntry = () => {
   const { id } = useParams();
-  const [entry, setEntry] = useState(null);
-  const [error, setError] = useState(null);
-  useEffect(() => {
-    const fetchEntry = async () => {
-      try {
-        const response = await fetch(`/api/user/journal/${id}`);
-        if (!response.ok) {
-          throw new Error("Could not load entry.");
-        }
-        const data = await response.json();
-        setEntry(data);
-      } catch (error) {
-        setError(error.message);
-      }
-    };
-    fetchEntry();
-  }, [id]);
-  if (!entry) return <p>No Entry found.</p>;
-  const handleEdit = () => {};
+  const { data: entry, error, isLoading } = useGetJournalQuery(id);
+     if (isLoading) return <p>Loading Entry...</p>
+     if(error) return <p>{error.message}</p>
+     if (!entry) return <p>No Such Entry.</p>
+    
+  
+  
 
   //   FIX THE RETURN CONTENT!!!!
   return (
@@ -36,7 +24,7 @@ const JournalEntry = () => {
       {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}
       <div>
         <Link to={`/edit-entry/${id}`}></Link>
-        <button onClick={handleEdit}>Edit</button>
+        <button>Edit</button>
       </div>
     </>
   );

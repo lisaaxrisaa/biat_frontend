@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { useLoginUserMutation } from '../store/loginSlice';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../store/authSlice';
-import { Link } from 'react-router-dom';
-import './login.css';
+import { useState } from "react";
+import { useLoginUserMutation } from "../store/loginSlice";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { registerUser } from "../store/authSlice";
+import { Link } from "react-router-dom";
+import "./login.css";
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [error, setError] = useState(null);
@@ -22,12 +22,12 @@ const Login = () => {
       const response = await loginUserApi(credentials).unwrap();
 
       dispatch(registerUser({ token: response.token, user: response.user }));
-      sessionStorage.setItem('token', response.token);
-      sessionStorage.setItem('user', JSON.stringify(response.user));
-      navigate('/');
+      sessionStorage.setItem("token", response.token);
+      sessionStorage.setItem("user", JSON.stringify(response.user));
+      navigate("/");
     } catch (error) {
-      setError('Invalid login, please try again!');
-      console.error('Invalid login, please try again!', error);
+      setError("Invalid login, please try again!");
+      console.error("Invalid login, please try again!", error);
     }
   };
 
@@ -57,7 +57,7 @@ const Login = () => {
               required
             />
             <button type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Login'}
+              {isLoading ? "Loading..." : "Login"}
             </button>
           </form>
           <p className="register-link">

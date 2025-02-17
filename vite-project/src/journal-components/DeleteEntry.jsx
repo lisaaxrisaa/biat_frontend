@@ -1,27 +1,24 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// ask about prop validation!!!
-
+import { useDeleteEntryMutation } from "../store/journalSlice";
 const DeleteEntry = ({ id }) => {
   const navigate = useNavigate();
+  const [deleteEntry, { isLoading, error }] = useDeleteEntryMutation;
   const handleDelete = async () => {
     try {
-      const response = await fetch(`/api/user/journal/${id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        alert("Entry deleted.");
-        navigate("/journals");
-      } else {
-        alert("Unable to delete entry, please try again later.");
-      }
+      await deleteEntry(id).unwrap();
+      alert("Entry successfully deleted!");
+      navigate("/journals");
     } catch (error) {
       console.error(error);
     }
   };
   return (
     <div>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDelete} disabled={isLoading}>
+        {isLoading ? "Deleting Entry..." : "Delete"}
+      </button>
+      {error && <p>{error.message}</p>}
     </div>
   );
 };

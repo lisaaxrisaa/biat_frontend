@@ -1,6 +1,6 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useGetItinerariesQuery } from '../store/itinerarySlice';
 import ItineraryList from '../Itinerary/ItineraryList';
 import ItineraryForm from './ItineraryForm';
@@ -8,8 +8,7 @@ import './itinerary-page.css';
 
 const ItineraryPage = () => {
   const [isAddingItinerary, setIsAddingItinerary] = useState(false);
-  const [reloadKey, setReloadKey] = useState(0);
-
+  const location = useLocation();
   const navigate = useNavigate();
   const token = sessionStorage.getItem('token');
 
@@ -32,16 +31,10 @@ const ItineraryPage = () => {
   };
 
   useEffect(() => {
-    if (reloadKey > 0) {
-      refetch();
+    if (location.pathname === '/itineraries') {
+      setIsAddingItinerary(false);
     }
-  }, [reloadKey, refetch]);
-
-  useEffect(() => {
-    if (!isAddingItinerary) {
-      setReloadKey((prevKey) => prevKey + 1);
-    }
-  }, [isAddingItinerary]);
+  }, [location.pathname]);
 
   return (
     <>

@@ -26,7 +26,7 @@
   margin: auto;
   grid-template-areas:
     'weather journal journal'
-    'weather itinerary itinerary'
+    'weather itinerary flight'
     'budget packing packing';
 }
 
@@ -167,6 +167,11 @@
 .home-card-packing {
   grid-area: packing;
   background-image: url('https://images.pexels.com/photos/1051077/pexels-photo-1051077.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
+
+.home-card-flight {
+  grid-area: flight;
+  background-image: url('https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&w=1200');
 }
 
 @media (max-width: 768px) {

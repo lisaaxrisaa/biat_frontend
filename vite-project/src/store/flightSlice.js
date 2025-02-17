@@ -14,6 +14,6 @@ const flightSlice = api.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useSearchFlightsQuery } = flightSlice;
+export const { useSearchFlightsQuery, useLazySearchFlightsQuery } = flightSlice;
 
 export default flightSlice;

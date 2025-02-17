@@ -43,7 +43,7 @@ const Home = () => {
             </div>
           </Link>
 
-          <Link to="/user/journals" className="home-card home-card-journal">
+          <Link to="/user/journal" className="home-card home-card-journal">
             <div className="home-card-content">
               <h3>Journal</h3>
               <p>Keep track of your travel memories and notes.</p>

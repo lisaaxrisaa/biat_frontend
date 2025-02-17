@@ -66,6 +66,7 @@ const AppContent = () => {
           <Route path="/flights" element={<FlightSearch />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/flights" element={<FlightSearch />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="*" element={<Navigate to="/" />} />
         </Route>

@@ -19,24 +19,9 @@ const itinerarySlice = api.injectEndpoints({
         method: 'POST',
         body: newItinerary,
       }),
-      async onQueryStarted(newItinerary, { dispatch, queryFulfilled }) {
-        try {
-          const { data: createdItinerary } = await queryFulfilled;
-          dispatch(
-            itinerarySlice.util.updateQueryData(
-              'getItineraries',
-              undefined,
-              (draft) => {
-                draft.unshift(createdItinerary);
-              }
-            )
-          );
-          dispatch(itinerarySlice.util.invalidateTags(['Itineraries']));
-        } catch (error) {
-          console.error('Error creating itinerary:', error);
-        }
-      },
+      invalidatesTags: ['Itineraries'],
     }),
+
     updateItinerary: builder.mutation({
       query: ({ id, updatedItinerary }) => ({
         url: `/api/itinerary/user/itinerary/${id}`,

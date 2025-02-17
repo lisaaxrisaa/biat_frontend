@@ -18,8 +18,9 @@ const NewEntry = () => {
 
     const newJournalEntry = { title, content, imageUrl };
     try {
-      await createEntry(newJournalEntry).unwrap();
+      const result = await createEntry(newJournalEntry).unwrap();
       navigate("/journals");
+      console.log("Entry has been created: ", result);
     } catch (error) {
       console.error(error);
     }

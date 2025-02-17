@@ -9,12 +9,12 @@ import { useGetJournalQuery } from "../store/journalSlice";
 const JournalEntry = () => {
   const { id } = useParams();
   const { data: entry, error, isLoading } = useGetJournalQuery(id);
-     if (isLoading) return <p>Loading Entry...</p>
-     if(error) return <p>{error.message}</p>
-     if (!entry) return <p>No Such Entry.</p>
-    
-  
-  
+
+  console.log(entry);
+
+  if (isLoading) return <p>Loading Entry...</p>;
+  if (error) return <p>{error.message}</p>;
+  if (!entry) return <p>No Such Entry.</p>;
 
   //   FIX THE RETURN CONTENT!!!!
   return (
@@ -23,8 +23,9 @@ const JournalEntry = () => {
       <p>{entry.content}</p>
       {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}
       <div>
-        <Link to={`/edit-entry/${id}`}></Link>
-        <button>Edit</button>
+        <Link to={`/edit-entry/${id}`}>
+          <button>Edit</button>
+        </Link>
       </div>
     </>
   );

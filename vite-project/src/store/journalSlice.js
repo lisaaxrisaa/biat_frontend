@@ -4,7 +4,7 @@ const journalSlice = api.injectEndpoints({
   endpoints: (builder) => ({
     getJournals: builder.query({
       query: () => {
-        return "/api/user/journal";
+        return "/api/journal/user/journal";
       },
       transformResponse: (response) => {
         return response;
@@ -12,26 +12,27 @@ const journalSlice = api.injectEndpoints({
     }),
     getJournal: builder.query({
       query: (id) => {
-        return `/api/user/journal/${id}`;
+        return `/api/journal/user/journal/${id}`;
       },
     }),
     createEntry: builder.mutation({
       query: (newEntry) => ({
-        url: "/api/user/journal",
+        url: "/api/journal/user/journal",
         method: "POST",
         body: newEntry,
       }),
     }),
     updateEntry: builder.mutation({
       query: ({ id, updatedEntry }) => ({
-        url: `/api/user/journal/${id}`,
+        url: `/api/journal/user/journal/${id}`,
         method: "PUT",
         body: updatedEntry,
       }),
     }),
     deleteEntry: builder.mutation({
       query: (id) => ({
-        url: `/api/user/journal${id}`,
+        url: `/api/journal/user/journal/${id}`,
+        method: "DELETE",
       }),
     }),
   }),

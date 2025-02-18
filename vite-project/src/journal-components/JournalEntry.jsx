@@ -5,6 +5,8 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { useGetJournalQuery } from "../store/journalSlice";
+import "./journal-background.css";
+
 
 const JournalEntry = () => {
   const { id } = useParams();
@@ -18,7 +20,7 @@ const JournalEntry = () => {
 
   //   FIX THE RETURN CONTENT!!!!
   return (
-    <>
+    <div className="journal-background">
       <h2>{entry.title}</h2>
       <p>{entry.content}</p>
       {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}
@@ -27,7 +29,7 @@ const JournalEntry = () => {
           <button>Edit</button>
         </Link>
       </div>
-    </>
+    </div>
   );
 };
 export default JournalEntry;

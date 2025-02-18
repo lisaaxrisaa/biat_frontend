@@ -1,9 +1,10 @@
 // this file fetches entries from backend
-import React from "react";
+import React, { useEffect } from "react";
 // removed unnecessary journalentry import
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useGetJournalsQuery } from "../store/journalSlice";
 import DeleteEntry from "./DeleteEntry";
+import "./journal-background.css";
 
 const JournalList = () => {
   const {
@@ -13,6 +14,11 @@ const JournalList = () => {
     refetch,
   } = useGetJournalsQuery();
   //   gets and renders a list of the users journal entries
+
+  const location = useLocation();
+  useEffect(() => {
+    refetch();
+  }, [location, refetch]);
 
   const renderEntries = () => {
     if (!journalEntries || journalEntries.length === 0) {
@@ -46,7 +52,7 @@ const JournalList = () => {
   };
 
   return (
-    <div>
+    <div className="journal-background">
       <h2>Your Journal Entries</h2>
       {isLoading ? <p>Loading...</p> : renderEntries()}
       {error && <p>{error.message}</p>}

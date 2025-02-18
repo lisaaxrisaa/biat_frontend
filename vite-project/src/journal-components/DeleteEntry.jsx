@@ -1,5 +1,7 @@
 import React from "react";
 import { useDeleteEntryMutation } from "../store/journalSlice";
+import "./journal-background.css";
+
 
 const DeleteEntry = ({ id, navigate }) => {
   const [deleteEntry, { isLoading, error }] = useDeleteEntryMutation();
@@ -17,7 +19,7 @@ const DeleteEntry = ({ id, navigate }) => {
   };
 
   return (
-    <div>
+    <div className="journal-background">
       <button onClick={handleDelete} disabled={isLoading}>
         {isLoading ? "Deleting Entry..." : "Delete"}
       </button>

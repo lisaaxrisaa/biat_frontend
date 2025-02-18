@@ -7,6 +7,8 @@ import {
   useGetJournalQuery,
   useUpdateEntryMutation,
 } from "../store/journalSlice";
+import "./journal-background.css";
+
 
 const EditEntry = () => {
   const { id } = useParams();
@@ -38,7 +40,7 @@ const EditEntry = () => {
     }
   };
   return (
-    <div>
+    <div className="journal-background">
       <h2>Edit</h2>
       <form onSubmit={handleSave}>
         <div>

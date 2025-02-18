@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FlightsList = ({ flights }) => {
-  console.log('Flights Data:', flights); // Log the flights prop
+  console.log('Flights Data:', flights);
   if (!flights || flights.length === 0) return <p>No flights found.</p>;
 
   return (
@@ -9,20 +9,16 @@ const FlightsList = ({ flights }) => {
       <h2>Available Flights</h2>
       <div className="flights-grid">
         {flights.map((flight, index) => {
-          // Debug logs
           console.log('Flight Object:', flight);
 
-          // Airline name and flight number
           const airlineName = flight.airline || 'Unknown Airline';
           const flightNumber = flight.flightNumber || 'N/A';
 
-          // Airports
           const departureAirport = flight.departureAirport || 'Unknown';
           const departureCode = flight.departureCode || 'N/A';
           const arrivalAirport = flight.arrivalAirport || 'Unknown';
           const arrivalCode = flight.arrivalCode || 'N/A';
 
-          // Dates
           const departureDate = flight.departureTime
             ? new Date(flight.departureTime).toLocaleString()
             : 'N/A';
@@ -30,14 +26,11 @@ const FlightsList = ({ flights }) => {
             ? new Date(flight.arrivalTime).toLocaleString()
             : 'N/A';
 
-          // Cabin class
           const cabinClass = flight.cabinClass || 'N/A';
 
-          // Price
           const price = flight.price || 'Not Available';
           const currency = flight.currency || 'USD';
 
-          // Booking link
           const bookingLink = flight.bookingLink || '#';
 
           return (

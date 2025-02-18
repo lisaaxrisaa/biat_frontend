@@ -18,14 +18,13 @@ import ItineraryForm from './Itinerary/ItineraryForm';
 import ItineraryDetailPage from './Itinerary/ItineraryDetail';
 import EditItineraryPage from './Itinerary/EditItinerary';
 import JournalList from './journal-components/JournalList';
-import NewEntry from "./journal-components/NewEntry";
-import JournalEntry from "./journal-components/JournalEntry";
-import EditEntry from "./journal-components/EditEntry";
-// import DeleteEntry from './journal-components/DeleteEntry';
+import NewEntry from './journal-components/NewEntry';
+import JournalEntry from './journal-components/JournalEntry';
+import EditEntry from './journal-components/EditEntry';
 import Layout from './pages/Layout';
 import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';
-import FlightSearch from './Flight/FlightSearch';
+import Flight from './Flight/Flight';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -40,13 +39,23 @@ const App = () => {
 };
 
 const AppContent = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const location = useLocation();
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    !!sessionStorage.getItem('token')
+  );
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     setIsLoggedIn(!!token);
   }, [location]);
+
+  useEffect(() => {
+    if (location.pathname !== '/login' && location.pathname !== '/register') {
+      sessionStorage.setItem('lastPage', location.pathname);
+    }
+  }, [location]);
+
+  const lastPage = sessionStorage.getItem('lastPage') || '/';
 
   return (
     <Routes>
@@ -58,17 +67,15 @@ const AppContent = () => {
           <Route path="/itinerary/:id" element={<ItineraryDetailPage />} />
           <Route path="/edit-itinerary/:id" element={<EditItineraryPage />} />
           <Route path="/journals" element={<JournalList />} />
-           <Route path="/user/journal" element={<JournalList />} />
+          <Route path="/user/journal" element={<JournalList />} />
           <Route path="/create-journal-entry" element={<NewEntry />} />
           <Route path="/journal/:id" element={<JournalEntry />} />
           <Route path="/edit-entry/:id" element={<EditEntry />} />
-          {/* <Route path ="/user/journal:id" element={<DeleteEntry/>} /> */}
-          <Route path="/flights" element={<FlightSearch />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/flights" element={<FlightSearch />} />
+          <Route path="/flights" element={<Flight />} />
           <Route path="/logout" element={<Logout />} />
-          <Route path="*" element={<Navigate to="/" />} />
+          <Route path="*" element={<Navigate to={lastPage} replace />} />
         </Route>
       ) : (
         <>

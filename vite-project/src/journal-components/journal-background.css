@@ -1,4 +1,77 @@
 .journal-background {
-  background-image: url("https://i.pinimg.com/736x/14/b6/70/14b670f183eb1a0ea98d5379f36edd86.jpg");
+  /* background-image: url("https://i.pinimg.com/736x/14/b6/70/14b670f183eb1a0ea98d5379f36edd86.jpg"); */
   background-size: cover;
+  background-attachment: fixed;
+  justify-content: center;
+  position: fixed;
+  display: flex;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+.journal-content-wrapper {
+  position: relative;
+  background-color: antiquewhite;
+  justify-content: center;
+  display: flex;
+}
+.journal-entry-box {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.create-entry-button {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.view-button {
+  background: #6ca7e6;
+  color: white;
+  padding: 10px;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+}
+
+.create-journal-form {
+  width: 100%;
+  background: white;
+  box-shadow: 3px;
+  background: rgba(255, 255, 255, 0.808);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  max-height: 80vh;
+  overflow-y: auto;
 }

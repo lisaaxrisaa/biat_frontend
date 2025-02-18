@@ -7,7 +7,6 @@ import { useParams, Link } from "react-router-dom";
 import { useGetJournalQuery } from "../store/journalSlice";
 import "./journal-background.css";
 
-
 const JournalEntry = () => {
   const { id } = useParams();
   const { data: entry, error, isLoading } = useGetJournalQuery(id);
@@ -21,13 +20,15 @@ const JournalEntry = () => {
   //   FIX THE RETURN CONTENT!!!!
   return (
     <div className="journal-background">
-      <h2>{entry.title}</h2>
-      <p>{entry.content}</p>
-      {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}
-      <div>
-        <Link to={`/edit-entry/${id}`}>
-          <button>Edit</button>
-        </Link>
+      <div className="journal-entry-box">
+        <h2>{entry.title}</h2>
+        <p>{entry.content}</p>
+        {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}
+        <div>
+          <Link to={`/edit-entry/${id}`}>
+            <button className="create-entry-button">Edit</button>
+          </Link>
+        </div>
       </div>
     </div>
   );

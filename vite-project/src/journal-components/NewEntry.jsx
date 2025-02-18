@@ -5,7 +5,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCreateEntryMutation } from "../store/journalSlice";
-import "./journal-background.css"
+import "./journal-background.css";
 
 const NewEntry = () => {
   const [title, setTitle] = useState("");
@@ -29,31 +29,33 @@ const NewEntry = () => {
 
   return (
     <div className="journal-background">
-      <h2>Create a New Entry</h2>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="title"
-          name="title"
-          placeholder="title"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          required
-        />
-        <textarea
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          value={imageUrl}
-          onChange={(e) => setImageUrl(e.target.value)}
-        />
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Creating Entry..." : "Create Journal Entry"}
-        </button>
-      </form>
-      {error && <p>{error.message}</p>}
+      <div className="journal-content-wrapper">
+        <h2>Create a New Entry</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="title"
+            name="title"
+            placeholder="title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+          />
+          <textarea
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+            required
+          />
+          <input
+            type="text"
+            value={imageUrl}
+            onChange={(e) => setImageUrl(e.target.value)}
+          />
+          <button className="create-entry-button"type="submit" disabled={isLoading}>
+            {isLoading ? "Creating Entry..." : "Create Journal Entry"}
+          </button>
+        </form>
+        {error && <p>{error.message}</p>}
+      </div>
     </div>
   );
 };

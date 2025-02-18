@@ -7,7 +7,6 @@ import {
   useGetJournalQuery,
   useUpdateEntryMutation,
 } from "../store/journalSlice";
-import "./journal-background.css";
 
 
 const EditEntry = () => {
@@ -40,7 +39,7 @@ const EditEntry = () => {
     }
   };
   return (
-    <div className="journal-background">
+    <div >
       <h2>Edit</h2>
       <form onSubmit={handleSave}>
         <div>
@@ -75,6 +74,7 @@ const EditEntry = () => {
 
       <DeleteEntry id={id} navigate={navigate} />
     </div>
+    
   );
 };
 export default EditEntry;

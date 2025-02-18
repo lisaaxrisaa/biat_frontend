@@ -20,7 +20,7 @@ const JournalEntry = () => {
   //   FIX THE RETURN CONTENT!!!!
   return (
     <div className="journal-background">
-      <div className="journal-entry-box">
+      <div className="individual-entry-box">
         <h2>{entry.title}</h2>
         <p>{entry.content}</p>
         {entry.imageUrl && <img src={entry.imageUrl} alt="EntryImage" />}

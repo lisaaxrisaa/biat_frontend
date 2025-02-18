@@ -8,6 +8,7 @@ import {
   useUpdateEntryMutation,
 } from "../store/journalSlice";
 
+
 const EditEntry = () => {
   const { id } = useParams();
   const [title, setTitle] = useState("");
@@ -38,7 +39,7 @@ const EditEntry = () => {
     }
   };
   return (
-    <div>
+    <div >
       <h2>Edit</h2>
       <form onSubmit={handleSave}>
         <div>
@@ -73,6 +74,7 @@ const EditEntry = () => {
 
       <DeleteEntry id={id} navigate={navigate} />
     </div>
+    
   );
 };
 export default EditEntry;

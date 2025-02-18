@@ -39,21 +39,49 @@ const App = () => {
 };
 
 const AppContent = () => {
+  // const location = useLocation();
+  // const [isLoggedIn, setIsLoggedIn] = useState(
+  //   !!sessionStorage.getItem('token')
+  // );
+
+  // useEffect(() => {
+  //   const token = sessionStorage.getItem('token');
+  //   setIsLoggedIn(!!token);
+  // }, [location]);
+
+  // useEffect(() => {
+  //   if (location.pathname !== '/login' && location.pathname !== '/register') {
+  //     sessionStorage.setItem('lastPage', location.pathname);
+  //   }
+  // }, [location]);
+
+  // const lastPage = sessionStorage.getItem('lastPage') || '/';
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!sessionStorage.getItem('token')
+    () => !!sessionStorage.getItem('token')
   );
 
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     setIsLoggedIn(!!token);
-  }, [location]);
+  }, [location]); // This ensures UI updates when navigating
 
   useEffect(() => {
     if (location.pathname !== '/login' && location.pathname !== '/register') {
       sessionStorage.setItem('lastPage', location.pathname);
     }
   }, [location]);
+
+  // ⬇️ Ensure a proper re-render on state change
+  useEffect(() => {
+    const checkSession = () => {
+      const token = sessionStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener('storage', checkSession); // Detects storage changes across tabs
+    return () => window.removeEventListener('storage', checkSession);
+  }, []);
 
   const lastPage = sessionStorage.getItem('lastPage') || '/';
 

@@ -1,12 +1,11 @@
 // this file should display a specific budget table
-// with the option to edit, and save it or delete it
+// with the option (buttons and links to) to edit, and save it or delete it
 
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 // import edit budget
 // import delete budget
-// import budget form
 
 const IndividualBudget = () => {
   const { budgetId } = useParams();

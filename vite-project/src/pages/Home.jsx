@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import WeatherForm from '../Weather/WeatherForm';
+import CountdownTimer from '../CountDown/CountdownTimer';
 import './home.css';
 
 const Home = () => {
@@ -35,7 +36,6 @@ const Home = () => {
             )}
           </div>
 
-          {/* Feature Cards */}
           <Link to="/itineraries" className="home-card home-card-itinerary">
             <div className="home-card-content">
               <h3>Itinerary</h3>
@@ -68,6 +68,19 @@ const Home = () => {
             <div className="home-card-content">
               <h3>Flights</h3>
               <p>Look up your upcoming flights.</p>
+            </div>
+          </Link>
+
+          <Link to="/checklist" className="home-card home-card-checklist">
+            <div className="home-card-content">
+              <h3>Checklist</h3>
+              <p>Keep track of important items.</p>
+            </div>
+          </Link>
+
+          <Link to="/set-countdown" className="home-card home-card-time">
+            <div className="home-card-content">
+              <CountdownTimer />
             </div>
           </Link>
         </div>

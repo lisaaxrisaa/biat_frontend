@@ -25,6 +25,7 @@ import Layout from './pages/Layout';
 import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';
 import Flight from './Flight/Flight';
+import SetCountdown from './CountDown/SetCountdown';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -39,23 +40,6 @@ const App = () => {
 };
 
 const AppContent = () => {
-  // const location = useLocation();
-  // const [isLoggedIn, setIsLoggedIn] = useState(
-  //   !!sessionStorage.getItem('token')
-  // );
-
-  // useEffect(() => {
-  //   const token = sessionStorage.getItem('token');
-  //   setIsLoggedIn(!!token);
-  // }, [location]);
-
-  // useEffect(() => {
-  //   if (location.pathname !== '/login' && location.pathname !== '/register') {
-  //     sessionStorage.setItem('lastPage', location.pathname);
-  //   }
-  // }, [location]);
-
-  // const lastPage = sessionStorage.getItem('lastPage') || '/';
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
     () => !!sessionStorage.getItem('token')
@@ -64,7 +48,7 @@ const AppContent = () => {
   useEffect(() => {
     const token = sessionStorage.getItem('token');
     setIsLoggedIn(!!token);
-  }, [location]); // This ensures UI updates when navigating
+  }, [location]);
 
   useEffect(() => {
     if (location.pathname !== '/login' && location.pathname !== '/register') {
@@ -72,14 +56,13 @@ const AppContent = () => {
     }
   }, [location]);
 
-  // ⬇️ Ensure a proper re-render on state change
   useEffect(() => {
     const checkSession = () => {
       const token = sessionStorage.getItem('token');
       setIsLoggedIn(!!token);
     };
 
-    window.addEventListener('storage', checkSession); // Detects storage changes across tabs
+    window.addEventListener('storage', checkSession);
     return () => window.removeEventListener('storage', checkSession);
   }, []);
 
@@ -103,6 +86,7 @@ const AppContent = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/flights" element={<Flight />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/set-countdown" element={<SetCountdown />} />
           <Route path="*" element={<Navigate to={lastPage} replace />} />
         </Route>
       ) : (

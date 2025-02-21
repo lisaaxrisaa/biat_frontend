@@ -1,20 +1,13 @@
 // this file should list all budgets, only overviews not the information.
 
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { useGetBudgetQuery } from "../store/budgetSlice";
 
 const BudgetList = () => {
-  const budgets = useSelector((state) => state.budget.budgets);
-  const location = useLocation;
-
-  useEffect(() => {
-    // refetch if needed, like in journalList.jsx
-  }, [location]);
-
-  const handleViewClick = (budgetId) => {
-    history.push(`/budget/${budgetId}`);
-  };
+  const { data, error, isLoading } = useGetBudgetQuery();
+  if (isLoading) return <p>Loading...</p>
+  if (error) return <p>Error: {error.message}</p>
   const renderBudgets = () => {
     if (!budgets || budgets.length === 0) {
       return (

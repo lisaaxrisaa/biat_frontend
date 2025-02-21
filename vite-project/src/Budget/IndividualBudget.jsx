@@ -1,26 +1,35 @@
 // this file should display a specific budget table
 // with the option (buttons and links to) to edit, and save it or delete it
 
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-// import edit budget
-// import delete budget
+import { useParams, Link } from "react-router-dom";
 
 const IndividualBudget = () => {
   const { budgetId } = useParams();
   const budget = useSelector((state) =>
     state.budget.budgets.find((budget) => budget.id === budgetId)
   );
-  if (!budget) return <p>Budget not found</p>;
+  if (!budget) return <p>Budget not found</p>; // add a redirect back to budget list
   return (
     <div>
       <h2>{budget.name}</h2>
-      {/* <p></p> */}
-      {/* <p></p> */}
-      {/* <BudgetForm budgetId={budgetId}/> */}
-      {/* editbudget */}
-      {/* deletebudget */}
+      <p>Total: {budget.totalCost}</p>
+      <p>Remaining left to budget: {budget.remainingBalance}</p>
+      <div>
+        <h3>Expenses</h3>
+        {budget.expenses.length > 0 ? (
+            <ul>{budget.expenses.map((expense) => (
+                <li key={expense.id}>
+                </li>
+            ))}</ul>
+
+        ) : (
+            <p>No expenses.</p>
+        )}
+      </div>
+      <Link to={`/budget/${budgetId}/edit}`}><button>Edit</button></Link>
+      <Link to={`/budget/${budgetId}/delete`}><button>Delete</button></Link>
     </div>
   );
 };

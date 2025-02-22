@@ -26,6 +26,7 @@ import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';
 import Flight from './Flight/Flight';
 import SetCountdown from './CountDown/SetCountdown';
+import Destination from './Destination/Destination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -87,6 +88,7 @@ const AppContent = () => {
           <Route path="/flights" element={<Flight />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/set-countdown" element={<SetCountdown />} />
+          <Route path="/random-destination" element={<Destination />} />
           <Route path="*" element={<Navigate to={lastPage} replace />} />
         </Route>
       ) : (

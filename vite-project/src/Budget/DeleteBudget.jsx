@@ -11,6 +11,10 @@ const DeleteBudget = () => {
   const [deleteBudget] = useDeleteBudgetMutation();
 
   const handleDelete = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you would like to delete this budget?"
+    );
+    if (!confirmed) return;
     try {
       await deleteBudget(id);
       navigate("/budget-list");

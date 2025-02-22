@@ -2,7 +2,7 @@
 
 // replacing uuid with Date.now, uuid kept breaking code and causing errors
 
-// Here is inspo for the budget table format: https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.goskills.com%2FExcel%2FResources%2FExcel-manage-travel-budget&psig=AOvVaw0igxRWTHhiT8gqM9zAOFED&ust=1740079175343000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCLCDv5260IsDFQAAAAAdAAAAABAE
+// Here is inspo for the budget table format: https://www.goskills.com/blobs/blogs/761/a9863aed-f2f7-4049-8f52-f76496738b8d.png
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";

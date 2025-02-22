@@ -21,6 +21,7 @@ import JournalList from './journal-components/JournalList';
 import NewEntry from './journal-components/NewEntry';
 import JournalEntry from './journal-components/JournalEntry';
 import EditEntry from './journal-components/EditEntry';
+// import budget component:
 import Layout from './pages/Layout';
 import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';

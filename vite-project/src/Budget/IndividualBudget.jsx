@@ -2,34 +2,39 @@
 // with the option (buttons and links to) to edit, and save it or delete it
 
 import React from "react";
-import { useSelector } from "react-redux";
+import { useGetBudgetQuery } from "../store/budgetSlice";
 import { useParams, Link } from "react-router-dom";
 
 const IndividualBudget = () => {
   const { budgetId } = useParams();
-  const budget = useSelector((state) =>
-    state.budget.budgets.find((budget) => budget.id === budgetId)
-  );
+  const { data: budget } = useGetBudgetQuery(budgetId);
+
   if (!budget) return <p>Budget not found</p>; // add a redirect back to budget list
   return (
     <div>
       <h2>{budget.name}</h2>
-      <p>Total: {budget.totalCost}</p>
+      <p>Total: {budget.amount}</p>
+      <p>Currency: {budget.currency}</p>
+      <p>Trip Type: {budget.tripType}</p>
       <p>Remaining left to budget: {budget.remainingBalance}</p>
       <div>
         <h3>Expenses</h3>
         {budget.expenses.length > 0 ? (
-            <ul>{budget.expenses.map((expense) => (
-                <li key={expense.id}>
-                </li>
-            ))}</ul>
-
+          <ul>
+            {budget.expenses.map((expense) => (
+              <li key={expense.id}>{expense.name}: {expense.amount}</li>
+            ))}
+          </ul>
         ) : (
-            <p>No expenses.</p>
+          <p>No expenses.</p>
         )}
       </div>
-      <Link to={`/budget/${budgetId}/edit}`}><button>Edit</button></Link>
-      <Link to={`/budget/${budgetId}/delete`}><button>Delete</button></Link>
+      <Link to={`/budget/${budgetId}/edit}`}>
+        <button>Edit</button>
+      </Link>
+      <Link to={`/budget/${budgetId}/delete`}>
+        <button>Delete</button>
+      </Link>
     </div>
   );
 };

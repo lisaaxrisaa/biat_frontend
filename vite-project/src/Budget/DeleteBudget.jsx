@@ -3,12 +3,12 @@
 
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useDeleteBudgetItemMutation } from "../store/budgetSlice";
+import { useDeleteBudgetMutation } from "../store/budgetSlice";
 
 const DeleteBudget = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const [deleteBudget] = useDeleteBudgetItemMutation();
+  const [deleteBudget] = useDeleteBudgetMutation();
 
   const handleDelete = async () => {
     try {

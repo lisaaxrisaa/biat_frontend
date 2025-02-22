@@ -4,14 +4,12 @@
 
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { useCreateBudgetItemMutation } from "../store/budgetSlice";
+import { useCreateBudgetMutation } from "../store/budgetSlice";
 import { v4 as uuidv4 } from "uuid";
 
 const BudgetForm = () => {
-  const dispatch = useDispatch();
-  //   the following will allow users to create their own categories for their budget tables
-  const [createBudget, { idLoading, error }] = useCreateBudgetItemMutation();
+    //   the following will allow users to create their own categories for their budget tables
+  const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
 
   const [categories, setCategories] = useState([
     {
@@ -19,7 +17,6 @@ const BudgetForm = () => {
       name: "",
       budgeted: "",
       actual: "",
-      difference: "",
     },
   ]);
   // the following allows the user to update/change their budget and budget items
@@ -31,50 +28,45 @@ const BudgetForm = () => {
   const handleAddCategory = () => {
     setCategories([
       ...categories,
-      { id: uuidv4(), name: "", budgeted: "", actual: "", difference: "" },
+      { id: uuidv4(), name: "", budgeted: "", actual: "" },
     ]);
   };
   //   the following handleDelete deletes specific category from array of categories
   const handleDeleteCategory = (index) => {
-    const newCategories = [
-      ...categories.slice(0, index),
-      ...categories.slice(index + 1),
-    ];
-    setCategories(newCategories);
+    setCategories(categories.filter((_, i) => i !== index));
+    
   };
   const handleSubmit = async (e) => {
-    e.prevent();
-    const budgetData = { categories 
-  }; 
+    e.preventDefault();
+    const budgetData = { categories }; 
   try {
     await createBudget(budgetData)
   } catch(error) {
-    console.error("Could not create budget, due to:", error)
-  }};
+    console.error("Could not create budget, due to:", error);
+  }
+
   return (
     <div>
       <h2>Create New Budget</h2>
       <form onSubmit={handleSubmit}>
-        {categories.map((category), index) => (
+        {categories.map((category, index) => (
             <div key={category.id}>
-<input type="text" value={category.name} onChange={(e) => handleInputChange(index, "name", e.target.value)} placeholder="Category Name" required />
-          <input type="number" value={category.budgeted} onChange={(e) => handleInputChange(index, "budgeted", e.target.value)} placeholder="Budgeted" />
-          <input type="number" value={category.actual} onChange={(e) => handleInputChange(index, "actual", e.target.value)} placeholder="Actual" />
-          <button type="button" onClick={() => handleDeleteCategory(index)}>Delete Category</button>
+          <input type="text" 
+          value={category.name} 
+          onChange={(e) => handleInputChange(index, "name", e.target.value)} placeholder="Category Name" required />
+          <input type="number" 
+          value={category.budgeted} 
+          onChange={(e) => handleInputChange(index, "budgeted", e.target.value)} placeholder="Budgeted" />
+          <input type="number" 
+          value={category.actual} 
+          onChange={(e) => handleInputChange(index, "actual", e.target.value)} placeholder="Actual" />
+          <button type="button" 
+          onClick={() => handleDeleteCategory(index)}>Delete Category</button>
             </div>
         )}
         <button type="button" onClick={handleAddCategory}>Add Category</button>
         <button type="submit" disabled={isLoading}>{isLoading ? "Saving change..." : "Save"}</button>
-      <table>
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Budgeted Amount</th>
-            <th>Actual</th>
-            <th>Difference</th>
-          </tr>
-        </thead>
-      </table>
+     
       </form>
       {error && <p>Error: {error.message}</p>}
       <Link to="/budget-list">

@@ -2,36 +2,66 @@ import { api } from "./api";
 
 const budgetSlice = api.injectEndpoints({
   endpoints: (builder) => ({
-    getBudget: builder.query({
+    getBudgets: builder.query({
       query: () => {
         return "/api/budget/user/budget";
       },
       transformResponse: (response) => {
-        return response;
+        return response.map((budget) => {
+          const updatedCategories = budget.categories.map((category) => {
+            const amountLeftToBudget = category.budgeted - category.actual;
+            return {
+              ...category,
+              amountLeftToBudget:
+                amountLeftToBudget > 0 ? amountLeftToBudget : 0,
+            };
+          });
+          return { ...budget, categories: updatedCategories };
+        });
       },
     }),
-    getBudgetItem: builder.query({
+    getBudget: builder.query({
       query: (id) => {
         return `/api/budget/user/budget/${id}`;
       },
     }),
-    createBudgetItem: builder.query({
-      query: (newBudgetItem) => ({
+    createBudget: builder.mutation({
+      query: (newBudget) => ({
         url: "/api/budget/user/budget",
         method: "POST",
-        body: newBudgetItem,
+        body: newBudget,
       }),
     }),
-    updateBudgetItem: builder.mutation({
-      query: ({ id, updatedBudgetItem }) => ({
+    updateBudget: builder.mutation({
+      query: ({ id, updatedBudget }) => ({
         url: `/api/budget/user/budget/${id}`,
         method: "PUT",
-        body: updatedBudgetItem,
+        body: updatedBudget,
       }),
     }),
-    deleteBudgetItem: builder.mutation({
+    deleteBudget: builder.mutation({
       query: (id) => ({
         url: `/api/budget/user/budget/${id}`,
+        method: "DELETE",
+      }),
+    }),
+    createCategory: builder.mutation({
+      query: ({ budgetId, newCategory }) => ({
+        url: `/api/budget/user/budget/${budgetId}/category`,
+        method: "POST",
+        body: newCategory,
+      }),
+    }),
+    updateCategory: builder.mutation({
+      query: ({ budgetId, categoryId, updatedCategory }) => ({
+        url: `/api/budget/user/budget/${budgetId}/category/${categoryId}`,
+        method: "PUT",
+        body: updatedCategory,
+      }),
+    }),
+    deleteCategory: builder.mutation({
+      query: ({ budgetId, categoryId }) => ({
+        url: `/api/budget/user/budget/${budgetId}/category/${categoryId}`,
         method: "DELETE",
       }),
     }),
@@ -40,9 +70,12 @@ const budgetSlice = api.injectEndpoints({
 });
 
 export const {
+  useGetBudgetsQuery,
   useGetBudgetQuery,
-  useGetBudgetItemQuery,
-  useCreateBudgetItemMutation,
-  useUpdateBudgetItemMutation,
-  useDeleteBudgetItemMutation,
+  useCreateBudgetMutation,
+  useUpdateBudgetMutation,
+  useDeleteBudgetMutation,
+  useCreateCategoryMutation,
+  useUpdateCategoryMutation,
+  useDeleteCategoryMutation,
 } = budgetSlice;

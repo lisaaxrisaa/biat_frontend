@@ -11,7 +11,9 @@ import { useCreateBudgetMutation } from "../store/budgetSlice";
 const BudgetForm = () => {
   //   the following will allow users to create their own categories for their budget tables
   const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
-
+  const [tripName, setTripName] = useState("");
+  const [tripType, setTripType] = useState("");
+  const [currency, setCurrency] = useState("");
   const [categories, setCategories] = useState([
     {
       id: Date.now(),
@@ -36,90 +38,113 @@ const BudgetForm = () => {
   const handleDeleteCategory = (index) => {
     setCategories(categories.filter((_, i) => i !== index));
   };
+  // the following will render the leftover amount to budget
+  const calculateLeftover = () => {
+    let totalBudgeted = 0;
+    let totalActual = 0;
+    categories.forEach((category) => {
+      totalBudgeted += parseFloat(category.budgeted || 0);
+      totalActual += parseFloat(category.actual || 0);
+    });
+    return totalBudgeted - totalActual;
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const budgetData = { categories };
+    const budgetData = {
+      name: tripName,
+      tripType: tripType,
+      currency: currency,
+      categories: categories,
+    };
     try {
       await createBudget(budgetData);
+      alert("Budget saved.");
     } catch (error) {
       console.error("Could not create budget, due to:", error);
+      alert("Unable to save the budget!");
     }
   };
   return (
     <div>
       <h2>Create New Budget</h2>
       <form onSubmit={handleSubmit}>
-        {/* Added table structure for better layout */}
-        <table>
-          <thead>
-            <tr>
-              <th>Category Name</th>
-              <th>Budgeted</th>
-              <th>Actual</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {categories.map((category, index) => (
-              <tr key={category.id}>
-                {/* Inputs inside table cells */}
-                <td>
-                  <input
-                    type="text"
-                    value={category.name}
-                    onChange={(e) =>
-                      handleInputChange(index, "name", e.target.value)
-                    }
-                    placeholder="Category Name"
-                    required
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    value={category.budgeted}
-                    onChange={(e) =>
-                      handleInputChange(index, "budgeted", e.target.value)
-                    }
-                    placeholder="Budgeted"
-                  />
-                </td>
-                <td>
-                  <input
-                    type="number"
-                    value={category.actual}
-                    onChange={(e) =>
-                      handleInputChange(index, "actual", e.target.value)
-                    }
-                    placeholder="Actual"
-                  />
-                </td>
-                <td>
-                  <button
-                    type="button"
-                    onClick={() => handleDeleteCategory(index)}
-                  >
-                    Delete Category
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div>
+          <input
+            type="text"
+            value={tripName}
+            onChange={(e) => setTripName(e.target.value)}
+            placeholder="Trip Name"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={tripType}
+            onChange={(e) => setTripType(e.target.value)}
+            placeholder="Trip Type"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            placeholder="Enter currency"
+            required
+          />
+        </div>
 
-        {/* Buttons */}
+        {categories.map((category, index) => (
+          <div key={category.id}>
+            <input
+              type="text"
+              value={category.name}
+              onChange={(e) => handleInputChange(index, "name", e.target.value)}
+              placeholder="Category Name"
+              required
+            />
+            <input
+              type="number"
+              value={category.budgeted}
+              onChange={(e) =>
+                handleInputChange(index, "budgeted", e.target.value)
+              }
+              placeholder="Budgeted"
+            />
+            <input
+              type="number"
+              value={category.actual}
+              onChange={(e) =>
+                handleInputChange(index, "actual", e.target.value)
+              }
+              placeholder="Actual"
+            />
+            <button type="button" onClick={() => handleDeleteCategory(index)}>
+              Delete Category
+            </button>
+          </div>
+        ))}
+
         <button type="button" onClick={handleAddCategory}>
           Add Category
         </button>
+
+        <div>
+          <h3>Leftover Budget: ${calculateLeftover()}</h3>
+        </div>
+
         <button type="submit" disabled={isLoading}>
-          {isLoading ? "Saving..." : "Save"}
+          {isLoading ? "Saving..." : "Save Budget"}
         </button>
       </form>
 
       {error && <p>Error: {error.message}</p>}
 
       <Link to="/budget-list">
-        <button>Back to Budgets</button>
+        <button>Back to Budget List</button>
       </Link>
     </div>
   );

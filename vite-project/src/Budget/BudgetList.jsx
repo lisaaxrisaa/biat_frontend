@@ -2,10 +2,10 @@
 
 import React, { useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useGetBudgetQuery } from "../store/budgetSlice";
+import { useGetBudgetsQuery } from "../store/budgetSlice";
 
 const BudgetList = () => {
-  const { data: budgets, error, isLoading, refetch } = useGetBudgetQuery();
+  const { data: budgets, error, isLoading, refetch } = useGetBudgetsQuery();
   const location = useLocation();
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const BudgetList = () => {
       return (
         <div>
           <p>No budgets</p>
-          <Link to={"/create-budget"}>
+          <Link to="/create-budget">
             <button>Create a New</button>
           </Link>
         </div>
@@ -37,11 +37,18 @@ const BudgetList = () => {
   return (
     <div>
       <h2>Your Budgets</h2>
-      <Link to="/create-budget">
-        <button>Create a New Budget</button>
-      </Link>
-      {isLoading ? <p>Loading Budgets...</p> : renderBudgets()}
-      {error && <p>Error: {error.message}</p>}
+      {/* Only show Create New Budget button once */}
+      {budgets && budgets.length === 0 ? (
+        <Link to="/create-budget">
+          <button>Create a New Budget</button>
+        </Link>
+      ) : (
+        renderBudgets()
+      )}
+      {isLoading && <p>Loading Budgets...</p>}
+      {error && (
+        <p>Could not fetch budgets, due to: {error.message || "Unknown error"}</p>
+      )}
     </div>
   );
 };

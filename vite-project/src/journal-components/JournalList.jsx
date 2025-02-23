@@ -55,14 +55,14 @@ const JournalList = () => {
     <div className="journal-background">
       <div className="journal-content-wrapper">
         <h2>Your Journal Entries</h2>
-        {isLoading ? <p>Loading...</p> : renderEntries()}
-        {error && <p>{error.message}</p>}
 
         <Link to="/create-journal-entry">
           <button className="create-entry-button">
             Create New Journal Entry
           </button>
         </Link>
+        {isLoading ? <p>Loading...</p> : renderEntries()}
+        {error && <p>{error.message}</p>}
       </div>
     </div>
   );

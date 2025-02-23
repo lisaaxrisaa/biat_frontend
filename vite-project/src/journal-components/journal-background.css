@@ -1,7 +1,6 @@
 .journal-background {
-  /* background-image: url("https://i.pinimg.com/736x/14/b6/70/14b670f183eb1a0ea98d5379f36edd86.jpg"); */
+  background-image: url("https://images.pexels.com/photos/3368816/pexels-photo-3368816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
   background-size: cover;
-  background-attachment: fixed;
   justify-content: center;
   position: fixed;
   display: flex;
@@ -12,11 +11,19 @@
   padding: 0;
   margin: 0;
 }
+h2 {
+  margin: 0;
+  margin-bottom: 20px;
+}
 .journal-content-wrapper {
-  position: relative;
+  width: 100%;
+  align-items: center;
+  padding: 20px 0;
+  flex-direction: column;
   background-color: antiquewhite;
-  justify-content: center;
+  /* justify-content: center; */
   display: flex;
+  box-sizing: border-box;
 }
 .journal-entry-box {
   display: flex;
@@ -30,8 +37,28 @@
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   height: 800px;
-  width: 100%;
+  width: 80%;
+  max-width: 500px;
+  max-height: 300px;
   box-sizing: border-box;
+  margin: 15px;
+}
+.individual-entry-box {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 800px;
+  width: 80%;
+  height: 80%;
+  box-sizing: border-box;
+  margin: 15px;
 }
 
 .create-entry-button {

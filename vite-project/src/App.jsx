@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import {
   BrowserRouter,
   Route,
@@ -21,6 +21,11 @@ import JournalList from './journal-components/JournalList';
 import NewEntry from './journal-components/NewEntry';
 import JournalEntry from './journal-components/JournalEntry';
 import EditEntry from './journal-components/EditEntry';
+import BudgetList from "./Budget/BudgetList";
+import BudgetForm from "./Budget/BudgetForm";
+import DeleteBudget from "./Budget/DeleteBudget";
+import EditBudget from "./Budget/EditBudget";
+import IndividualBudget from "./Budget/IndividualBudget";
 import Layout from './pages/Layout';
 import Logout from './pages/Logout';
 import LandingPage from './Landing Page/LandingPage';
@@ -47,13 +52,13 @@ const AppContent = () => {
   );
 
   useEffect(() => {
-    const token = sessionStorage.getItem('token');
+    const token = sessionStorage.getItem("token");
     setIsLoggedIn(!!token);
   }, [location]);
 
   useEffect(() => {
-    if (location.pathname !== '/login' && location.pathname !== '/register') {
-      sessionStorage.setItem('lastPage', location.pathname);
+    if (location.pathname !== "/login" && location.pathname !== "/register") {
+      sessionStorage.setItem("lastPage", location.pathname);
     }
   }, [location]);
 
@@ -83,6 +88,10 @@ const AppContent = () => {
           <Route path="/create-journal-entry" element={<NewEntry />} />
           <Route path="/journal/:id" element={<JournalEntry />} />
           <Route path="/edit-entry/:id" element={<EditEntry />} />
+          <Route path="/budget" element={<BudgetList />} />
+          <Route path="/create-budget" element={<BudgetForm />} />
+          <Route path="/edit-budget/:id" element={<EditBudget />} />
+          <Route path="/budget/:id" element={<IndividualBudget />} />
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/flights" element={<Flight />} />

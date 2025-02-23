@@ -49,7 +49,7 @@ const Home = () => {
               <p>Keep track of your travel memories and notes.</p>
             </div>
           </Link>
-
+          
           <Link to="/budget" className="home-card home-card-budget">
             <div className="home-card-content">
               <h3>Budget Planner</h3>

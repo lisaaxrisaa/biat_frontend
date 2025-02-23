@@ -25,9 +25,10 @@
   max-width: 1100px;
   margin: auto;
   grid-template-areas:
-    'weather journal journal'
-    'weather itinerary flight'
-    'budget packing packing';
+    'weather time checklist'
+    'weather itinerary destination'
+    'budget packing flight'
+    'journal journal journal';
 }
 
 .home-weather-card {
@@ -174,22 +175,17 @@
   background-image: url('https://images.pexels.com/photos/1309644/pexels-photo-1309644.jpeg?auto=compress&cs=tinysrgb&w=1200');
 }
 
-@media (max-width: 768px) {
-  .home-card-grid {
-    grid-template-columns: repeat(2, 1fr); /* Two columns on smaller screens */
-  }
-
-  .home-weather-card-container {
-    grid-column: span 2;
-  }
+.home-card-checklist {
+  grid-area: checklist;
+  background-image: url('https://images.pexels.com/photos/885880/pexels-photo-885880.jpeg?auto=compress&cs=tinysrgb&w=1200');
 }
 
-@media (max-width: 480px) {
-  .home-card-grid {
-    grid-template-columns: repeat(1, 1fr); /* Single column for mobile */
-  }
+.home-card-time {
+  grid-area: time;
+  background-image: url('https://images.pexels.com/photos/929032/pexels-photo-929032.jpeg?auto=compress&cs=tinysrgb&w=1200');
+}
 
-  .home-weather-card-container {
-    grid-column: span 1;
-  }
+.home-card-destination {
+  grid-area: destination;
+  background-image: url('https://images.pexels.com/photos/1440476/pexels-photo-1440476.jpeg?auto=compress&cs=tinysrgb&w=800');
 }

@@ -11,8 +11,10 @@
   align-items: flex-start;
   padding: 20px;
   z-index: 1000;
-  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.3);
+  box-shadow: none;
   font-family: 'Quicksand', sans-serif;
+  justify-content: space-between;
+  border: none;
 }
 
 .sidebar-title {
@@ -28,6 +30,7 @@
   flex-direction: column;
   width: 100%;
   gap: 10px;
+  flex-grow: 1;
 }
 
 .sidebar-link {
@@ -48,8 +51,8 @@
 }
 
 .sidebar-logout {
-  background: #ff4757;
-  color: #ffffff;
+  background: transparent;
+  color: #e0e0e0;
   border: none;
   padding: 12px 15px;
   width: calc(100% - 40px);
@@ -58,12 +61,11 @@
   transition: all 0.3s ease;
   text-decoration: none;
   border-radius: 6px;
-  margin-top: auto;
-  margin-bottom: 20px;
   text-align: center;
+  margin-top: auto;
 }
 
 .sidebar-logout:hover {
-  background: #ff6b81;
-  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
 }

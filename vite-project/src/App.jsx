@@ -5,33 +5,35 @@ import {
   Routes,
   Navigate,
   useLocation,
-} from "react-router-dom";
-import { Provider } from "react-redux";
-import store from "./store/store";
-import Home from "./pages/Home";
-import Login from "./pages/Login";
-import Registration from "./pages/Registration";
-import UpdateProfile from "./pages/UpdateProfile";
-import Profile from "./pages/Profile";
-import ItineraryPage from "./Itinerary/ItineraryPage";
-import ItineraryForm from "./Itinerary/ItineraryForm";
-import ItineraryDetailPage from "./Itinerary/ItineraryDetail";
-import EditItineraryPage from "./Itinerary/EditItinerary";
-import JournalList from "./journal-components/JournalList";
-import NewEntry from "./journal-components/NewEntry";
-import JournalEntry from "./journal-components/JournalEntry";
-import EditEntry from "./journal-components/EditEntry";
+} from 'react-router-dom';
+import { Provider } from 'react-redux';
+import store from './store/store';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Registration from './pages/Registration';
+import UpdateProfile from './pages/UpdateProfile';
+import Profile from './pages/Profile';
+import ItineraryPage from './Itinerary/ItineraryPage';
+import ItineraryForm from './Itinerary/ItineraryForm';
+import ItineraryDetailPage from './Itinerary/ItineraryDetail';
+import EditItineraryPage from './Itinerary/EditItinerary';
+import JournalList from './journal-components/JournalList';
+import NewEntry from './journal-components/NewEntry';
+import JournalEntry from './journal-components/JournalEntry';
+import EditEntry from './journal-components/EditEntry';
 import BudgetList from "./Budget/BudgetList";
 import BudgetForm from "./Budget/BudgetForm";
 import DeleteBudget from "./Budget/DeleteBudget";
 import EditBudget from "./Budget/EditBudget";
 import IndividualBudget from "./Budget/IndividualBudget";
-import Layout from "./pages/Layout";
-import Logout from "./pages/Logout";
-import LandingPage from "./Landing Page/LandingPage";
-import Flight from "./Flight/Flight";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import Layout from './pages/Layout';
+import Logout from './pages/Logout';
+import LandingPage from './Landing Page/LandingPage';
+import Flight from './Flight/Flight';
+import SetCountdown from './CountDown/SetCountdown';
+import Destination from './Destination/Destination';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 const App = () => {
   return (
@@ -46,7 +48,7 @@ const App = () => {
 const AppContent = () => {
   const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = useState(
-    !!sessionStorage.getItem("token")
+    () => !!sessionStorage.getItem('token')
   );
 
   useEffect(() => {
@@ -60,7 +62,17 @@ const AppContent = () => {
     }
   }, [location]);
 
-  const lastPage = sessionStorage.getItem("lastPage") || "/";
+  useEffect(() => {
+    const checkSession = () => {
+      const token = sessionStorage.getItem('token');
+      setIsLoggedIn(!!token);
+    };
+
+    window.addEventListener('storage', checkSession);
+    return () => window.removeEventListener('storage', checkSession);
+  }, []);
+
+  const lastPage = sessionStorage.getItem('lastPage') || '/';
 
   return (
     <Routes>
@@ -84,6 +96,8 @@ const AppContent = () => {
           <Route path="/profile" element={<Profile />} />
           <Route path="/flights" element={<Flight />} />
           <Route path="/logout" element={<Logout />} />
+          <Route path="/set-countdown" element={<SetCountdown />} />
+          <Route path="/random-destination" element={<Destination />} />
           <Route path="*" element={<Navigate to={lastPage} replace />} />
         </Route>
       ) : (

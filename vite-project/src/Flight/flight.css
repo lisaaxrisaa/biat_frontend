@@ -1,0 +1,131 @@
+.flight-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: url('https://cdn.pixabay.com/photo/2021/08/14/04/15/mountains-6544522_1280.jpg')
+    no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  overflow: auto;
+  padding-top: 20px;
+  padding-left: 250px;
+}
+
+.flight-search-container {
+  background: rgba(255, 255, 255, 0.821);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 900px;
+  text-align: center;
+  margin: 0 auto 20px;
+}
+
+.flight-search-form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.flight-search-form label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  text-align: left;
+}
+
+.flight-search-form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.flight-search-button {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.flight-search-button:hover {
+  background: #0056b3;
+}
+
+.flights-container {
+  background: rgba(255, 255, 255, 0.821);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 900px;
+  max-height: 500px;
+  overflow-y: auto;
+  margin: 0 auto;
+}
+
+.flight-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.flight-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.flight-card:hover {
+  transform: translateY(-5px);
+}
+
+.flight-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.flight-card p {
+  margin: 5px 0;
+}
+
+.flight-card-price {
+  font-weight: bold;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.flight-card-button {
+  display: inline-block;
+  padding: 10px 15px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.flight-card-button:hover {
+  background-color: #218838;
+}

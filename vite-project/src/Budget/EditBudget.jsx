@@ -10,7 +10,10 @@ const EditBudget = () => {
   const { budgetId } = useParams();
   const navigate = useNavigate();
   const { data: budget } = useGetBudgetQuery(budgetId);
-  const [updateBudget] = useUpdateBudgetMutation();
+  const [updateBudget, { error }] = useUpdateBudgetMutation();
+  if (error) {
+    console.error("Unable to update budget, due to: ", error);
+  }
 
   const [categories, setCategories] = useState(budget.categories);
 

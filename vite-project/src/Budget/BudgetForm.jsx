@@ -10,19 +10,20 @@ import {
   useCreateBudgetMutation,
   useGetBudgetsQuery,
 } from "../store/budgetSlice";
+import { v4 as uuidv4 } from "uuid";
 
 const BudgetForm = () => {
   //   the following will allow users to create their own categories for their budget tables
   const navigate = useNavigate();
   const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
-  const { refetch } = useGetBudgetsQuery;
+  const { refetch } = useGetBudgetsQuery();
   const [tripName, setTripName] = useState("");
   const [tripType, setTripType] = useState("");
   const [currency, setCurrency] = useState("");
   const [date, setDate] = useState("");
   const [categories, setCategories] = useState([
     {
-      id: Date.now(),
+      id: uuidv4(),
       name: "",
       budgeted: "",
       actual: "",
@@ -37,7 +38,7 @@ const BudgetForm = () => {
   const handleAddCategory = () => {
     setCategories([
       ...categories,
-      { id: Date.now(), name: "", budgeted: "", actual: "" },
+      { id: uuidv4(), name: "", budgeted: "", actual: "" },
     ]);
   };
   //   the following handleDelete deletes specific category from array of categories
@@ -75,7 +76,7 @@ const BudgetForm = () => {
     try {
       await createBudget(budgetData).unwrap();
       alert("Budget saved.");
-      // refetch();
+      refetch();
       navigate("/budget");
     } catch (error) {
       console.error("Could not create budget, due to:", error.message);

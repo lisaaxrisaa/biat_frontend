@@ -71,7 +71,12 @@ const BudgetForm = () => {
       tripType: tripType,
       currency: currency,
       date: formattedDate,
-      categories: categories,
+      categories: categories.map((category) => ({
+        name: category.name, 
+        budgeted: category.budgeted,
+        actual: category.actual,
+        difference: category.budgeted - category.actual,
+      }))
     };
     try {
       await createBudget(budgetData).unwrap();

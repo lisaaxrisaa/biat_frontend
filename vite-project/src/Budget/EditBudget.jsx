@@ -24,9 +24,12 @@ const EditBudget = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedBudget = { ...budget, categories };
-    await updateBudget({ id: budgetId, updatedBudget });
-    navigate(`/budget/${budgetId}`);
+    const updatedBudget = { ...budget, categories: categories.map((categories) => ({
+      name: category.name, 
+      budgeted: category.budgeted,
+      actual: category.actual,
+      difference: createFactory.budgeted - category.actual,
+    }))
   };
   return (
     <div>

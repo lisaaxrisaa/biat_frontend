@@ -1,8 +1,8 @@
 // this file should list all budgets, only overviews not the information.
 
-import React, { useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { useGetBudgetsQuery } from "../store/budgetSlice";
+import React, { useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { useGetBudgetsQuery } from '../store/budgetSlice';
 
 const BudgetList = () => {
   const { data: budgets, error, isLoading, refetch } = useGetBudgetsQuery();
@@ -37,11 +37,11 @@ const BudgetList = () => {
   return (
     <div>
       <h2>Your Budgets</h2>
-
+   
       <Link to="/create-budget">
         <button>Create a New Budget</button>
       </Link>
-
+      
       {isLoading && <p>Loading Budgets...</p>}
       {error ? (
         <p>

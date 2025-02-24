@@ -47,3 +47,4 @@ const IndividualBudget = () => {
   );
 };
 export default IndividualBudget;
+

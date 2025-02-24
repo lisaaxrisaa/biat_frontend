@@ -34,6 +34,14 @@ import SetCountdown from './CountDown/SetCountdown';
 import Destination from './Destination/Destination';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import PackingList from "./PackingListComponents/PackingList";
+import App from "./PackingListComponents/App";
+// import Form from "./PackingListComponents/Form";
+import Item from "./PackingListComponents/Item";
+import Stats from "./PackingListComponents/Stats";
+
+
+
 
 const App = () => {
   return (
@@ -93,6 +101,10 @@ const AppContent = () => {
           <Route path="/set-countdown" element={<SetCountdown />} />
           <Route path="/random-destination" element={<Destination />} />
           <Route path="*" element={<Navigate to={lastPage} replace />} />
+          <Route path="/packing-list" element={<PackingList />} />
+          <Route path="/form" element={<Form />} />
+          <Route path="/item" element={<Item />} />
+          <Route path="/stats" element={<Stats />} />
         </Route>
       ) : (
         <>

@@ -50,7 +50,7 @@ const Home = () => {
               <p>Keep track of your travel memories and notes.</p>
             </div>
           </Link>
-          
+
           <Link to="/budget" className="home-card home-card-budget">
             <div className="home-card-content">
               <h3>Budget Planner</h3>
@@ -69,13 +69,6 @@ const Home = () => {
             <div className="home-card-content">
               <h3>Flights</h3>
               <p>Look up your upcoming flights.</p>
-            </div>
-          </Link>
-
-          <Link to="/checklist" className="home-card home-card-checklist">
-            <div className="home-card-content">
-              <h3>Checklist</h3>
-              <p>Keep track of important items.</p>
             </div>
           </Link>
 

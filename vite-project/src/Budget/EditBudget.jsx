@@ -7,9 +7,9 @@ import {
 } from "../store/budgetSlice";
 
 const EditBudget = () => {
-  const { budgetId } = useParams();
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { data: budget } = useGetBudgetQuery(budgetId);
+  const { data: budget } = useGetBudgetQuery(id);
   const [updateBudget, { error }] = useUpdateBudgetMutation();
   if (error) {
     console.error("Unable to update budget, due to: ", error);
@@ -24,12 +24,23 @@ const EditBudget = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedBudget = { ...budget, categories: categories.map((categories) => ({
-      name: category.name, 
-      budgeted: category.budgeted,
-      actual: category.actual,
-      difference: createFactory.budgeted - category.actual,
-    }))
+    const updatedBudget = {
+      ...budget,
+      categories: categories.map((category) => {
+        return {
+          name: category.name,
+          budgeted: category.budgeted,
+          actual: category.actual,
+          difference: category.budgeted - category.actual,
+        };
+      }),
+    };
+    try {
+      await updateBudget({ id, updatedBudget }).unwrap();
+      navigate(`/budget/${id}`);
+    } catch (error) {
+      console.error("Unable to edit budget, due to: ", error);
+    }
   };
   return (
     <div>

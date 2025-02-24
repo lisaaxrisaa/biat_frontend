@@ -5,15 +5,21 @@
 // Here is inspo for the budget table format: https://www.goskills.com/blobs/blogs/761/a9863aed-f2f7-4049-8f52-f76496738b8d.png
 
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useCreateBudgetMutation } from "../store/budgetSlice";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  useCreateBudgetMutation,
+  useGetBudgetsQuery,
+} from "../store/budgetSlice";
 
 const BudgetForm = () => {
   //   the following will allow users to create their own categories for their budget tables
+  const navigate = useNavigate();
   const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
+  const { refetch } = useGetBudgetsQuery;
   const [tripName, setTripName] = useState("");
   const [tripType, setTripType] = useState("");
   const [currency, setCurrency] = useState("");
+  const [date, setDate] = useState("");
   const [categories, setCategories] = useState([
     {
       id: Date.now(),
@@ -48,20 +54,31 @@ const BudgetForm = () => {
     });
     return totalBudgeted - totalActual;
   };
+  const calculateAmount = () => {
+    return categories.reduce(
+      (sum, category) => sum + parseFloat(category.budgeted || 0),
+      0
+    );
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formattedDate = new Date(date);
+    const amount = calculateAmount();
     const budgetData = {
       name: tripName,
       tripType: tripType,
       currency: currency,
+      date: formattedDate,
       categories: categories,
     };
     try {
-      await createBudget(budgetData);
+      await createBudget(budgetData).unwrap();
       alert("Budget saved.");
+      // refetch();
+      navigate("/budget");
     } catch (error) {
-      console.error("Could not create budget, due to:", error);
+      console.error("Could not create budget, due to:", error.message);
       alert("Unable to save the budget!");
     }
   };
@@ -96,7 +113,14 @@ const BudgetForm = () => {
             required
           />
         </div>
-
+        <div>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+        </div>
         {categories.map((category, index) => (
           <div key={category.id}>
             <input
@@ -135,15 +159,15 @@ const BudgetForm = () => {
         <div>
           <h3>Leftover Budget: ${calculateLeftover()}</h3>
         </div>
-
+        <div>
+          <h3>Total Amount: ${calculateAmount()}</h3>
+        </div>
         <button type="submit" disabled={isLoading}>
           {isLoading ? "Saving..." : "Save Budget"}
         </button>
       </form>
-
       {error && <p>Error: {error.message}</p>}
-
-      <Link to="/budget-list">
+      <Link to="/budget">
         <button>Back to Budget List</button>
       </Link>
     </div>

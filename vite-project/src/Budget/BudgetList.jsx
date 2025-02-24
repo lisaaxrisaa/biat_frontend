@@ -47,7 +47,9 @@ const BudgetList = () => {
       )}
       {isLoading && <p>Loading Budgets...</p>}
       {error && (
-        <p>Could not fetch budgets, due to: {error.message || "Unknown error"}</p>
+        <p>
+          Could not fetch budgets, due to: {error.message || "Unknown error"}
+        </p>
       )}
     </div>
   );

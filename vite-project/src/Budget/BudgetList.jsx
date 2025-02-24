@@ -37,31 +37,18 @@ const BudgetList = () => {
   return (
     <div>
       <h2>Your Budgets</h2>
-      {/* LF- 'Create' button shouldn't only show once, it should always show so users can continue to create new budgets 
-      
-      Remove the ternary operator and just leave:
-        <Link to="/create-budget">
+   
+      <Link to="/create-budget">
         <button>Create a New Budget</button>
       </Link>
       
-      and 
-
       {isLoading && <p>Loading Budgets...</p>}
-      {error && <p>Could not fetch budgets: {error.message || "Unknown error"}</p>}
-      {renderBudgets()}
-      */}
-      {budgets && budgets.length === 0 ? (
-        <Link to="/create-budget">
-          <button>Create a New Budget</button>
-        </Link>
+      {error ? (
+        <p>
+          Could not fetch budgets, due to: {error.message || "Unknown error"}
+        </p>
       ) : (
         renderBudgets()
-      )}
-      {isLoading && <p>Loading Budgets...</p>}
-      {error && (
-        <p>
-          Could not fetch budgets, due to: {error.message || 'Unknown error'}
-        </p>
       )}
     </div>
   );

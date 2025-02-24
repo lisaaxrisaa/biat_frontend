@@ -16,10 +16,12 @@ const DeleteBudget = () => {
     );
     if (!confirmed) return;
     try {
-      await deleteBudget(id);
+      await deleteBudget(id).unwrap();
+      alert("Budget has been deleted!")
       navigate("/budget-list");
     } catch (error) {
       console.error("Unable to delete budget, due to:", error);
+      alert("Could not delete budget!");
     }
   };
 

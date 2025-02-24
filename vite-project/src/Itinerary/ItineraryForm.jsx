@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { useCreateItineraryMutation } from '../store/itinerarySlice';
-import { useDispatch } from 'react-redux';
 import Activity from './Activity';
 import { Link } from 'react-router-dom';
 import './itinerary-form.css';
@@ -23,7 +22,6 @@ const ItineraryForm = () => {
 
   const [createItinerary] = useCreateItineraryMutation();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleChange = (e, index) => {
     const { name, value } = e.target;

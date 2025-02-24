@@ -25,7 +25,7 @@ const BudgetList = () => {
     }
     return budgets.map((budget) => (
       <div key={budget.id}>
-        <h3>{budgets.name}</h3>
+        <h3>{budget.name}</h3>
         <p>{budget.description}</p>
         <Link to={`/budget/${budget.id}`}>
           <button>View</button>
@@ -37,19 +37,18 @@ const BudgetList = () => {
   return (
     <div>
       <h2>Your Budgets</h2>
-      {/* Only show Create New Budget button once */}
-      {budgets && budgets.length === 0 ? (
-        <Link to="/create-budget">
-          <button>Create a New Budget</button>
-        </Link>
+
+      <Link to="/create-budget">
+        <button>Create a New Budget</button>
+      </Link>
+
+      {isLoading && <p>Loading Budgets...</p>}
+      {error ? (
+        <p>
+          Could not fetch budgets, due to: {error.message || "Unknown error"}{" "}
+        </p>
       ) : (
         renderBudgets()
-      )}
-      {isLoading && <p>Loading Budgets...</p>}
-      {error && (
-        <p>
-          Could not fetch budgets, due to: {error.message || "Unknown error"}
-        </p>
       )}
     </div>
   );

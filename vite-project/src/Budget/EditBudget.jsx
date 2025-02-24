@@ -10,7 +10,10 @@ const EditBudget = () => {
   const { budgetId } = useParams();
   const navigate = useNavigate();
   const { data: budget } = useGetBudgetQuery(budgetId);
-  const [updateBudget] = useUpdateBudgetMutation();
+  const [updateBudget, { error }] = useUpdateBudgetMutation();
+  if (error) {
+    console.error("Unable to update budget, due to: ", error);
+  }
 
   const [categories, setCategories] = useState(budget.categories);
 
@@ -21,9 +24,12 @@ const EditBudget = () => {
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedBudget = { ...budget, categories };
-    await updateBudget({ id: budgetId, updatedBudget });
-    navigate(`/budget/${budgetId}`);
+    const updatedBudget = { ...budget, categories: categories.map((categories) => ({
+      name: category.name, 
+      budgeted: category.budgeted,
+      actual: category.actual,
+      difference: createFactory.budgeted - category.actual,
+    }))
   };
   return (
     <div>

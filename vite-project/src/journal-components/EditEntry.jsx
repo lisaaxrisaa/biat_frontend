@@ -1,12 +1,13 @@
 // this file allows users to edit a specific journal entry and delete if they wish (delete in another file but connected)
 
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import DeleteEntry from "./DeleteEntry";
 import {
   useGetJournalQuery,
   useUpdateEntryMutation,
 } from "../store/journalSlice";
+import "./journal-edit.css"
 
 
 const EditEntry = () => {
@@ -18,6 +19,15 @@ const EditEntry = () => {
   const { data: entry, error: fetchError, isLoading } = useGetJournalQuery(id);
   const [updateEntry, { isLoading: isUpdating, error: updateError }] =
     useUpdateEntryMutation();
+    useEffect(() => {
+    
+      document.body.classList.add("journal-page");
+  
+      return () => {
+        document.body.classList.remove("journal-page");
+      };
+    }, [id]);
+
   if (fetchError) return <p>{fetchError.message}</p>;
 
   useEffect(() => {
@@ -33,48 +43,55 @@ const EditEntry = () => {
     try {
       await updateEntry({ id, updatedEntry: modifiedEntry }).unwrap();
       alert("Journal entry has been updated!");
-      navigate("/journals");
+      navigate(`/journal/${id}`);
     } catch (error) {
       console.error(error);
     }
   };
   return (
-    <div >
-      <h2>Edit</h2>
-      <form onSubmit={handleSave}>
-        <div>
-          <label>Title:</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Image Url:</label>
-          <input
-            type="text"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-          />
-        </div>
-        {/* Removed div between image url and button, as it was giving errors */}
-        <button type="submit" disabled={isUpdating}>
-          {isUpdating ? "Saving..." : "Save"}
-        </button>
-      </form>
+    <div>
+      <Link to="/journals"><button className="back-to-journals-button">Back to Journals</button></Link>
+    <div className="journal-background">
+      <div className="edit-entry-container">
+        <h2>Edit Journal Entry</h2>
 
-      <DeleteEntry id={id} navigate={navigate} />
+        <form onSubmit={handleSave}>
+          <div>
+            <label>Title:</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Content:</label>
+            <textarea
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+          </div>
+          <div>
+            <label>Image Url:</label>
+            <input
+              type="text"
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+            />
+          </div>
+          <button type="submit" disabled={isUpdating}>
+            {isUpdating ? "Saving..." : "Save Changes"}
+          </button>
+          <DeleteEntry id={id} navigate={navigate} />
+        </form>
+       
+        {updateError && <p className="error-message">{updateError.message}</p>}
+      </div>
     </div>
-    
+    </div>
   );
 };
+
 export default EditEntry;

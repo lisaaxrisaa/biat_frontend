@@ -2,8 +2,8 @@
 
 // changes to be made later: fix error handling to be more specific!!!!!!
 
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, Link } from "react-router-dom";
 import { useCreateEntryMutation } from "../store/journalSlice";
 import "./journal-background.css";
 
@@ -14,6 +14,14 @@ const NewEntry = () => {
   const navigate = useNavigate();
   const [createEntry, { isLoading, error }] = useCreateEntryMutation();
 
+  useEffect(() => {
+    document.body.classList.add("journal-page");
+
+    return () => {
+      document.body.classList.remove("journal-page");
+    };
+  }, []);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,6 +36,9 @@ const NewEntry = () => {
   };
 
   return (
+    <div>
+      <Link to="/journals">
+      <button>Back to Journals</button></Link>
     <div className="journal-background">
       <div className="journal-content-wrapper">
         <h2>Create a New Entry</h2>
@@ -41,12 +52,14 @@ const NewEntry = () => {
             required
           />
           <textarea
+          placeholder="content"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             required
           />
           <input
             type="text"
+            placeholder="image url"
             value={imageUrl}
             onChange={(e) => setImageUrl(e.target.value)}
           />
@@ -56,6 +69,7 @@ const NewEntry = () => {
         </form>
         {error && <p>{error.message}</p>}
       </div>
+    </div>
     </div>
   );
 };

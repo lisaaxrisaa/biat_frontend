@@ -7,10 +7,13 @@ import { useParams, Link } from "react-router-dom";
 
 const IndividualBudget = () => {
   const { id } = useParams();
-  const { data: budget, error } = useGetBudgetQuery(id);
+  const { data: budget, error, isLoading } = useGetBudgetQuery(id);
+
+  if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>Error: {error.message}</p>;
   if (!budget) return <p>Budget not found</p>; // add a redirect back to budget list
+
   const totalBudgeted = budget.categories.reduce(
     (sum, category) => sum + parseFloat(category.budgeted || 0),
     0
@@ -21,6 +24,7 @@ const IndividualBudget = () => {
       <p>Total: ${totalBudgeted}</p>
       <p>Currency: {budget.currency}</p>
       <p>Trip Type: {budget.tripType}</p>
+      <p>Date: {new Date(budget.date).toLocaleDateString()}</p>
       {/* <p>Remaining left to budget: {budget.remainingBalance}</p> */}
       <div>
         <h3>Categories</h3>
@@ -28,7 +32,9 @@ const IndividualBudget = () => {
           <ul>
             {budget.categories.map((category) => (
               <li key={category.id}>
-                {category.name}: {category.budgeted}, {category.actual}
+                <strong>{category.name}</strong>
+                Budgeted: ${category.budgeted}, Actual: ${category.actual},
+                Difference: ${category.difference}
               </li>
             ))}
           </ul>
@@ -36,15 +42,14 @@ const IndividualBudget = () => {
           <p>No categories.</p>
         )}
       </div>
-      <Link to={`/budget/${id}/edit}`}>
+      <Link to={`/edit-budget/${id}`}>
         <button>Edit</button>
       </Link>
       <Link to={`/budget/${id}/delete`}>
         <button>Delete</button>
       </Link>
-      <Link to={"/budget-list"}>Back to Budgets</Link>
+      <Link to="/budget">Back to Budgets</Link>
     </div>
   );
 };
 export default IndividualBudget;
-

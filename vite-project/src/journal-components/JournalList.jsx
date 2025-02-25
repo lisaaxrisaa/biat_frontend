@@ -14,6 +14,13 @@ const JournalList = () => {
     refetch,
   } = useGetJournalsQuery();
   //   gets and renders a list of the users journal entries
+  useEffect(() => {
+    document.body.classList.add("journal-page");
+    return () => {
+      document.body.classList.remove("journal-page");
+    };
+  }, []);
+
 
   const location = useLocation();
   useEffect(() => {
@@ -32,8 +39,7 @@ const JournalList = () => {
       return journalEntries.map((entry) => (
         <div key={entry.id} className="journal-entry-box">
           <h3>{entry.title}</h3>
-          <p>{entry.content}</p>
-          {/* Add other journal entry details if needed */}
+          
           <Link to={`/journal/${entry.id}`}>
             <button className="view-button">View Entry</button>
           </Link>

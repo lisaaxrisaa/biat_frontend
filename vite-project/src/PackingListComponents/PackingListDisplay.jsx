@@ -36,7 +36,13 @@ export default function PackingListsDisplay() {
                 </Link>
                 <button
                   className="packing-list-delete-btn"
-                  onClick={() => deletePackingList(list.id)}
+                  onClick={async () => {
+                    try {
+                      await deletePackingList({ id: list.id }).unwrap();
+                    } catch (error) {
+                      console.error('Error deleting packing list:', error);
+                    }
+                  }}
                 >
                   ❌
                 </button>

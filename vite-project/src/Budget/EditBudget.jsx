@@ -1,10 +1,10 @@
 // this file is responsible for editing budgets
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   useGetBudgetQuery,
   useUpdateBudgetMutation,
-} from "../store/budgetSlice";
+} from '../store/budgetSlice';
 
 const EditBudget = () => {
   const { id } = useParams();
@@ -50,7 +50,7 @@ const EditBudget = () => {
       await updateBudget(updatedBudget).unwrap();
       navigate(`/budget/${id}`);
     } catch (err) {
-      console.error("Failed to update budget:", err);
+      console.error('Failed to update budget:', err);
     }
   };
 
@@ -64,21 +64,21 @@ const EditBudget = () => {
               type="text"
               value={category.name}
               onChange={(e) =>
-                handleEditCategory(index, "name", e.target.value)
+                handleEditCategory(index, 'name', e.target.value)
               }
             />
             <input
               type="number"
               value={category.budgeted}
               onChange={(e) =>
-                handleEditCategory(index, "budgeted", e.target.value)
+                handleEditCategory(index, 'budgeted', e.target.value)
               }
             />
             <input
               type="number"
               value={category.actual}
               onChange={(e) =>
-                handleEditCategory(index, "actual", e.target.value)
+                handleEditCategory(index, 'actual', e.target.value)
               }
             />
           </div>

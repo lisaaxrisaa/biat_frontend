@@ -58,7 +58,10 @@ const Home = () => {
             </div>
           </Link>
 
-          <Link to="/packing-list" className="home-card home-card-packing">
+          <Link
+            to="/packing-list-display"
+            className="home-card home-card-packing"
+          >
             <div className="home-card-content">
               <h3>Packing List</h3>
               <p>Ensure you have everything you need for your trip.</p>

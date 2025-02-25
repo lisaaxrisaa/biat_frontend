@@ -32,6 +32,9 @@ import LandingPage from './Landing Page/LandingPage';
 import Flight from './Flight/Flight';
 import SetCountdown from './CountDown/SetCountdown';
 import Destination from './Destination/Destination';
+import PackingListForm from './PackingListComponents/PackingListForm';
+import PackingListDisplay from './PackingListComponents/PackingListDisplay';
+import PackingListDetails from './PackingListComponents/PackingListDetails';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
@@ -89,6 +92,12 @@ const AppContent = () => {
           <Route path="/update-profile" element={<UpdateProfile />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/flights" element={<Flight />} />
+          <Route path="/packing-list" element={<PackingListForm />} />
+          <Route
+            path="/packing-list-display"
+            element={<PackingListDisplay />}
+          />
+          <Route path="/packing-list/:id" element={<PackingListDetails />} />
           <Route path="/logout" element={<Logout />} />
           <Route path="/set-countdown" element={<SetCountdown />} />
           <Route path="/random-destination" element={<Destination />} />

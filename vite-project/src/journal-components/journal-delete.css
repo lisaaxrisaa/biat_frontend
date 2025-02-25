@@ -1,0 +1,18 @@
+.journal-delete .delete-entry {
+    padding: 10px 20px;
+    background-color: red; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.journal-delete .delete-entry:hover {
+    background-color: darkred; 
+}
+
+.journal-delete .delete-entry:disabled {
+    background-color: #cccccc; 
+    cursor: not-allowed;
+}

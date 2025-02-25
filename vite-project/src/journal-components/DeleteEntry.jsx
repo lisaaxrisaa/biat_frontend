@@ -1,6 +1,7 @@
 import React from "react";
 import { useDeleteEntryMutation } from "../store/journalSlice";
-import "./journal-background.css";
+import "./journal-delete.css";
+
 
 const DeleteEntry = ({ id, navigate }) => {
   const [deleteEntry, { isLoading, error }] = useDeleteEntryMutation();
@@ -22,10 +23,9 @@ const DeleteEntry = ({ id, navigate }) => {
   };
 
   return (
-    <div className="journal-background">
-      <div className="journal-content-wrapper">
+    <div className="journal-delete">
         <button
-          className="create-entry-button"
+          className="delete-entry"
           onClick={handleDelete}
           disabled={isLoading}
         >
@@ -33,7 +33,7 @@ const DeleteEntry = ({ id, navigate }) => {
         </button>
         {error && <p>{error.message}</p>}
       </div>
-    </div>
+    
   );
 };
 

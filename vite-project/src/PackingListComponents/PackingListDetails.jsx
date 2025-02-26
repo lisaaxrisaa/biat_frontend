@@ -34,51 +34,63 @@ export default function PackingListDetails() {
   }
 
   return (
-    <div className="packing-list">
-      <h2>{packingList.name}</h2>
+    <>
+      <div className="packing-list">
+        <h2 className="packing-list-title">{packingList.name}</h2>
 
-      <form onSubmit={handleAddItem}>
-        <input
-          type="text"
-          placeholder="Add an item..."
-          value={itemText}
-          onChange={(e) => setItemText(e.target.value)}
-        />
-        <button type="submit">➕ Add Item</button>
-      </form>
+        <form className="packing-list-form" onSubmit={handleAddItem}>
+          <input
+            className="packing-list-input"
+            type="text"
+            placeholder="Add an item..."
+            value={itemText}
+            onChange={(e) => setItemText(e.target.value)}
+          />
+          <button className="packing-list-add-btn" type="submit">
+            ➕ Add Item
+          </button>
+        </form>
 
-      {packingList.items?.length === 0 ? (
-        <p>No items found.</p>
-      ) : (
-        <ul>
-          {packingList.items.map((item) => (
-            <li key={item.id}>
-              <input
-                type="checkbox"
-                checked={item.packed}
-                onChange={() =>
-                  togglePackingItem({ itemId: item.id, packed: !item.packed })
-                }
-              />
-
-              {editingItem === item.id ? (
-                <EditPackingItem
-                  item={item}
-                  onCancel={() => setEditingItem(null)}
+        {packingList.items?.length === 0 ? (
+          <p>No items found.</p>
+        ) : (
+          <ul className="packing-list-items">
+            {packingList.items.map((item) => (
+              <li className="packing-list-item" key={item.id}>
+                <input
+                  className="packing-list-checkbox"
+                  type="checkbox"
+                  checked={item.packed}
+                  onChange={() =>
+                    togglePackingItem({ itemId: item.id, packed: !item.packed })
+                  }
                 />
-              ) : (
-                <>
-                  <span>{item.description}</span>
-                  <button onClick={() => setEditingItem(item.id)}>
-                    ✏️ Edit
-                  </button>
-                  <DeletePackingItem itemId={item.id} />
-                </>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
+
+                {editingItem === item.id ? (
+                  <EditPackingItem
+                    item={item}
+                    onCancel={() => setEditingItem(null)}
+                  />
+                ) : (
+                  <>
+                    <span>{item.description}</span>
+                    <button
+                      className="packing-list-edit-btn"
+                      onClick={() => setEditingItem(item.id)}
+                    >
+                      Edit
+                    </button>
+                    <DeletePackingItem
+                      className="packing-list-delete-btn"
+                      itemId={item.id}
+                    />
+                  </>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </>
   );
 }

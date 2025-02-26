@@ -1,0 +1,76 @@
+.packing-lists {
+  text-align: center;
+  padding: 2rem;
+}
+
+.packing-lists-title {
+  font-size: 2.4rem;
+  margin-bottom: 1.6rem;
+  color: #333;
+}
+
+.packing-lists-create-btn {
+  background-color: #76c7ad;
+  color: white;
+  font-weight: 700;
+  font-size: 1.6rem;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 10rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.packing-lists-create-btn:hover {
+  background-color: #5aa58c;
+}
+
+.packing-lists-container {
+  list-style: none;
+  width: 80%;
+  margin: 2rem auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.2rem;
+  justify-content: center;
+  align-content: start;
+  padding: 0;
+}
+
+.packing-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffebb3;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1.6rem;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.packing-list-item:hover {
+  background: #fcd77f;
+}
+
+.packing-list-link {
+  text-decoration: none;
+  color: #5a3e2b;
+  font-weight: bold;
+}
+
+.packing-list-delete-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  padding: 0.8rem;
+  color: red;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.packing-list-delete-btn:hover {
+  transform: scale(1.1);
+  color: darkred;
+}

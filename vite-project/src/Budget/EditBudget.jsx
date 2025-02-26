@@ -83,7 +83,7 @@ const EditBudget = () => {
       refetch();
       navigate(`/budget/${id}`);
     } catch (err) {
-      console.error("Failed to update budget:", err);
+      console.error('Failed to update budget:', err);
     }
   };
   const handleDeleteBudget = async () => {
@@ -151,7 +151,7 @@ const EditBudget = () => {
               type="text"
               value={category.name}
               onChange={(e) =>
-                handleEditCategory(index, "name", e.target.value)
+                handleEditCategory(index, 'name', e.target.value)
               }
               placeholder="Category Name"
               required
@@ -160,7 +160,7 @@ const EditBudget = () => {
               type="number"
               value={category.budgeted}
               onChange={(e) =>
-                handleEditCategory(index, "budgeted", e.target.value)
+                handleEditCategory(index, 'budgeted', e.target.value)
               }
               placeholder="Budgeted"
             />
@@ -168,7 +168,7 @@ const EditBudget = () => {
               type="number"
               value={category.actual}
               onChange={(e) =>
-                handleEditCategory(index, "actual", e.target.value)
+                handleEditCategory(index, 'actual', e.target.value)
               }
               placeholder="Actual"
             />

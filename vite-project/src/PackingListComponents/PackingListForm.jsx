@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useCreatePackingListMutation } from '../store/packingListSlice';
 import { useNavigate } from 'react-router-dom';
+import './packinglistform.css';
 
 export default function CreatePackingListForm() {
   const [listName, setListName] = useState('');
@@ -20,15 +21,20 @@ export default function CreatePackingListForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h3>Create a New Packing List</h3>
-      <input
-        type="text"
-        placeholder="Trip Name (e.g., Hawaii)"
-        value={listName}
-        onChange={(e) => setListName(e.target.value)}
-      />
-      <button type="submit">Create Packing List</button>
-    </form>
+    <>
+      <form className="packing-list-form" onSubmit={handleSubmit}>
+        <h3 className="packing-list-title">Create a New Packing List</h3>
+        <input
+          className="packing-list-input"
+          type="text"
+          placeholder="Trip Name (e.g., Hawaii)"
+          value={listName}
+          onChange={(e) => setListName(e.target.value)}
+        />
+        <button className="packing-list-btn" type="submit">
+          Create Packing List
+        </button>
+      </form>
+    </>
   );
 }

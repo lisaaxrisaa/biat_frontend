@@ -70,7 +70,7 @@ const Destination = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              Read more on Wikipedia
+              <strong>Read more on Wikipedia</strong>
             </a>
             <br />
             <br />

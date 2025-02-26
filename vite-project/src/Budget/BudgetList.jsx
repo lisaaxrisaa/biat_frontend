@@ -17,9 +17,6 @@ const BudgetList = () => {
       return (
         <div>
           <p>No budgets</p>
-          <Link to="/create-budget">
-            <button>Create a New</button>
-          </Link>
         </div>
       );
     }

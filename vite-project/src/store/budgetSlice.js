@@ -44,10 +44,13 @@ const budgetSlice = api.injectEndpoints({
         url: `/api/budget/user/budget/${id}`,
         method: "DELETE",
       }),
+      onSuccess: () => {
+        api.util.invalidateTags([{ type: 'Budget', id: 'LIST' }]); 
+      }
     }),
     createCategory: builder.mutation({
-      query: ({ budgetId, newCategory }) => ({
-        url: `/api/budget/user/budget/${budgetId}/category`,
+      query: ({ id, newCategory }) => ({
+        url: `/api/budget/user/budget/${id}/category`,
         method: "POST",
         body: newCategory,
       }),

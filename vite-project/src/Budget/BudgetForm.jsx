@@ -15,6 +15,7 @@ const BudgetForm = () => {
   //   the following will allow users to create their own categories for their budget tables
   const navigate = useNavigate();
   const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
+
   const { refetch } = useGetBudgetsQuery();
   const [tripName, setTripName] = useState('');
   const [tripType, setTripType] = useState('');
@@ -59,7 +60,7 @@ const BudgetForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formattedDate = new Date(date);
+    const formattedDate = new Date(date)
     const amount = calculateAmount();
     const budgetData = {
       name: tripName,

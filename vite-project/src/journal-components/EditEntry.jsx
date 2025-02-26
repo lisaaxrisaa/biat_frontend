@@ -7,8 +7,7 @@ import {
   useGetJournalQuery,
   useUpdateEntryMutation,
 } from "../store/journalSlice";
-import "./journal-edit.css"
-
+import "./journal-edit.css";
 
 const EditEntry = () => {
   const { id } = useParams();
@@ -16,17 +15,16 @@ const EditEntry = () => {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const navigate = useNavigate();
-  const { data: entry, error: fetchError, isLoading } = useGetJournalQuery(id);
+  const { data: entry, error: fetchError, isLoading, refetch } = useGetJournalQuery(id);
   const [updateEntry, { isLoading: isUpdating, error: updateError }] =
     useUpdateEntryMutation();
-    useEffect(() => {
-    
-      document.body.classList.add("journal-page");
-  
-      return () => {
-        document.body.classList.remove("journal-page");
-      };
-    }, [id]);
+  useEffect(() => {
+    document.body.classList.add("journal-page");
+
+    return () => {
+      document.body.classList.remove("journal-page");
+    };
+  }, [id]);
 
   if (fetchError) return <p>{fetchError.message}</p>;
 
@@ -43,6 +41,7 @@ const EditEntry = () => {
     try {
       await updateEntry({ id, updatedEntry: modifiedEntry }).unwrap();
       alert("Journal entry has been updated!");
+      refetch();
       navigate(`/journal/${id}`);
     } catch (error) {
       console.error(error);
@@ -50,46 +49,50 @@ const EditEntry = () => {
   };
   return (
     <div>
-      <Link to="/journals"><button className="back-to-journals-button">Back to Journals</button></Link>
-    <div className="journal-background">
-      <div className="edit-entry-container">
-        <h2>Edit Journal Entry</h2>
+      <Link to="/journals">
+        <button className="back-to-journals-button">Back to Journals</button>
+      </Link>
+      <div className="journal-background">
+        <div className="edit-entry-container">
+          <h2>Edit Journal Entry</h2>
 
-        <form onSubmit={handleSave}>
-          <div>
-            <label>Title:</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Content:</label>
-            <textarea
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              required
-            />
-          </div>
-          <div>
-            <label>Image Url:</label>
-            <input
-              type="text"
-              value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-            />
-          </div>
-          <button type="submit" disabled={isUpdating}>
-            {isUpdating ? "Saving..." : "Save Changes"}
-          </button>
-          <DeleteEntry id={id} navigate={navigate} />
-        </form>
-       
-        {updateError && <p className="error-message">{updateError.message}</p>}
+          <form onSubmit={handleSave}>
+            <div>
+              <label>Title:</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Content:</label>
+              <textarea
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                required
+              />
+            </div>
+            <div>
+              <label>Image Url:</label>
+              <input
+                type="text"
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+              />
+            </div>
+            <button type="submit" disabled={isUpdating}>
+              {isUpdating ? "Saving..." : "Save Changes"}
+            </button>
+            <DeleteEntry id={id} navigate={navigate} />
+          </form>
+
+          {updateError && (
+            <p className="error-message">{updateError.message}</p>
+          )}
+        </div>
       </div>
-    </div>
     </div>
   );
 };

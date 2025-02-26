@@ -45,10 +45,6 @@ const IndividualBudget = () => {
       <Link to={`/edit-budget/${id}`}>
         <button>Edit</button>
       </Link>
-      <Link to={`/budget/${id}/delete`}>
-        <button>Delete</button>
-      </Link>
-      <Link to="/budget">Back to Budgets</Link>
     </div>
   );
 };

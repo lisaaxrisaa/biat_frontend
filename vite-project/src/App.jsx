@@ -23,7 +23,6 @@ import JournalEntry from './journal-components/JournalEntry';
 import EditEntry from './journal-components/EditEntry';
 import BudgetList from './Budget/BudgetList';
 import BudgetForm from './Budget/BudgetForm';
-import DeleteBudget from './Budget/DeleteBudget';
 import EditBudget from './Budget/EditBudget';
 import IndividualBudget from './Budget/IndividualBudget';
 import Layout from './pages/Layout';

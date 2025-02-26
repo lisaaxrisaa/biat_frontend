@@ -1,29 +1,37 @@
-// this file is responsible for editing budgets
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import {
   useGetBudgetQuery,
   useUpdateBudgetMutation,
+  useDeleteBudgetMutation,
 } from "../store/budgetSlice";
 
 const EditBudget = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const { data: budget, error, isLoading } = useGetBudgetQuery(id);
+  const { data: budget, error, isLoading, refetch } = useGetBudgetQuery(id);
 
   if (isLoading) return <p>Loading budget...</p>;
   if (error) return <p>Error: {error.message}</p>;
 
   const [categories, setCategories] = useState([]);
+  const categoriesRef = useRef(false);
 
   useEffect(() => {
-    if (budget) {
+    if (budget && !categoriesRef.current) {
       setCategories(budget.categories);
+      categoriesRef.current = true;
     }
   }, [budget]);
 
+  const [tripName, setTripName] = useState(budget?.name || "");
+  const [tripType, setTripType] = useState(budget?.tripType || "");
+  const [currency, setCurrency] = useState(budget?.currency || "");
+  const [date, setDate] = useState(budget?.date || "");
+
   const [updateBudget] = useUpdateBudgetMutation();
+  const [deleteBudget] = useDeleteBudgetMutation();
 
   const handleEditCategory = (index, field, value) => {
     const updatedCategories = [...categories];
@@ -32,25 +40,66 @@ const EditBudget = () => {
     updatedCategories[index] = updatedCategory;
     setCategories(updatedCategories);
   };
+  const handleDeleteCategory = (index) => {
+    const updatedCategories = categories.filter((_, i) => i !== index);
+    setCategories(updatedCategories);
+  };
+
+  const handleAddCategory = async () => {
+    const newCategory = {
+      name: "",
+      budgeted: "",
+      actual: "",
+    };
+
+    setCategories([...categories, newCategory]);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!id) {
+      console.error("Budget ID is missing.", error);
+      return;
+    }
+
     const updatedBudget = {
-      ...budget,
+      id,
+      name: budget.name,
+      tripType: budget.tripType,
+      currency: budget.currency.trim(),
+      amount: parseFloat(budget.amount),
+      date: date,
       categories: categories.map((category) => ({
-        id: category.id,
+        id: category.id || undefined,
         name: category.name,
-        budgeted: category.budgeted,
-        actual: category.actual,
-        difference: category.budgeted - category.actual,
+        budgeted: parseFloat(category.budgeted) || 0,
+        actual: parseFloat(category.actual) || 0,
+        difference: parseFloat(category.budgeted) - parseFloat(category.actual),
       })),
     };
 
     try {
-      await updateBudget(updatedBudget).unwrap();
+      await updateBudget({ id, updatedBudget }).unwrap();
+      refetch();
       navigate(`/budget/${id}`);
     } catch (err) {
       console.error("Failed to update budget:", err);
+    }
+  };
+  const handleDeleteBudget = async () => {
+    const confirmed = window.confirm(
+      "Are you sure you would like to delete this budget?"
+    );
+    if (!confirmed) return;
+    console.log("Deleting budget with ID:", id); // Debugging log
+
+    try {
+      await deleteBudget(id).unwrap();
+      alert("Budget has been deleted successfully!");
+      navigate("/budget");
+    } catch (error) {
+      console.error("Unable to delete the budget, due to: ", error);
+      alert("Unable to delete budget!");
     }
   };
 
@@ -58,6 +107,44 @@ const EditBudget = () => {
     <div>
       <h2>Edit Budget</h2>
       <form onSubmit={handleSubmit}>
+        {/* Edit the Trip Name, Trip Type, Currency, Date */}
+        <div>
+          <input
+            type="text"
+            value={tripName}
+            onChange={(e) => setTripName(e.target.value)}
+            placeholder="Trip Name"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={tripType}
+            onChange={(e) => setTripType(e.target.value)}
+            placeholder="Trip Type"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="text"
+            value={currency}
+            onChange={(e) => setCurrency(e.target.value)}
+            placeholder="Enter Currency"
+            required
+          />
+        </div>
+        <div>
+          <input
+            type="date"
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+            required
+          />
+        </div>
+
+        {/* Categories Editing */}
         {categories.map((category, index) => (
           <div key={category.id}>
             <input
@@ -66,6 +153,8 @@ const EditBudget = () => {
               onChange={(e) =>
                 handleEditCategory(index, "name", e.target.value)
               }
+              placeholder="Category Name"
+              required
             />
             <input
               type="number"
@@ -73,6 +162,7 @@ const EditBudget = () => {
               onChange={(e) =>
                 handleEditCategory(index, "budgeted", e.target.value)
               }
+              placeholder="Budgeted"
             />
             <input
               type="number"
@@ -80,11 +170,29 @@ const EditBudget = () => {
               onChange={(e) =>
                 handleEditCategory(index, "actual", e.target.value)
               }
+              placeholder="Actual"
             />
+            <button type="button" onClick={() => handleDeleteCategory(index)}>
+              Delete Category
+            </button>
           </div>
         ))}
+
+        {/* Add New Category */}
+        <button type="button" onClick={handleAddCategory}>
+          Add Category
+        </button>
+
         <button type="submit">Save Changes</button>
       </form>
+
+      {/* Delete Budget Button */}
+      <button
+        onClick={handleDeleteBudget}
+        style={{ backgroundColor: "red", color: "white", marginTop: "20px" }}
+      >
+        Delete Budget
+      </button>
     </div>
   );
 };

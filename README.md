@@ -158,23 +158,18 @@ If you have a suggestion to improve this project, feel free to fork the repo and
 
   ```sh
   git checkout -b feature/AmazingFeature
-
-
   ```
 
 - **Make your changes and commit**
 
   ```sh
   git commit -m "Add some AmazingFeature"
-
-
   ```
 
 - **Push the changes**
 
   ```sh
   git push origin feature/AmazingFeature
-
   ```
 
 ## 📬 Contact

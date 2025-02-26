@@ -12,6 +12,16 @@ export default function PackingListsDisplay() {
   if (isLoading) return <p>Loading packing lists...</p>;
   if (isError) return <p>Failed to load packing lists.</p>;
 
+  const handleDelete = async (id) => {
+    try {
+      console.log(`Deleting packing list with ID: ${id}`);
+      await deletePackingList(id).unwrap();
+      console.log('Packing list deleted successfully');
+    } catch (error) {
+      console.error('Error deleting packing list:', error);
+    }
+  };
+
   return (
     <>
       <div className="packing-lists">
@@ -36,13 +46,7 @@ export default function PackingListsDisplay() {
                 </Link>
                 <button
                   className="packing-list-delete-btn"
-                  onClick={async () => {
-                    try {
-                      await deletePackingList({ id: list.id }).unwrap();
-                    } catch (error) {
-                      console.error('Error deleting packing list:', error);
-                    }
-                  }}
+                  onClick={() => handleDelete(list.id)}
                 >
                   ❌
                 </button>

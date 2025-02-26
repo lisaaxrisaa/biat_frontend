@@ -14,9 +14,7 @@ export default function PackingListsDisplay() {
 
   const handleDelete = async (id) => {
     try {
-      console.log(`Deleting packing list with ID: ${id}`);
       await deletePackingList(id).unwrap();
-      console.log('Packing list deleted successfully');
     } catch (error) {
       console.error('Error deleting packing list:', error);
     }

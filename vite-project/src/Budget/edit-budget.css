@@ -1,103 +1,107 @@
 body.edit-budget-page {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .back-to-list-btn {
-    top: 20px; 
-    left: 20px; 
-    background-color: #6ca7e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    z-index: 9999; 
+  top: 20px;
+  left: 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  z-index: 9999;
 }
 
 .back-to-list-btn:hover {
-    background-color: #5a94c5; 
+  background-color: #5a94c5;
 }
 
 .back-to-list-btn:focus {
-    outline: none; 
+  outline: none;
 }
 
 .edit-budget-container {
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 40px;
-    border-radius: 10px;
-    width: 90%;
-    min-width: 750px;
-    max-width: 1100px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    text-align: center;
-    position: relative;
-    overflow-y: auto;
-    margin-top: 50px;
+  background-color: rgba(255, 255, 255, 0.81);
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  min-width: 750px;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  overflow-y: auto;
+  margin-top: 50px;
 }
 
 .edit-budget-container h2 {
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  margin-bottom: 30px;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; 
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-input[type="text"], input[type="date"], input[type="number"] {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 10px;
+input[type='text'],
+input[type='date'],
+input[type='number'] {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
 }
 
-input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
-    outline: none;
-    border-color: #6ca7e6;
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='date']:focus {
+  outline: none;
+  border-color: #6ca7e6;
 }
 
 button {
-    background-color: #6ca7e6; 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background-color 0.3s;
+  background-color: #6ca7e6;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #5a94c5; 
+  background-color: #5a94c5;
 }
 
 .delete-budget-btn {
-    background-color: red; 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 30px; 
-    width: 100%; 
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 30px;
+  width: 100%;
 }
 
 .delete-budget-btn:hover {
-    background-color: darkred; 
+  background-color: darkred;
 }

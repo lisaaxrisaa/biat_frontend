@@ -41,8 +41,7 @@ const WeatherForm = () => {
             value={location}
             onChange={(e) => setLocation(e.target.value)}
           />
-          <br />
-          <br />
+
           <button className="weather-btn" type="submit">
             Get Weather
           </button>

@@ -2,7 +2,7 @@ body.budget-page {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-image: url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -18,7 +18,7 @@ body.budget-page {
 }
 
 .budget-content-wrapper {
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.81);
   padding: 60px;
   border-radius: 10px;
   min-width: 600px;

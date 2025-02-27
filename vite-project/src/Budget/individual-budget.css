@@ -2,7 +2,7 @@ body.individual-budget-page {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-image: url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -33,7 +33,7 @@ body.individual-budget-page {
 }
 
 .individual-budget-container {
-  background-color: rgba(255, 255, 255, 0.9);
+  background-color: rgba(255, 255, 255, 0.81);
   padding: 30px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
@@ -199,7 +199,7 @@ body.journal-page {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-image: url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;

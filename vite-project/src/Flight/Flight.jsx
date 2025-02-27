@@ -25,11 +25,11 @@ const FlightSearch = () => {
   };
 
   return (
-    <>
-      <div className="flight-page">
-        <div className="flight-search-container">
-          <h2>Find Flights</h2>
-          <form className="flight-search-form">
+    <div className="flight-page">
+      <div className="flight-search-container">
+        <h2>Find Flights</h2>
+        <form className="flight-search-form">
+          <div>
             <label>
               From
               <input
@@ -50,8 +50,10 @@ const FlightSearch = () => {
                 onChange={handleChange}
               />
             </label>
+          </div>
+          <div>
             <label>
-              Departure Date
+              Departure
               <input
                 type="date"
                 name="departDate"
@@ -60,7 +62,7 @@ const FlightSearch = () => {
               />
             </label>
             <label>
-              Return Date
+              Return
               <input
                 type="date"
                 name="returnDate"
@@ -68,6 +70,8 @@ const FlightSearch = () => {
                 onChange={handleChange}
               />
             </label>
+          </div>
+          <div className="passenger-container">
             <label>
               Passengers
               <input
@@ -78,22 +82,24 @@ const FlightSearch = () => {
                 onChange={handleChange}
               />
             </label>
-          </form>
-          <button className="flight-search-button" onClick={handleSearch}>
-            Search Flights
-          </button>
-        </div>
-
-        {isLoading && <p>Loading flights...</p>}
-        {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
-
-        {data?.flights && Array.isArray(data.flights) ? (
-          <FlightsList flights={data.flights} />
-        ) : (
-          <p>No flights found.</p>
-        )}
+          </div>
+        </form>
+        <button className="flight-search-button" onClick={handleSearch}>
+          Search Flights
+        </button>
       </div>
-    </>
+
+      {isLoading && <p>Loading flights...</p>}
+      {error && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+
+      {data?.flights && Array.isArray(data.flights) ? (
+        <div className="flights-container">
+          <FlightsList flights={data.flights} />
+        </div>
+      ) : (
+        <p>No flights found.</p>
+      )}
+    </div>
   );
 };
 

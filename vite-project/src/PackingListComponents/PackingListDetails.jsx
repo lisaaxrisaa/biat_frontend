@@ -7,6 +7,7 @@ import {
 import { useState } from 'react';
 import EditPackingItem from './EditPackingItem';
 import DeletePackingItem from './DeletePackingItem';
+import './packinglistdetails.css';
 
 export default function PackingListDetails() {
   const { id } = useParams();
@@ -47,7 +48,7 @@ export default function PackingListDetails() {
             onChange={(e) => setItemText(e.target.value)}
           />
           <button className="packing-list-add-btn" type="submit">
-            ➕ Add Item
+            Add Item
           </button>
         </form>
 
@@ -80,6 +81,7 @@ export default function PackingListDetails() {
                     >
                       Edit
                     </button>
+
                     <DeletePackingItem
                       className="packing-list-delete-btn"
                       itemId={item.id}

@@ -1,0 +1,257 @@
+body.individual-budget-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.back-to-list-btn {
+  top: 20px;
+  left: 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  z-index: 9999;
+}
+
+.back-to-list-btn:hover {
+  background-color: #5a94c5;
+}
+
+.back-to-list-btn:focus {
+  outline: none;
+}
+
+.individual-budget-container {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 1100px;
+  min-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100vh - 40px);
+  z-index: 1;
+  position: relative;
+  overflow-y: auto;
+  margin-top: 80px;
+}
+
+.individual-budget-header {
+  background-color: rgba(78, 143, 209, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.individual-budget-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
+
+.individual-budget-info {
+  margin-top: 10px;
+  color: white;
+}
+
+.individual-budget-info span {
+  display: block;
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.individual-budget-content {
+  padding: 20px;
+  background-color: rgba(249, 249, 249, 0.9);
+  border-radius: 10px;
+  flex-grow: 1;
+}
+
+.individual-budget-category-table {
+  margin-bottom: 30px;
+}
+
+.category-table-header {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e4e4e4;
+  padding: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.category-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+.category-name,
+.category-budget,
+.category-actual,
+.category-difference {
+  text-align: center;
+  padding: 10px;
+  flex: 1;
+}
+
+.category-name {
+  font-weight: bold;
+  flex: 2;
+}
+
+.category-budget,
+.category-actual,
+.category-difference {
+  flex: 1;
+}
+
+.total-budget {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  color: #4e8fd1;
+}
+
+button {
+  background-color: #6ca7e6;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #5a94c5;
+}
+
+@media (max-width: 768px) {
+  .individual-budget-container {
+    padding: 20px;
+  }
+
+  .individual-budget-header {
+    padding: 20px;
+  }
+
+  .individual-budget-title {
+    font-size: 24px;
+  }
+
+  .category-table-header,
+  .category-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .category-name,
+  .category-budget,
+  .category-actual,
+  .category-difference {
+    width: 100%;
+    text-align: left;
+  }
+
+  .category-name {
+    font-weight: bold;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .individual-budget-title {
+    font-size: 20px;
+  }
+
+  .category-name,
+  .category-budget,
+  .category-actual,
+  .category-difference {
+    font-size: 14px;
+  }
+}
+
+body.journal-page {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.individual-entry-box {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  min-width: 750px;
+  min-height: 80vh;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.individual-entry-box h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.dates-container {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.dates-container p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.edit-button {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-button:hover {
+  background-color: #5a94c5;
+}

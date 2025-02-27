@@ -1,0 +1,225 @@
+/* Budget Form Specific Styles */
+
+/* Apply background image for the entire page */
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+/* Container for the form */
+.budget-form-container-custom {
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  max-width: 1100px;
+  min-width: 600px;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: calc(100vh - 40px);
+  z-index: 1;
+  position: relative;
+  overflow-y: auto;
+  margin-top: 80px;
+  background-color: rgba(255, 255, 255, 0.9); /* To make sure the form is readable on top of the image */
+}
+
+/* Header styles */
+.budget-form-header-custom {
+  background-color: rgba(78, 143, 209, 0.9);
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.budget-form-title-custom {
+  font-size: 32px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Form content */
+.budget-form-content-custom {
+  padding: 20px;
+  background-color: rgba(249, 249, 249, 0.9);
+  border-radius: 10px;
+  flex-grow: 1;
+}
+
+/* Table headers and rows */
+.budget-form-category-table-custom {
+  margin-bottom: 30px;
+}
+
+.budget-form-category-table-header-custom {
+  display: flex;
+  justify-content: space-between;
+  background-color: #e4e4e4;
+  padding: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 5px;
+}
+
+.budget-form-category-row-custom {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Table cell styling */
+.budget-form-category-name-custom,
+.budget-form-category-budget-custom,
+.budget-form-category-actual-custom,
+.budget-form-category-difference-custom {
+  text-align: center;
+  padding: 10px;
+  flex: 1;
+}
+
+.budget-form-category-name-custom {
+  font-weight: bold;
+  flex: 2;
+}
+
+.budget-form-category-budget-custom,
+.budget-form-category-actual-custom,
+.budget-form-category-difference-custom {
+  flex: 1;
+}
+
+/* Total budget and button styles */
+.budget-form-total-budget-custom {
+  text-align: left;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 40px;
+  color: #4e8fd1;
+}
+
+.budget-form-button-custom {
+  background-color: #6ca7e6;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.budget-form-button-custom:hover {
+  background-color: #5a94c5;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .budget-form-container-custom {
+    padding: 20px;
+  }
+
+  .budget-form-header-custom {
+    padding: 20px;
+  }
+
+  .budget-form-title-custom {
+    font-size: 24px;
+  }
+
+  .budget-form-category-table-header-custom,
+  .budget-form-category-row-custom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .budget-form-category-name-custom,
+  .budget-form-category-budget-custom,
+  .budget-form-category-actual-custom,
+  .budget-form-category-difference-custom {
+    width: 100%;
+    text-align: left;
+  }
+
+  .budget-form-category-name-custom {
+    font-weight: bold;
+  }
+
+  .budget-form-button-custom {
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .budget-form-title-custom {
+    font-size: 20px;
+  }
+
+  .budget-form-category-name-custom,
+  .budget-form-category-budget-custom,
+  .budget-form-category-actual-custom,
+  .budget-form-category-difference-custom {
+    font-size: 14px;
+  }
+}
+
+/* Entry box styling for individual budgets */
+.budget-entry-box-custom {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  min-width: 750px;
+  min-height: 80vh;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative;
+  overflow-y: auto;
+  margin-top: 50px;
+}
+
+.budget-entry-box-custom h2 {
+  text-align: center;
+  margin-top: 0;
+}
+
+/* Dates container in the top-left corner */
+.dates-container-custom {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  text-align: left;
+  font-size: 14px;
+  color: #333;
+}
+
+.dates-container-custom p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* Edit button for individual budgets */
+.edit-button-custom {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.edit-button-custom:hover {
+  background-color: #5a94c5;
+}

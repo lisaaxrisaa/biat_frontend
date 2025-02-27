@@ -1,82 +1,82 @@
 /* Apply background image only to BudgetList */
 body.budget-page {
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    background-image: url("https://images.pexels.com/photos/3368816/pexels-photo-3368816.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
-  }
-  
-  .budget-background {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-  }
-  
-  .budget-content-wrapper {
-    background-color: rgba(255, 255, 255, 0.8); 
-    padding: 60px;
-    border-radius: 10px;
-    max-width: 1600px;
-    width: 95%;
-    text-align: center;
-    z-index: 1; 
-    box-sizing: border-box;
-    position: relative;
-    overflow-y: auto; 
-    max-height: 90vh;
-  }
-  
-  button {
-    padding: 10px 20px;
-    background-color: #6ca7e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  button:hover {
-    background-color: #5a94c5;
-  }
-  
-  button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  /* Budget-specific styling */
-  .budget-entry-box {
-    background-color: white;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 80%;
-    max-width: 600px;
-    margin: 20px auto;
-    text-align: center;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .budget-entry-box:hover {
-    transform: scale(1.05);
-  }
-  
-  h3 {
-    margin-bottom: 10px;
-  }
-  
-  p {
-    margin: 10px 0;
-  }
-  
-  h2 {
-    margin-bottom: 40px;
-  }
-  
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+.budget-background {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.budget-content-wrapper {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 60px;
+  border-radius: 10px;
+  min-width: 600px;
+  max-width: 1600px;
+  width: 95%;
+  text-align: center;
+  z-index: 1;
+  box-sizing: border-box;
+  position: relative;
+  overflow-y: auto;
+  max-height: 90vh;
+}
+
+button {
+  padding: 10px 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button:hover {
+  background-color: #5a94c5;
+}
+
+button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+/* Budget-specific styling */
+.budget-entry-box {
+  background-color: white;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
+  margin: 20px auto;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.budget-entry-box:hover {
+  transform: scale(1.05);
+}
+
+h3 {
+  margin-bottom: 10px;
+}
+
+p {
+  margin: 10px 0;
+}
+
+h2 {
+  margin-bottom: 40px;
+}

@@ -4,12 +4,13 @@
 
 // Here is inspo for the budget table format: https://www.goskills.com/blobs/blogs/761/a9863aed-f2f7-4049-8f52-f76496738b8d.png
 
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   useCreateBudgetMutation,
   useGetBudgetsQuery,
-} from '../store/budgetSlice';
+} from "../store/budgetSlice";
+import "./budget-form.css";
 
 const BudgetForm = () => {
   //   the following will allow users to create their own categories for their budget tables
@@ -17,15 +18,15 @@ const BudgetForm = () => {
   const [createBudget, { isLoading, error }] = useCreateBudgetMutation();
 
   const { refetch } = useGetBudgetsQuery();
-  const [tripName, setTripName] = useState('');
-  const [tripType, setTripType] = useState('');
-  const [currency, setCurrency] = useState('');
-  const [date, setDate] = useState('');
+  const [tripName, setTripName] = useState("");
+  const [tripType, setTripType] = useState("");
+  const [currency, setCurrency] = useState("");
+  const [date, setDate] = useState("");
   const [categories, setCategories] = useState([
     {
-      name: '',
-      budgeted: '',
-      actual: '',
+      name: "",
+      budgeted: "",
+      actual: "",
     },
   ]);
   // the following allows the user to update/change their budget and budget items
@@ -35,7 +36,7 @@ const BudgetForm = () => {
     setCategories(newCategories);
   };
   const handleAddCategory = () => {
-    setCategories([...categories, { name: '', budgeted: '', actual: '' }]);
+    setCategories([...categories, { name: "", budgeted: "", actual: "" }]);
   };
   //   the following handleDelete deletes specific category from array of categories
   const handleDeleteCategory = (index) => {
@@ -60,7 +61,7 @@ const BudgetForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formattedDate = new Date(date)
+    const formattedDate = new Date(date);
     const amount = calculateAmount();
     const budgetData = {
       name: tripName,
@@ -77,20 +78,20 @@ const BudgetForm = () => {
     };
     try {
       await createBudget(budgetData).unwrap();
-      alert('Budget saved.');
+      alert("Budget saved.");
       refetch();
-      navigate('/budget');
+      navigate("/budget");
     } catch (error) {
-      console.error('Could not create budget, due to:', error);
+      console.error("Could not create budget, due to:", error);
       alert(
-        `Unable to save the budget! ${error?.data?.message || 'Unknown error'}`
+        `Unable to save the budget! ${error?.data?.message || "Unknown error"}`
       );
     }
   };
   return (
-    <div>
-      <h2>Create New Budget</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="budget-form-container-custom">  {/* Apply updated container class */}
+      <h2 className="budget-form-title-custom">Create New Budget</h2>
+      <form onSubmit={handleSubmit} className="budget-form-content-custom">
         <div>
           <input
             type="text"
@@ -126,12 +127,14 @@ const BudgetForm = () => {
             required
           />
         </div>
+
+        {/* Category Inputs */}
         {categories.map((category, index) => (
           <div key={category.id}>
             <input
               type="text"
               value={category.name}
-              onChange={(e) => handleInputChange(index, 'name', e.target.value)}
+              onChange={(e) => handleInputChange(index, "name", e.target.value)}
               placeholder="Category Name"
               required
             />
@@ -139,7 +142,7 @@ const BudgetForm = () => {
               type="number"
               value={category.budgeted}
               onChange={(e) =>
-                handleInputChange(index, 'budgeted', e.target.value)
+                handleInputChange(index, "budgeted", e.target.value)
               }
               placeholder="Budgeted"
             />
@@ -147,7 +150,7 @@ const BudgetForm = () => {
               type="number"
               value={category.actual}
               onChange={(e) =>
-                handleInputChange(index, 'actual', e.target.value)
+                handleInputChange(index, "actual", e.target.value)
               }
               placeholder="Actual"
             />
@@ -161,21 +164,23 @@ const BudgetForm = () => {
           Add Category
         </button>
 
-        <div>
+        <div className="budget-form-total-budget-custom">
           <h3>Leftover Budget: ${calculateLeftover()}</h3>
         </div>
-        <div>
+        <div className="budget-form-total-budget-custom">
           <h3>Total Amount: ${calculateAmount()}</h3>
         </div>
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Saving...' : 'Save Budget'}
+
+        <button type="submit" disabled={isLoading} className="budget-form-button-custom">
+          {isLoading ? "Saving..." : "Save Budget"}
         </button>
       </form>
       {error && <p>Error: {error.message}</p>}
       <Link to="/budget">
-        <button>Back to Budget List</button>
+        <button className="budget-form-button-custom">Back to Budget List</button>
       </Link>
     </div>
   );
 };
+
 export default BudgetForm;

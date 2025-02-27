@@ -89,96 +89,98 @@ const BudgetForm = () => {
     }
   };
   return (
-    <div className="budget-form-container-custom">  {/* Apply updated container class */}
-      <h2 className="budget-form-title-custom">Create New Budget</h2>
-      <form onSubmit={handleSubmit} className="budget-form-content-custom">
-        <div>
-          <input
-            type="text"
-            value={tripName}
-            onChange={(e) => setTripName(e.target.value)}
-            placeholder="Trip Name"
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            value={tripType}
-            onChange={(e) => setTripType(e.target.value)}
-            placeholder="Trip Type"
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="text"
-            value={currency}
-            onChange={(e) => setCurrency(e.target.value)}
-            placeholder="Enter currency"
-            required
-          />
-        </div>
-        <div>
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            required
-          />
-        </div>
+    <div className="budget-form-page-background">  
+      <div className="budget-background-container">
+        <div className="budget-form-container-custom">
+          <h2 className="budget-form-title-custom">Create New Budget</h2>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <input
+                type="text"
+                value={tripName}
+                onChange={(e) => setTripName(e.target.value)}
+                placeholder="Trip Name"
+                required
+              />
+            </div>
 
-        {/* Category Inputs */}
-        {categories.map((category, index) => (
-          <div key={category.id}>
-            <input
-              type="text"
-              value={category.name}
-              onChange={(e) => handleInputChange(index, "name", e.target.value)}
-              placeholder="Category Name"
-              required
-            />
-            <input
-              type="number"
-              value={category.budgeted}
-              onChange={(e) =>
-                handleInputChange(index, "budgeted", e.target.value)
-              }
-              placeholder="Budgeted"
-            />
-            <input
-              type="number"
-              value={category.actual}
-              onChange={(e) =>
-                handleInputChange(index, "actual", e.target.value)
-              }
-              placeholder="Actual"
-            />
-            <button type="button" onClick={() => handleDeleteCategory(index)}>
-              Delete Category
+            <div>
+              <input
+                type="text"
+                value={tripType}
+                onChange={(e) => setTripType(e.target.value)}
+                placeholder="Trip Type"
+                required
+              />
+            </div>
+
+            <div>
+              <input
+                type="text"
+                value={currency}
+                onChange={(e) => setCurrency(e.target.value)}
+                placeholder="Enter currency"
+                required
+              />
+            </div>
+
+            <div>
+              <input
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                required
+              />
+            </div>
+
+            {categories.map((category, index) => (
+              <div key={index}>
+                <input
+                  type="text"
+                  value={category.name}
+                  onChange={(e) => handleInputChange(index, "name", e.target.value)}
+                  placeholder="Category Name"
+                  required
+                />
+                <input
+                  type="number"
+                  value={category.budgeted}
+                  onChange={(e) => handleInputChange(index, "budgeted", e.target.value)}
+                  placeholder="Budgeted"
+                />
+                <input
+                  type="number"
+                  value={category.actual}
+                  onChange={(e) => handleInputChange(index, "actual", e.target.value)}
+                  placeholder="Actual"
+                />
+                <button type="button" onClick={() => handleDeleteCategory(index)}>
+                  Delete Category
+                </button>
+              </div>
+            ))}
+
+            <button type="button" onClick={handleAddCategory}>
+              Add Category
             </button>
-          </div>
-        ))}
 
-        <button type="button" onClick={handleAddCategory}>
-          Add Category
-        </button>
+            <div className="budget-form-total-budget-custom">
+              <h3>Leftover Budget: ${calculateLeftover()}</h3>
+            </div>
+            <div className="budget-form-total-budget-custom">
+              <h3>Total Amount: ${calculateAmount()}</h3>
+            </div>
+            <button type="submit" disabled={isLoading} className="budget-form-button-custom">
+              {isLoading ? "Saving..." : "Save Budget"}
+            </button>
+          </form>
 
-        <div className="budget-form-total-budget-custom">
-          <h3>Leftover Budget: ${calculateLeftover()}</h3>
+          {error && <p>Error: {error.message}</p>}
+          <Link to="/budget">
+            <button className="budget-form-button-custom">Back to Budget List</button>
+          </Link>
         </div>
-        <div className="budget-form-total-budget-custom">
-          <h3>Total Amount: ${calculateAmount()}</h3>
-        </div>
-
-        <button type="submit" disabled={isLoading} className="budget-form-button-custom">
-          {isLoading ? "Saving..." : "Save Budget"}
-        </button>
-      </form>
-      {error && <p>Error: {error.message}</p>}
-      <Link to="/budget">
-        <button className="budget-form-button-custom">Back to Budget List</button>
-      </Link>
+      </div>
     </div>
   );
 };

@@ -9,11 +9,10 @@ body.edit-budget-page {
     background-repeat: no-repeat;
 }
 
-/* Position the back to list button outside of container */
 .back-to-list-btn {
-    top: 20px; /* Position from the top */
-    left: 20px; /* Position from the left */
-    background-color: #6ca7e6; /* Button color */
+    top: 20px; 
+    left: 20px; 
+    background-color: #6ca7e6;
     color: white;
     border: none;
     border-radius: 5px;
@@ -21,18 +20,17 @@ body.edit-budget-page {
     cursor: pointer;
     font-weight: bold;
     transition: background-color 0.3s;
-    z-index: 9999; /* Keep button above other content */
+    z-index: 9999; 
 }
 
 .back-to-list-btn:hover {
-    background-color: #5a94c5; /* Darker shade on hover */
+    background-color: #5a94c5; 
 }
 
 .back-to-list-btn:focus {
     outline: none; 
 }
 
-/* Edit Budget Page Container */
 .edit-budget-container {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 40px;
@@ -48,21 +46,18 @@ body.edit-budget-page {
     margin-top: 50px;
 }
 
-/* Title for Edit Budget */
 .edit-budget-container h2 {
     font-size: 32px;
     font-weight: bold;
     margin-bottom: 30px;
 }
 
-/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
-    gap: 20px; /* Space between inputs */
+    gap: 20px; 
 }
 
-/* Input Fields Styling */
 input[type="text"], input[type="date"], input[type="number"] {
     padding: 10px;
     font-size: 16px;
@@ -76,9 +71,8 @@ input[type="text"]:focus, input[type="number"]:focus, input[type="date"]:focus {
     border-color: #6ca7e6;
 }
 
-/* Buttons Styling */
 button {
-    background-color: #6ca7e6; /* Button color */
+    background-color: #6ca7e6; 
     color: white;
     padding: 10px 20px;
     border: none;
@@ -89,23 +83,21 @@ button {
 }
 
 button:hover {
-    background-color: #5a94c5; /* Darker shade on hover */
+    background-color: #5a94c5; 
 }
 
-/* Delete Budget Button */
 .delete-budget-btn {
-    background-color: red; /* Red background */
+    background-color: red; 
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-weight: bold;
-    margin-top: 30px; /* Add space below the Save button */
-    width: 100%; /* Make it full width */
+    margin-top: 30px; 
+    width: 100%; 
 }
 
-/* Delete Budget Button Hover Effect */
 .delete-budget-btn:hover {
-    background-color: darkred; /* Darker red on hover */
+    background-color: darkred; 
 }

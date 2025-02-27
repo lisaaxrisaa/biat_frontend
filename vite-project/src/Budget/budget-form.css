@@ -1,225 +1,110 @@
-/* Budget Form Specific Styles */
+/* Apply the background image directly to the body element */
 
-/* Apply background image for the entire page */
-body {
-  margin: 0;
-  padding: 0;
-  height: 100vh;
-  background-image: url("https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
+
+/* Container for the content, centered on the page */
+.budget-background-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 0;  /* No padding to ensure the image fills the screen */
+  z-index: 1; /* Ensures the content is above the background */
 }
 
-/* Container for the form */
-.budget-form-container-custom {
-  padding: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+/* Wrapper for the budget content with transparent background */
+.budget-content-wrapper {
+  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
+  padding: 60px;
   border-radius: 10px;
-  max-width: 1100px;
   min-width: 600px;
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  height: calc(100vh - 40px);
+  max-width: 1600px;
+  width: 95%;
+  text-align: center;
   z-index: 1;
+  box-sizing: border-box;
   position: relative;
   overflow-y: auto;
-  margin-top: 80px;
-  background-color: rgba(255, 255, 255, 0.9); /* To make sure the form is readable on top of the image */
+  max-height: 90vh;
 }
 
-/* Header styles */
-.budget-form-header-custom {
-  background-color: rgba(78, 143, 209, 0.9);
+/* Form-specific container */
+.budget-form-container-custom {
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.9); /* To maintain readability */
   padding: 30px;
   border-radius: 10px;
-  text-align: center;
-  margin-bottom: 40px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px; /* Content box does not take up full width */
+  margin: 0 auto;
+  z-index: 2; /* Content should stay above the background */
 }
 
+/* Title styling */
 .budget-form-title-custom {
   font-size: 32px;
   font-weight: bold;
-  color: white;
-}
-
-/* Form content */
-.budget-form-content-custom {
-  padding: 20px;
-  background-color: rgba(249, 249, 249, 0.9);
-  border-radius: 10px;
-  flex-grow: 1;
-}
-
-/* Table headers and rows */
-.budget-form-category-table-custom {
+  color: #333;
   margin-bottom: 30px;
 }
 
-.budget-form-category-table-header-custom {
-  display: flex;
-  justify-content: space-between;
-  background-color: #e4e4e4;
-  padding: 15px;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 5px;
-}
-
-.budget-form-category-row-custom {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
-}
-
-/* Table cell styling */
-.budget-form-category-name-custom,
-.budget-form-category-budget-custom,
-.budget-form-category-actual-custom,
-.budget-form-category-difference-custom {
-  text-align: center;
+/* Input fields */
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+  width: 100%;
   padding: 10px;
-  flex: 1;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
 }
 
-.budget-form-category-name-custom {
-  font-weight: bold;
-  flex: 2;
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="date"]:focus {
+  border-color: #4e8fd1;
+  outline: none;
 }
 
-.budget-form-category-budget-custom,
-.budget-form-category-actual-custom,
-.budget-form-category-difference-custom {
-  flex: 1;
-}
-
-/* Total budget and button styles */
-.budget-form-total-budget-custom {
-  text-align: left;
-  font-size: 20px;
-  font-weight: bold;
-  margin-top: 40px;
-  color: #4e8fd1;
-}
-
+/* Add category button styling */
 .budget-form-button-custom {
-  background-color: #6ca7e6;
+  background-color: #4e8fd1;
+  color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-weight: bold;
+  font-size: 16px;
 }
 
 .budget-form-button-custom:hover {
-  background-color: #5a94c5;
+  background-color: #3c76a3;
 }
 
-/* Media queries for responsive design */
-@media (max-width: 768px) {
-  .budget-form-container-custom {
-    padding: 20px;
-  }
-
-  .budget-form-header-custom {
-    padding: 20px;
-  }
-
-  .budget-form-title-custom {
-    font-size: 24px;
-  }
-
-  .budget-form-category-table-header-custom,
-  .budget-form-category-row-custom {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .budget-form-category-name-custom,
-  .budget-form-category-budget-custom,
-  .budget-form-category-actual-custom,
-  .budget-form-category-difference-custom {
-    width: 100%;
-    text-align: left;
-  }
-
-  .budget-form-category-name-custom {
-    font-weight: bold;
-  }
-
-  .budget-form-button-custom {
-    width: 100%;
-    margin-top: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .budget-form-title-custom {
-    font-size: 20px;
-  }
-
-  .budget-form-category-name-custom,
-  .budget-form-category-budget-custom,
-  .budget-form-category-actual-custom,
-  .budget-form-category-difference-custom {
-    font-size: 14px;
-  }
-}
-
-/* Entry box styling for individual budgets */
-.budget-entry-box-custom {
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 40px;
-  border-radius: 10px;
-  width: 90%;
-  min-width: 750px;
-  min-height: 80vh;
-  box-sizing: border-box;
-  text-align: center;
-  position: relative;
-  overflow-y: auto;
-  margin-top: 50px;
-}
-
-.budget-entry-box-custom h2 {
-  text-align: center;
-  margin-top: 0;
-}
-
-/* Dates container in the top-left corner */
-.dates-container-custom {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  text-align: left;
-  font-size: 14px;
-  color: #333;
-}
-
-.dates-container-custom p {
-  margin: 0;
-  font-weight: bold;
-}
-
-/* Edit button for individual budgets */
-.edit-button-custom {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: #6ca7e6;
+/* Category delete button styling */
+button[type="button"] {
+  background-color: #f44336;
   color: white;
+  padding: 5px 10px;
   border: none;
   border-radius: 5px;
-  padding: 10px 20px;
   cursor: pointer;
-  font-weight: bold;
+  margin-top: 10px;
 }
 
-.edit-button-custom:hover {
-  background-color: #5a94c5;
+button[type="button"]:hover {
+  background-color: #d32f2f;
+}
+
+/* Total budget and leftover display */
+.budget-form-total-budget-custom {
+  margin-top: 20px;
+}
+
+.budget-form-total-budget-custom h3 {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
 }

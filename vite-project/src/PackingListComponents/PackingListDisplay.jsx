@@ -35,20 +35,21 @@ export default function PackingListsDisplay() {
         ) : (
           <ul className="packing-lists-container">
             {packingLists.map((list) => (
-              <li className="packing-list-item" key={list.id}>
-                <Link
-                  className="packing-list-link"
-                  to={`/packing-list/${list.id}`}
-                >
-                  {list.name}
-                </Link>
-                <button
-                  className="packing-list-delete-btn"
-                  onClick={() => handleDelete(list.id)}
-                >
-                  ❌
-                </button>
-              </li>
+              <Link
+                key={list.id}
+                className="packing-list-link"
+                to={`/packing-list/${list.id}`}
+              >
+                <li className="packing-list-item">
+                  <span className="packing-list-name">{list.name}</span>
+                  <button
+                    className="packing-list-delete-btn"
+                    onClick={(e) => handleDelete(list.id, e)}
+                  >
+                    ❌
+                  </button>
+                </li>
+              </Link>
             ))}
           </ul>
         )}

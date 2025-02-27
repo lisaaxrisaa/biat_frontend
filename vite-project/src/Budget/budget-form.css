@@ -1,47 +1,48 @@
-/* Apply the background image directly to the body element */
+/* Ensure the background covers the entire screen, accounting for the sidebar */
+.budget-form-page-background {
+  position: absolute;
+  top: 0;
+  left: 250px; /* Adjust for sidebar width */
+  width: calc(100vw - 250px); /* Full width minus sidebar */
+  min-height: 100vh; /* Cover the full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('https://images.pexels.com/photos/208701/pexels-photo-208701.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
+  background-size: cover; /* Cover the entire screen */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent tiling */
+  margin: 0; /* Remove default margin */
+  padding: 0; /* Remove default padding */
+}
 
-
-/* Container for the content, centered on the page */
+/* Container for the form */
 .budget-background-container {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
-  padding: 0;  /* No padding to ensure the image fills the screen */
-  z-index: 1; /* Ensures the content is above the background */
-}
-
-/* Wrapper for the budget content with transparent background */
-.budget-content-wrapper {
-  background-color: rgba(255, 255, 255, 0.8); /* Transparent white background */
-  padding: 60px;
-  border-radius: 10px;
-  min-width: 600px;
-  max-width: 1600px;
-  width: 95%;
-  text-align: center;
-  z-index: 1;
-  box-sizing: border-box;
-  position: relative;
-  overflow-y: auto;
-  max-height: 90vh;
-}
-
-/* Form-specific container */
-.budget-form-container-custom {
-  position: relative;
-  background-color: rgba(255, 255, 255, 0.9); /* To maintain readability */
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 100%;
-  max-width: 800px; /* Content box does not take up full width */
-  margin: 0 auto;
-  z-index: 2; /* Content should stay above the background */
+  padding: 20px; /* Add some padding */
+  z-index: 1;
 }
 
-/* Title styling */
+/* Form container */
+.budget-form-container-custom {
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 40px;
+  border-radius: 10px;
+  max-width: 800px;
+  width: 90%; /* Adjust width to fit within the available space */
+  max-height: 90vh; /* Limit height to 90% of the viewport height */
+  overflow-y: auto; /* Make the card scrollable if content overflows */
+  text-align: center;
+  z-index: 2;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form title */
 .budget-form-title-custom {
   font-size: 32px;
   font-weight: bold;
@@ -50,9 +51,9 @@
 }
 
 /* Input fields */
-input[type="text"],
-input[type="number"],
-input[type="date"] {
+input[type='text'],
+input[type='number'],
+input[type='date'] {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
@@ -61,14 +62,14 @@ input[type="date"] {
   font-size: 16px;
 }
 
-input[type="text"]:focus,
-input[type="number"]:focus,
-input[type="date"]:focus {
+input[type='text']:focus,
+input[type='number']:focus,
+input[type='date']:focus {
   border-color: #4e8fd1;
   outline: none;
 }
 
-/* Add category button styling */
+/* Form button */
 .budget-form-button-custom {
   background-color: #4e8fd1;
   color: white;
@@ -83,8 +84,8 @@ input[type="date"]:focus {
   background-color: #3c76a3;
 }
 
-/* Category delete button styling */
-button[type="button"] {
+/* Cancel button */
+button[type='button'] {
   background-color: #f44336;
   color: white;
   padding: 5px 10px;
@@ -94,11 +95,11 @@ button[type="button"] {
   margin-top: 10px;
 }
 
-button[type="button"]:hover {
+button[type='button']:hover {
   background-color: #d32f2f;
 }
 
-/* Total budget and leftover display */
+/* Total budget section */
 .budget-form-total-budget-custom {
   margin-top: 20px;
 }

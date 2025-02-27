@@ -1,101 +1,100 @@
 .edit-entry-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(255, 255, 255, 0.9); 
-    border-radius: 10px;
-    padding: 40px;
-    width: 80%;
-    max-width: 800px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    position: relative;
-  }
-  
-  .edit-entry-container h2 {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #333;
-    text-align: center;
-  }
-  
-  .edit-entry-container input,
-  .edit-entry-container textarea {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
-  }
-  
-  .edit-entry-container button {
-    padding: 12px 20px;
-    background-color: #6ca7e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 20px;
-  }
-  
-  .edit-entry-container button:hover {
-    background-color: #5a94c5;
-  }
-  
-  .edit-entry-container button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  .edit-entry-container .delete-button {
-    padding: 12px 20px;
-    background-color: #e64a4a; 
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-top: 10px; 
-  }
-  
-  .edit-entry-container .delete-button:hover {
-    background-color: #c73d3d; 
-  }
-  
-  .edit-entry-container .delete-button:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-  }
-  
-  .edit-entry-container .error-message {
-    color: red;
-    font-size: 1rem;
-    margin-top: 10px;
-  }
-  
-  .back-to-journals-button {
-    position: absolute;
-    top: 20px;
-    left: 275px;
-    padding: 10px 20px;
-    background-color: #6ca7e6;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  .back-to-journals-button:hover {
-    background-color: #5a94c5;
-  }
-  
-  .back-to-journals-button:focus {
-    outline: none;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 40px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.edit-entry-container h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  color: #333;
+  text-align: center;
+}
+
+.edit-entry-container input,
+.edit-entry-container textarea {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+.edit-entry-container button {
+  padding: 12px 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.edit-entry-container button:hover {
+  background-color: #5a94c5;
+}
+
+.edit-entry-container button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.edit-entry-container .delete-button {
+  padding: 12px 20px;
+  background-color: #e64a4a;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.edit-entry-container .delete-button:hover {
+  background-color: #c73d3d;
+}
+
+.edit-entry-container .delete-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.edit-entry-container .error-message {
+  color: red;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.back-to-journals-button {
+  position: absolute;
+  top: 20px;
+  left: 275px;
+  padding: 10px 20px;
+  background-color: #6ca7e6;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.back-to-journals-button:hover {
+  background-color: #5a94c5;
+}
+
+.back-to-journals-button:focus {
+  outline: none;
+}

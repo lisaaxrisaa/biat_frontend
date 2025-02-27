@@ -1,56 +1,60 @@
 /* Individual entry box */
 .individual-entry-box {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
-    padding: 40px;
-    border-radius: 10px;
-    width: 90%;
-    min-width: 750px;
-    min-height: 80vh;
-    box-sizing: border-box;
-    text-align: center;
-    position: relative; /* Allow for absolute positioning inside */
-    overflow-y: auto;
-    margin-top: 50px; /* Adjust as necessary to create space */
-  }
-  
-  /* Title centered at the top */
-  .individual-entry-box h2 {
-    text-align: center;
-    margin-top: 0; /* Remove default margin to bring it up */
-  }
-  
-  /* Container for the dates positioned at the top left */
-  .dates-container {
-    position: absolute;
-    top: 20px; /* Adjust this to control the vertical space from the top */
-    left: 20px; /* Adjust this to control the horizontal space from the left */
-    text-align: left; /* Align the dates to the left */
-    font-size: 14px; /* Adjust font size as needed */
-    color: #333; /* Set text color if needed */
-  }
-  
-  /* Styling for individual date elements */
-  .dates-container p {
-    margin: 0; /* Remove any default margin */
-    font-weight: bold;
-  }
-  
-  /* Edit button positioned at the top right */
-  .edit-button {
-    position: absolute;
-    top: 20px; /* Space from the top */
-    right: 20px; /* Space from the right */
-    background-color: #6ca7e6; /* Button color */
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  /* Edit button hover effect */
-  .edit-button:hover {
-    background-color: #5a94c5;
-  }
-  
+  background-color: rgba(
+    255,
+    255,
+    255,
+    0.9
+  ); /* Slightly transparent white background */
+  padding: 40px;
+  border-radius: 10px;
+  width: 90%;
+  min-width: 750px;
+  min-height: 80vh;
+  box-sizing: border-box;
+  text-align: center;
+  position: relative; /* Allow for absolute positioning inside */
+  overflow-y: auto;
+  margin-top: 50px; /* Adjust as necessary to create space */
+}
+
+/* Title centered at the top */
+.individual-entry-box h2 {
+  text-align: center;
+  margin-top: 0; /* Remove default margin to bring it up */
+}
+
+/* Container for the dates positioned at the top left */
+.dates-container {
+  position: absolute;
+  top: 20px; /* Adjust this to control the vertical space from the top */
+  left: 20px; /* Adjust this to control the horizontal space from the left */
+  text-align: left; /* Align the dates to the left */
+  font-size: 14px; /* Adjust font size as needed */
+  color: #333; /* Set text color if needed */
+}
+
+/* Styling for individual date elements */
+.dates-container p {
+  margin: 0; /* Remove any default margin */
+  font-weight: bold;
+}
+
+/* Edit button positioned at the top right */
+.edit-button {
+  position: absolute;
+  top: 20px; /* Space from the top */
+  right: 20px; /* Space from the right */
+  background-color: #6ca7e6; /* Button color */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Edit button hover effect */
+.edit-button:hover {
+  background-color: #5a94c5;
+}

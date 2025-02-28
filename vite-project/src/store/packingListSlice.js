@@ -50,6 +50,17 @@ const packingListSlice = api.injectEndpoints({
       invalidatesTags: ['PackingLists'],
     }),
 
+    updatePackingList: builder.mutation({
+      query: ({ id, data }) => ({
+        url: `api/packing-list/user/packing-lists/${id}`,
+        method: 'PUT',
+        body: data,
+      }),
+      invalidatesTags: (result, error, { id }) => [
+        { type: 'PackingLists', id },
+      ],
+    }),
+
     deletePackingItem: builder.mutation({
       query: (itemId) => ({
         url: `api/packing-list/user/packing-lists/items/${itemId}`,
@@ -77,6 +88,7 @@ export const {
   useAddPackingItemMutation,
   useTogglePackingItemMutation,
   useEditPackingItemMutation,
+  useUpdatePackingListMutation,
   useDeletePackingItemMutation,
   useDeletePackingListMutation,
 } = packingListSlice;

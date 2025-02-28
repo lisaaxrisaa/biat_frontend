@@ -52,7 +52,7 @@
   display: block;
   width: 100%;
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .packing-list-item {
@@ -71,7 +71,7 @@
 }
 
 .packing-list-name {
-  color: white;
+  color: white !important;
   font-weight: bold;
   flex-grow: 1;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
@@ -87,5 +87,5 @@
 }
 
 .packing-list-delete-btn:hover {
-  transform: scale(1.2);
+  background-color: #bd2130;
 }

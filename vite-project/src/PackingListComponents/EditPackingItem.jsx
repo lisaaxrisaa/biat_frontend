@@ -25,6 +25,7 @@ export default function EditPackingItem({ item, onCancel }) {
         value={editedText}
         onChange={(e) => setEditedText(e.target.value)}
         placeholder="Edit item"
+        className="packing-list-input"
       />
       <button className="packing-list-save-btn" onClick={handleEditItem}>
         Save

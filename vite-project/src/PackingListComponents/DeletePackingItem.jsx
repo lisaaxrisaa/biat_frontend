@@ -14,8 +14,10 @@ export default function DeletePackingItem({ itemId }) {
   }
 
   return (
-    <button className="packing-list-delete-btn" onClick={handleDeleteItem}>
-      Delete
-    </button>
+    <>
+      <button className="packing-list-delete-btn" onClick={handleDeleteItem}>
+        Delete
+      </button>
+    </>
   );
 }

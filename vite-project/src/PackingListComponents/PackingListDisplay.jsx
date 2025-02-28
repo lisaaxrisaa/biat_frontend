@@ -12,7 +12,8 @@ export default function PackingListsDisplay() {
   if (isLoading) return <p>Loading packing lists...</p>;
   if (isError) return <p>Failed to load packing lists.</p>;
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, e) => {
+    e.preventDefault();
     try {
       await deletePackingList(id).unwrap();
     } catch (error) {
@@ -46,7 +47,7 @@ export default function PackingListsDisplay() {
                     className="packing-list-delete-btn"
                     onClick={(e) => handleDelete(list.id, e)}
                   >
-                    ❌
+                    Delete
                   </button>
                 </li>
               </Link>

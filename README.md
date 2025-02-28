@@ -2,6 +2,8 @@
 
 Pack Ahead is a full-stack travel planning application that helps users organize their trips effortlessly. Whether you're planning a solo adventure or a family vacation, Pack Ahead offers tools to manage itineraries, track expenses, create packing lists, check the weather, and more—all in one place!
 
+🎉 **Live Demo:** 👉 [Pack Ahead](https://pack-ahead.vercel.app/) 👈
+
 <img src="https://i.imgur.com/H66DXN7.png" width="900">
 
 ## 🚀 Features

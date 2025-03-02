@@ -2,7 +2,10 @@
 
 Pack Ahead is a full-stack travel planning application that helps users organize their trips effortlessly. Whether you're planning a solo adventure or a family vacation, Pack Ahead offers tools to manage itineraries, track expenses, create packing lists, check the weather, and more—all in one place!
 
-🎉 **Live Demo:** 👉 [Pack Ahead](https://pack-ahead.vercel.app/) 👈
+🎉 **Live Demo**  
+Try Pack Ahead live here 👉 **[Pack Ahead](https://pack-ahead.vercel.app/)**
+
+Pack Ahead is deployed on **Vercel**. Log in to test itinerary management, budget tracking, and more!
 
 <img src="https://i.imgur.com/H66DXN7.png" width="900">
 
@@ -187,6 +190,7 @@ If you have any questions, suggestions, or feedback, feel free to reach out!
 **Jonah Wilson**  
 [LinkedIn](https://www.linkedin.com/in/jonah-wilson-584094353/) | 📧 jdbw13@hotmail.com
 
-## License
+## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+This project is open-source and available under the **MIT License**.  
+📖 See the full license details in the [LICENSE](./LICENSE) file.

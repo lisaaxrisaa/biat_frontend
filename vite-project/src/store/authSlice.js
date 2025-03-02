@@ -8,17 +8,12 @@ const authSlice = createSlice({
   },
   reducers: {
     registerUser: (state, action) => {
-      console.log('Registering user with data:', action.payload.user);
       state.token = action.payload.token;
       state.user = action.payload.user || null;
-      console.log('User after register:', state.user);
+
       if (state.user) {
         sessionStorage.setItem('token', action.payload.token);
         sessionStorage.setItem('user', JSON.stringify(action.payload.user));
-        console.log('Saved to sessionStorage:', {
-          token: action.payload.token,
-          user: action.payload.user,
-        });
       } else {
         console.warn('⚠ No user data received in registerUser action.');
       }

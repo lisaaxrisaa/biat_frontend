@@ -186,3 +186,7 @@ If you have any questions, suggestions, or feedback, feel free to reach out!
 
 **Jonah Wilson**  
 [LinkedIn](https://www.linkedin.com/in/jonah-wilson-584094353/) | 📧 jdbw13@hotmail.com
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.

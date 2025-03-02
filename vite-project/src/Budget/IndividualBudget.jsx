@@ -1,26 +1,26 @@
 // this file should display a specific budget table
 // with the option (buttons and links to) to edit, and save it or delete it
 
-import React, { useEffect } from "react";
-import { useGetBudgetQuery } from "../store/budgetSlice";
-import { useParams, Link } from "react-router-dom";
-import "./individual-budget.css";
+import React, { useEffect } from 'react';
+import { useGetBudgetQuery } from '../store/budgetSlice';
+import { useParams, Link } from 'react-router-dom';
+import './individual-budget.css';
 
 const IndividualBudget = () => {
   const { id } = useParams();
   const { data: budget, error, isLoading } = useGetBudgetQuery(id);
 
   useEffect(() => {
-    document.body.classList.add("individual-budget-page");
+    document.body.classList.add('individual-budget-page');
     return () => {
-      document.body.classList.remove("individual-budget-page");
+      document.body.classList.remove('individual-budget-page');
     };
   });
 
   if (isLoading) return <p>Loading...</p>;
 
   if (error) return <p>Error: {error.message}</p>;
-  if (!budget) return <p>Budget not found</p>; // add a redirect back to budget list
+  if (!budget) return <p>Budget not found</p>;
 
   const totalBudgeted = budget.categories.reduce(
     (sum, category) => sum + parseFloat(category.budgeted || 0),
@@ -28,13 +28,11 @@ const IndividualBudget = () => {
   );
   return (
     <div>
-      {/* Back to Budget List Button - Outside of Content Container */}
       <Link to="/budget">
         <button className="back-to-list-btn">Back to Budgets</button>
       </Link>
 
       <div className="individual-budget-container">
-        {/* Title Section */}
         <div className="individual-budget-header">
           <h1 className="individual-budget-title">{budget.name}</h1>
           <p className="individual-budget-info">
@@ -44,7 +42,6 @@ const IndividualBudget = () => {
           </p>
         </div>
 
-        {/* Content Section */}
         <div className="individual-budget-content">
           <div className="individual-budget-category-table">
             <div className="category-table-header">
@@ -60,7 +57,9 @@ const IndividualBudget = () => {
                   <div className="category-name">{category.name}</div>
                   <div className="category-budget">${category.budgeted}</div>
                   <div className="category-actual">${category.actual}</div>
-                  <div className="category-difference">${category.difference}</div>
+                  <div className="category-difference">
+                    ${category.difference}
+                  </div>
                 </div>
               ))
             ) : (
@@ -69,12 +68,10 @@ const IndividualBudget = () => {
           </div>
         </div>
 
-        {/* Total Budget Section at the Bottom */}
         <div className="total-budget">
           <p>Total Budget: ${totalBudgeted}</p>
         </div>
 
-        {/* Edit Budget Button */}
         <Link to={`/edit-budget/${id}`}>
           <button>Edit Budget</button>
         </Link>

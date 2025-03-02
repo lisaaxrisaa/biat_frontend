@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import {
   useGetBudgetQuery,
   useUpdateBudgetMutation,
   useDeleteBudgetMutation,
-} from "../store/budgetSlice";
-import "./edit-budget.css";
+} from '../store/budgetSlice';
+import './edit-budget.css';
 
 const EditBudget = () => {
   const { id } = useParams();
@@ -14,9 +14,9 @@ const EditBudget = () => {
   const { data: budget, error, isLoading, refetch } = useGetBudgetQuery(id);
 
   useEffect(() => {
-    document.body.classList.add("edit-budget-page");
+    document.body.classList.add('edit-budget-page');
     return () => {
-      document.body.classList.remove("edit-budget-page");
+      document.body.classList.remove('edit-budget-page');
     };
   }, []);
 
@@ -33,10 +33,10 @@ const EditBudget = () => {
     }
   }, [budget]);
 
-  const [tripName, setTripName] = useState(budget?.name || "");
-  const [tripType, setTripType] = useState(budget?.tripType || "");
-  const [currency, setCurrency] = useState(budget?.currency || "");
-  const [date, setDate] = useState(budget?.date?.slice(0, 10) || "");
+  const [tripName, setTripName] = useState(budget?.name || '');
+  const [tripType, setTripType] = useState(budget?.tripType || '');
+  const [currency, setCurrency] = useState(budget?.currency || '');
+  const [date, setDate] = useState(budget?.date?.slice(0, 10) || '');
 
   const [updateBudget] = useUpdateBudgetMutation();
   const [deleteBudget] = useDeleteBudgetMutation();
@@ -55,9 +55,9 @@ const EditBudget = () => {
 
   const handleAddCategory = async () => {
     const newCategory = {
-      name: "",
-      budgeted: "",
-      actual: "",
+      name: '',
+      budgeted: '',
+      actual: '',
     };
 
     setCategories([...categories, newCategory]);
@@ -66,7 +66,7 @@ const EditBudget = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!id) {
-      console.error("Budget ID is missing.", error);
+      console.error('Budget ID is missing.', error);
       return;
     }
 
@@ -91,36 +91,33 @@ const EditBudget = () => {
       await refetch();
       navigate(`/budget/${id}`);
     } catch (err) {
-      console.error("Failed to update budget:", err);
+      console.error('Failed to update budget:', err);
     }
   };
   const handleDeleteBudget = async () => {
     const confirmed = window.confirm(
-      "Are you sure you would like to delete this budget?"
+      'Are you sure you would like to delete this budget?'
     );
     if (!confirmed) return;
-    console.log("Deleting budget with ID:", id); // Debugging log
 
     try {
       await deleteBudget(id).unwrap();
-      alert("Budget has been deleted successfully!");
-      navigate("/budget");
+      alert('Budget has been deleted successfully!');
+      navigate('/budget');
     } catch (error) {
-      console.error("Unable to delete the budget, due to: ", error);
-      alert("Unable to delete budget!");
+      console.error('Unable to delete the budget, due to: ', error);
+      alert('Unable to delete budget!');
     }
   };
 
   return (
     <div className="edit-budget-container">
-      {/* Button outside of container */}
-      <button className="back-to-list-btn" onClick={() => navigate("/budget")}>
+      <button className="back-to-list-btn" onClick={() => navigate('/budget')}>
         Back to Budgets
       </button>
 
       <h2>Edit Budget</h2>
       <form onSubmit={handleSubmit}>
-        {/* Edit the Trip Name, Trip Type, Currency, Date */}
         <div>
           <input
             type="text"
@@ -157,14 +154,13 @@ const EditBudget = () => {
           />
         </div>
 
-        {/* Categories Editing */}
         {categories.map((category, index) => (
           <div key={category.id}>
             <input
               type="text"
               value={category.name}
               onChange={(e) =>
-                handleEditCategory(index, "name", e.target.value)
+                handleEditCategory(index, 'name', e.target.value)
               }
               placeholder="Category Name"
               required
@@ -173,7 +169,7 @@ const EditBudget = () => {
               type="number"
               value={category.budgeted}
               onChange={(e) =>
-                handleEditCategory(index, "budgeted", e.target.value)
+                handleEditCategory(index, 'budgeted', e.target.value)
               }
               placeholder="Budgeted"
             />
@@ -181,7 +177,7 @@ const EditBudget = () => {
               type="number"
               value={category.actual}
               onChange={(e) =>
-                handleEditCategory(index, "actual", e.target.value)
+                handleEditCategory(index, 'actual', e.target.value)
               }
               placeholder="Actual"
             />
@@ -191,7 +187,6 @@ const EditBudget = () => {
           </div>
         ))}
 
-        {/* Add New Category */}
         <button type="button" onClick={handleAddCategory}>
           Add Category
         </button>
@@ -199,7 +194,6 @@ const EditBudget = () => {
         <button type="submit">Save Changes</button>
       </form>
 
-      {/* Delete Budget Button */}
       <button onClick={handleDeleteBudget} className="delete-budget-btn">
         Delete Budget
       </button>

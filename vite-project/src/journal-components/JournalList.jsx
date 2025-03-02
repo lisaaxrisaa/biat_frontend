@@ -1,10 +1,9 @@
-// this file fetches entries from backend
-import React, { useEffect } from "react";
-// removed unnecessary journalentry import
-import { Link, useLocation } from "react-router-dom";
-import { useGetJournalsQuery } from "../store/journalSlice";
-import DeleteEntry from "./DeleteEntry";
-import "./journal-background.css";
+import React, { useEffect } from 'react';
+
+import { Link, useLocation } from 'react-router-dom';
+import { useGetJournalsQuery } from '../store/journalSlice';
+import DeleteEntry from './DeleteEntry';
+import './journal-background.css';
 
 const JournalList = () => {
   const {
@@ -13,14 +12,13 @@ const JournalList = () => {
     isLoading,
     refetch,
   } = useGetJournalsQuery();
-  //   gets and renders a list of the users journal entries
+
   useEffect(() => {
-    document.body.classList.add("journal-page");
+    document.body.classList.add('journal-page');
     return () => {
-      document.body.classList.remove("journal-page");
+      document.body.classList.remove('journal-page');
     };
   }, []);
-
 
   const location = useLocation();
   useEffect(() => {
@@ -39,7 +37,7 @@ const JournalList = () => {
       return journalEntries.map((entry) => (
         <div key={entry.id} className="journal-entry-box">
           <h3>{entry.title}</h3>
-          
+
           <Link to={`/journal/${entry.id}`}>
             <button className="view-button">View Entry</button>
           </Link>

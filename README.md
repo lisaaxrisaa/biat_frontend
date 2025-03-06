@@ -3,7 +3,8 @@
 Pack Ahead is a full-stack travel planning application that helps users organize their trips effortlessly. Whether you're planning a solo adventure or a family vacation, Pack Ahead offers tools to manage itineraries, track expenses, create packing lists, check the weather, and more—all in one place!
 
 🎉 **Live Demo**  
-Try Pack Ahead live here 👉 **[Pack Ahead](https://pack-ahead.vercel.app/)**
+Try Pack Ahead live here 👉 **[Pack Ahead](https://pack-ahead.vercel.app/)** <br>
+Video demo here 👉**[Pack Ahead Video](https://drive.google.com/file/d/1aQiJKIflm1yaHNNoZb5qU6uyeR1JXvuJ/view?usp=drive_link)**
 
 Pack Ahead is deployed on **Vercel**. Log in to test itinerary management, budget tracking, and more!
 
@@ -137,7 +138,7 @@ The backend is already deployed on Render.com, and all API endpoints are configu
 - **All API requests are automatically routed to:**
 
 ```sh
-https://biat-backend.onrender.com
+https://pack-ahead.onrender.com
 ```
 
 ⚠️ _ Note: If you encounter any API issues, please check that the frontend is correctly pointing to the deployed backend URL instead of localhost._
